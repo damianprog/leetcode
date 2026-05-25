@@ -11,13 +11,47 @@ var rotate = function (nums, k) {
   //   nums[destination] = originalNums[i];
   // }
 
-  for (let i = 0; i < nums.length; i++) {
-    const destination = (i + k) % nums.length;
+  // let swapCount = 0;
+  // let start = 0;
 
-    const prevDestinationValue = nums[destination];
-    nums[destination] = nums[i];
+  // while (swapCount < nums.length) {
+  //   let destination = (start + k) % nums.length;
+  //   let carry = nums[start];
+  //   let prevCarry = carry;
 
-    const destinationOfDestination = (destination + k) % nums.length;
-    nums[destinationOfDestination] = prevDestinationValue;
+  //   while (true) {
+  //     carry = nums[destination];
+  //     nums[destination] = prevCarry;
+  //     swapCount++;
+
+  //     if (destination === start) break;
+
+  //     prevCarry = carry;
+  //     destination = (destination + k) % nums.length;
+  //   }
+
+  //   start++;
+  // }
+
+  // ======================================================================================
+  // Wersja kanoniczna podejście cyklowe
+
+  const n = nums.length;
+  k = k % n; // normalizacja
+  let count = 0;
+
+  for (let start = 0; count < n; start++) {
+    // wolę while (swapCount < nums.length)
+    let current = start;
+    let carry = nums[start];
+
+    do {
+      const next = (current + k) % n;
+      [nums[next], carry] = [carry, nums[next]]; // odłóż carry, podnieś to co tam było
+      current = next;
+      count++;
+    } while (current !== start);
   }
+
+  // ======================================================================================
 };
