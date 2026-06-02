@@ -40,5 +40,21 @@ var hIndex = function (citations) {
   // return k;
   // ==================================================================================
   // Bucket
+
+  const n = citations.length;
+  const buckets = new Array(n + 1).fill(0);
+
+  // Przejście 1: zlicz prace wg cytowań, "za duże" do kubełka n
+  for (const c of citations) {
+    buckets[Math.min(c, n)]++;
+  }
+
+  // Przejście 2: akumuluj od prawej (najwyższe cytowania w dół)
+  let total = 0;
+  for (let i = n; i >= 0; i--) {
+    total += buckets[i];
+    if (total >= i) return i;
+  }
+
   // ==================================================================================
 };
