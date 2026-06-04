@@ -1,47 +1,25 @@
 var RandomizedSet = function () {
-  this.set = new Set();
+  this.array = [];
+  // this.set = new Set();
+  this.map = new Map();
 };
 
 /**
  * @param {number} val
  * @return {boolean}
  */
-RandomizedSet.prototype.insert = function (val) {
-  if (!this.set.has(val)) {
-    this.set.add(val);
-    return true;
-  } else {
-    return false;
-  }
-};
+RandomizedSet.prototype.insert = function (val) {};
 
 /**
  * @param {number} val
  * @return {boolean}
  */
-RandomizedSet.prototype.remove = function (val) {
-  if (this.set.has(val)) {
-    this.set.delete(val);
-    return true;
-  } else {
-    return false;
-  }
-};
+RandomizedSet.prototype.remove = function (val) {};
 
 /**
  * @return {number}
  */
-RandomizedSet.prototype.getRandom = function () {
-  let randomIndex = Math.floor(Math.random() * this.set.size);
-
-  let i = 0;
-
-  for (const item of this.set) {
-    if (i === randomIndex) return item;
-
-    i++;
-  }
-};
+RandomizedSet.prototype.getRandom = function () {};
 
 /**
  * Your RandomizedSet object will be instantiated and called as such:
