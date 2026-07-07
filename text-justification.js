@@ -7,21 +7,48 @@ var fullJustify = function (words, maxWidth) {
   const result = [];
 
   let currentLineWords = [];
+  const linesWords = [];
   let currentLineWordsLength = 0;
   let i = 0;
 
   while (i < words.length) {
     currentLineWordsCharsLength += words[i].length;
-    const currentLineMinSpacesQty = currentLineWords.length - 1;
 
-    if (currentLineWordsCharsLength + currentLineMinSpacesQty <= maxWidth) {
+    if (currentLineWordsCharsLength + currentLineWords.length <= maxWidth) {
       currentLineWords.push(word);
       i++;
     } else {
-      // do smth with gathered words so far
-
+      linesWords.push(currentLineWords);
       currentLineWords = [];
       currentLineWordsCharsLength = 0;
+    }
+  }
+
+  for (const line of linesWords) {
+    let currentLineCharsLength = 0;
+
+    for (const word of line) {
+      currentLineCharsLength += word.length;
+    }
+
+    currentLineCharsLength += line.length - 1;
+
+    let extraSpacesCount = maxWidth - currentLineCharsLength;
+    let i = 0;
+
+    while (extraSpacesCount > 0) {
+      // check this line
+      if (i === 0 && extraSpacesCount % line.length !== 0) {
+        line[0] += " ".repeat(extraSpacesCount);
+        extraSpacesCount = 0;
+      }
+      line[i] += " ";
+      extraSpacesCount--;
+      if (i + 1 === line.length) {
+        i = 0;
+      } else {
+        i++;
+      }
     }
   }
 };
