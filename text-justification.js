@@ -3,19 +3,19 @@
  * @param {number} maxWidth
  * @return {string[]}
  */
-var fullJustify = function (words, maxWidth) {
+const fullJustify = function (words, maxWidth) {
   const result = [];
 
   let currentLineWords = [];
   const linesWords = [];
-  let currentLineWordsLength = 0;
+  let currentLineWordsCharsLength = 0;
   let i = 0;
 
   while (i < words.length) {
     currentLineWordsCharsLength += words[i].length;
 
     if (currentLineWordsCharsLength + currentLineWords.length <= maxWidth) {
-      currentLineWords.push(word);
+      currentLineWords.push(words[i]);
       i++;
     } else {
       linesWords.push(currentLineWords);
@@ -24,10 +24,10 @@ var fullJustify = function (words, maxWidth) {
     }
   }
 
-  for (const line of linesWords) {
+  for (let line = 0; line < linesWords.length; line++) {
     let currentLineCharsLength = 0;
 
-    for (const word of line) {
+    for (const word of linesWords[line]) {
       currentLineCharsLength += word.length;
     }
 
@@ -36,19 +36,33 @@ var fullJustify = function (words, maxWidth) {
     let extraSpacesCount = maxWidth - currentLineCharsLength;
     let i = 0;
 
-    while (extraSpacesCount > 0) {
-      // check this line
-      if (i === 0 && extraSpacesCount % line.length !== 0) {
-        line[0] += " ".repeat(extraSpacesCount);
-        extraSpacesCount = 0;
-      }
-      line[i] += " ";
-      extraSpacesCount--;
-      if (i + 1 === line.length) {
-        i = 0;
-      } else {
-        i++;
+    if (line === linesWords.length - 1) {
+      const lineLastWordIndex = linesWords[line].length - 1;
+      linesWords[line][lineLastWordIndex] += " ".repeat(extraSpacesCount);
+    } else {
+      while (extraSpacesCount > 0) {
+        if (i === 0 && extraSpacesCount < linesWords[line].length - 1) {
+          linesWords[line][0] += " ".repeat(extraSpacesCount);
+          extraSpacesCount = 0;
+        }
+        linesWords[line][i] += " ";
+        extraSpacesCount--;
+        if (i + 1 === linesWords[line].length - 1) {
+          i = 0;
+        } else {
+          i++;
+        }
       }
     }
+
+    linesWords[line] = linesWords[line].join(" ");
   }
+
+  return linesWords;
 };
+
+const words = ["This", "is", "an", "example", "of", "text", "justification."];
+
+const maxWidth = 16;
+
+console.log(fullJustify(words, maxWidth));
