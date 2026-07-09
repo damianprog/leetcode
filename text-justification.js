@@ -24,6 +24,12 @@ const fullJustify = function (words, maxWidth) {
     }
   }
 
+  if (currentLineWordsCharsLength > 0) {
+    linesWords.push(currentLineWords);
+  }
+
+  // console.log("linesWords: ", linesWords);
+
   for (let line = 0; line < linesWords.length; line++) {
     let currentLineCharsLength = 0;
 
@@ -31,9 +37,14 @@ const fullJustify = function (words, maxWidth) {
       currentLineCharsLength += word.length;
     }
 
-    currentLineCharsLength += line.length - 1;
+    currentLineCharsLength += linesWords[line].length - 1;
+
+    // console.log("currentLineCharsLength: ", currentLineCharsLength);
 
     let extraSpacesCount = maxWidth - currentLineCharsLength;
+
+    // console.log("extraSpacesCount: ", extraSpacesCount);
+
     let i = 0;
 
     if (line === linesWords.length - 1) {
@@ -42,12 +53,12 @@ const fullJustify = function (words, maxWidth) {
     } else {
       while (extraSpacesCount > 0) {
         if (i === 0 && extraSpacesCount < linesWords[line].length - 1) {
-          linesWords[line][0] += " ".repeat(extraSpacesCount);
+          linesWords[line][0] += " ".repeat(extraSpacesCount - 1);
           extraSpacesCount = 0;
         }
         linesWords[line][i] += " ";
         extraSpacesCount--;
-        if (i + 1 === linesWords[line].length - 1) {
+        if (i + 1 >= linesWords[line].length - 1) {
           i = 0;
         } else {
           i++;
