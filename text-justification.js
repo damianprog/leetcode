@@ -28,8 +28,6 @@ const fullJustify = function (words, maxWidth) {
     linesWords.push(currentLineWords);
   }
 
-  // console.log("linesWords: ", linesWords);
-
   for (let line = 0; line < linesWords.length; line++) {
     let currentLineCharsLength = 0;
 
@@ -39,11 +37,7 @@ const fullJustify = function (words, maxWidth) {
 
     currentLineCharsLength += linesWords[line].length - 1;
 
-    // console.log("currentLineCharsLength: ", currentLineCharsLength);
-
     let extraSpacesCount = maxWidth - currentLineCharsLength;
-
-    // console.log("extraSpacesCount: ", extraSpacesCount);
 
     let i = 0;
 
@@ -52,10 +46,6 @@ const fullJustify = function (words, maxWidth) {
       linesWords[line][lineLastWordIndex] += " ".repeat(extraSpacesCount);
     } else {
       while (extraSpacesCount > 0) {
-        if (i === 0 && extraSpacesCount < linesWords[line].length - 1) {
-          linesWords[line][0] += " ".repeat(extraSpacesCount - 1);
-          extraSpacesCount = 0;
-        }
         linesWords[line][i] += " ";
         extraSpacesCount--;
         if (i + 1 >= linesWords[line].length - 1) {
@@ -72,8 +62,27 @@ const fullJustify = function (words, maxWidth) {
   return linesWords;
 };
 
-const words = ["This", "is", "an", "example", "of", "text", "justification."];
+const words = [
+  "Science",
+  "is",
+  "what",
+  "we",
+  "understand",
+  "well",
+  "enough",
+  "to",
+  "explain",
+  "to",
+  "a",
+  "computer.",
+  "Art",
+  "is",
+  "everything",
+  "else",
+  "we",
+  "do",
+];
 
-const maxWidth = 16;
+const maxWidth = 20;
 
 console.log(fullJustify(words, maxWidth));
