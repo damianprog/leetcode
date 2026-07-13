@@ -1187,3 +1187,75 @@ ale **zbędny** — pojawia się tylko, gdy nie obetniesz tablicy. `arr.length =
 - **LC 27 / 26 / 283** — Remove Element / Remove Duplicates / Move Zeroes
   (ta sama kompakcja read/write — "co przeżywa?")
 - **LC 186** — Reverse Words II (premium; ten sam in-place double reverse)
+
+## LC 68 — Text Justification
+
+**Kategoria:** greedy line-packing + per-line justification (string simulation)
+
+### Key insight
+
+Dwie fazy. (1) **Greedy packing** — dokładaj słowa do linii póki mieszczą się z minimum jedną spacją na gap. (2) **Justification per linia** — nadmiar spacji policz arytmetyką całkowitą, nie pętlą: `base = floor(total / gaps)` na każdy gap, `extra = total % gaps` rozłożone na **lewe** gapy. Dwa przypadki brzegowe (single-word line ORAZ last line) redukują się do tego samego left-justify: `join(" ").padEnd(maxWidth)`.
+
+### Canonical implementation
+
+```javascript
+const fullJustify = function (words, maxWidth) {
+  const res = [];
+  let line = [];
+  let len = 0; // suma znaków słów w linii (bez spacji)
+
+  for (const word of words) {
+    // fit-check: len słów + gapy (line.length) + nowe słowo
+    if (len + line.length + word.length > maxWidth) {
+      res.push(justify(line, len, maxWidth));
+      line = [];
+      len = 0;
+    }
+    line.push(word);
+    len += word.length;
+  }
+
+  res.push(line.join(" ").padEnd(maxWidth)); // last line: zawsze left-justify
+  return res;
+};
+
+function justify(line, len, maxWidth) {
+  if (line.length === 1) return line[0].padEnd(maxWidth); // single word
+  const gaps = line.length - 1;
+  const total = maxWidth - len;
+  const base = Math.floor(total / gaps);
+  const extra = total % gaps;
+
+  let out = "";
+  for (let i = 0; i < line.length; i++) {
+    out += line[i];
+    if (i < gaps) out += " ".repeat(base + (i < extra ? 1 : 0));
+  }
+  return out;
+}
+```
+
+### Named pitfalls + root causes
+
+1. **Last-line trap** — root cause: ostatnia linia ma inne reguły (left-justify, nie distribute). Objaw: podwójne spacje w środku ostatniej linii. Fix: flush poza pętlą przez `padEnd`, nie przez `justify()`.
+2. **Single-word → dzielenie przez zero** — root cause: przy jednym słowie `gaps = 0`, więc `total / gaps` = dzielenie przez zero. Fix: osobny early-return `padEnd`.
+3. **Left-heavy remainder** — root cause: reszta `extra = total % gaps` MUSI iść na lewe gapy. `i < extra` celuje w prefiks; `i >= gaps - extra` dałoby prawidłową sumę, ale zły kształt (`Science is  what  we` zamiast `Science  is  what we`).
+4. **Off-by-one w fit-check** — root cause: trzeba doliczyć minimalne pojedyncze spacje = liczba gapów = `line.length` (bieżąca, PRZED pushem nowego słowa).
+5. **Zgubiona ostatnia linia** — root cause: in-loop flush wypycha tylko linie zamknięte przez niemieszczące się słowo; ostatnia grupa słów nigdy nie trafia do flusha w pętli. Post-loop push jest load-bearing. Guard `if (line.length)` — potrzebny TYLKO defensywnie przy `words = []`, poza constraintami LC.
+
+### Complexity
+
+- **Czas:** O(suma znaków outputu) = O(liczba słów · maxWidth) w najgorszym razie.
+- **Pamięć:** O(output). Wariant arytmetyczny i „pętla po spacji" — identyczne complexity, różnica czysto czytelnościowa.
+
+### Talking points (interview)
+
+- „Greedy packing z fit-checkiem `len + gaps + nowe słowo`, gdzie gaps = liczba słów już w linii."
+- „Distribution to arytmetyka, nie symulacja: `base = floor(total/gaps)`, reszta modulo na lewe gapy przez `i < extra`."
+- „Dwa przypadki brzegowe — single word i last line — to ten sam left-justify: `join(' ').padEnd(maxWidth)`. Świadomie je scalam."
+- „Ostatnia linia flushowana poza pętlą — in-loop flush obsługuje tylko linie domknięte przez niemieszczące się słowo."
+
+### Related
+
+- **LC 6 Zigzag Conversion** — inna string simulation z formatowaniem pozycyjnym.
+- **Sub-pattern „even split + remainder to front"** — `base`/`extra` rozkład reszty pojawia się w round-robin / distribute-candies (np. LC 1103). Warto rozpoznawać jako reużywalny klocek.
