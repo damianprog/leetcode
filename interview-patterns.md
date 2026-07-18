@@ -1259,3 +1259,148 @@ function justify(line, len, maxWidth) {
 
 - **LC 6 Zigzag Conversion** — inna string simulation z formatowaniem pozycyjnym.
 - **Sub-pattern „even split + remainder to front"** — `base`/`extra` rozkład reszty pojawia się w round-robin / distribute-candies (np. LC 1103). Warto rozpoznawać jako reużywalny klocek.
+
+## Is Subsequence — wiele zapytań (LC 392, follow-up)
+
+**Pattern:** preprocessing + upper bound + closure jako nośnik stanu
+
+### Key insight
+
+Gdy jedno wejście jest **stałe**, a zapytań jest bardzo dużo (`k ≥ 10⁹`), koszt przenosi się z per-query do preprocessingu. Naiwne rozwiązanie skanuje `t` dla każdego `s` — to `|t|` w pętli po `k`.
+
+Zamiast tego mapujemy `t` **raz**: dla każdego znaku lista pozycji, na których występuje. Listy są posortowane rosnąco _z natury_, bo budujemy je idąc po `t` od lewej — to darmowy niezmiennik, który umożliwia binary search.
+
+Sprawdzanie `s` sprowadza się wtedy do: dla każdej litery znajdź **najmniejszą pozycję w `t` większą od ostatnio zużytej**. To wariant binary search zwany **upper bound**, nie wyszukiwanie równości.
+
+Efekt: `|t|` wylatuje z pętli po `k` i zostaje tylko pod logarytmem.
+
+### Canonical implementation
+
+```javascript
+function upperBound(arr, x) {
+  let lo = 0;
+  let hi = arr.length - 1;
+  let ans = -1; // sentinel: brak elementu > x
+
+  while (lo <= hi) {
+    const mid = Math.floor((lo + hi) / 2);
+
+    if (arr[mid] > x) {
+      ans = arr[mid]; // kandydat — ale może istnieje mniejszy
+      hi = mid - 1; // ...więc szukaj dalej PO LEWEJ
+    } else {
+      lo = mid + 1; // za małe, na pewno nie odpowiedź
+    }
+  }
+
+  return ans;
+}
+
+function makeChecker(t) {
+  // FAZA 1 — droga, wykonuje się RAZ
+  const charIndices = new Map();
+
+  for (let i = 0; i < t.length; i++) {
+    const list = charIndices.get(t[i]);
+    if (list) list.push(i);
+    else charIndices.set(t[i], [i]);
+  }
+
+  // FAZA 2 — tania, wykonuje się k RAZY
+  return function isSubsequence(s) {
+    let pos = -1; // ostatnia zużyta pozycja w t
+
+    for (const char of s) {
+      const indices = charIndices.get(char);
+      if (indices === undefined) return false;
+
+      const next = upperBound(indices, pos);
+      if (next === -1) return false;
+
+      pos = next;
+    }
+
+    return true; // pusty s przechodzi sam — brak iteracji
+  };
+}
+```
+
+Użycie:
+
+```javascript
+const check = makeChecker("bahbgdc");
+check("abc"); // true
+check("cb"); // false
+```
+
+### Named pitfalls
+
+**1. Zbudowanie mapy i nieużycie jej w fazie sprawdzania**
+Najczęstszy błąd przy przejściu z naiwnej wersji: mapa powstaje, ale pętla sprawdzająca dalej iteruje po `t`.
+_Root cause:_ faza 2 musi iterować po `s` (krótkim) i robić **lookup**, nigdy po `t`. Jeśli w fazie 2 widzisz `for (... of t)`, optymalizacja nie istnieje — złożoność jest dalej `O(|t|)` per query.
+
+**2. Zapis kandydata w gałęzi `else`**
+`ans = arr[mid]` należy **wyłącznie** do gałęzi `arr[mid] > x`.
+_Root cause:_ gałąź `else` to gałąź „ten element jest za mały". Nigdy nie może z niej wyjść odpowiedź — zapis tam zwraca element mniejszy od `x`, czyli dokładnie odwrotność zapytania.
+
+**3. Wcześniejszy `return` po trafieniu kandydata**
+Kuszące jest `return arr[mid]` zamiast `ans = arr[mid]; hi = mid - 1`.
+_Root cause:_ pierwszy napotkany element `> x` nie jest _najmniejszym_ takim elementem. Dla `arr = [0, 4, 5, 7, 9]`, `x = 3`: `mid` trafia na `5`, ale poprawna odpowiedź to `4`, leżąca po lewej. Trzeba dokończyć zawężanie.
+
+**4. `>` zamiast `>=`**
+`pos` to pozycja **już zużyta**. Kolejna litera `s` musi wylądować ściśle dalej.
+_Root cause:_ `>=` pozwoliłoby dwóm literom `s` zmapować się na ten sam znak `t`, np. `s = "aa"`, `t = "a"` błędnie dałoby `true`.
+
+**5. Podwójny lookup `has()` + `get()`**
+To dwa hashowania tego samego klucza.
+_Root cause:_ `get()` zwraca `undefined` dla brakującego klucza, co wystarcza jako test. Bezpieczne tutaj, bo listy nigdy nie są puste — powstają dopiero przy pierwszym `push`.
+
+**6. Martwy guard `if (s.length === 0) return true`**
+Zbędny w tej architekturze: `for...of` po pustym stringu nie wykonuje iteracji i funkcja dolatuje do `return true`. Guard był potrzebny w wersji two-pointers, gdzie na końcu stało `return false`.
+
+### Complexity
+
+| faza              | ile razy | koszt |
+| ----------------- | -------- | ----- | --- | ------------------ | --- | --- |
+| preprocessing `t` | 1×       | `O(   | t   | )` czasu i pamięci |
+| jedno `check(s)`  | k×       | `O(   | s   | · log              | t   | )`  |
+
+**Razem:** `O(|t| + k · |s| · log|t|)` — plus oznacza fazy następujące po sobie, nie mnożenie.
+
+Naiwnie: `O(k · |t|)`.
+
+Konkretnie dla `|t|` = 10⁶, `|s|` = 10, `k` = 10⁹ (`log₂10⁶ ≈ 20`):
+
+```
+naiwnie:            10⁹ · 10⁶        = 10¹⁵
+z preprocessingiem: 10⁶ + 10⁹·10·20  ≈ 2 · 10¹¹     (~5000× mniej)
+```
+
+Składnik `O(|t|)` jest pomijalny — milion przy dwustu miliardach to szum.
+
+`log|t|` jest górnym ograniczeniem: pojedyncza lista ma długość ≤ `|t|` (przypadek jednej powtarzającej się litery), a suma długości wszystkich list wynosi dokładnie `|t|`.
+
+### Talking points
+
+- „Skoro `t` jest stałe, a zapytań miliard, przenoszę koszt z per-query do preprocessingu. Płacę raz `O(|t|)`, żeby każde zapytanie zeszło z `O(|t|)` na `O(|s| log|t|)`."
+- „Rozbijam na dwie fazy przez **closure** — `makeChecker(t)` zwraca funkcję domkniętą nad mapą. Alternatywy: klasa z konstruktorem albo lazy cache w module. Closure najczytelniej wyraża, że stan zależy wyłącznie od `t` i jest niemodyfikowalny między zapytaniami."
+- „To nie jest binary search na równość, tylko **upper bound** — pierwszy element ściśle większy od `pos`. Po trafieniu kandydata nie kończę, tylko zapisuję i szukam dalej po lewej."
+- „Listy indeksów są posortowane za darmo, bo buduję je skanując `t` od lewej. Nie sortuję niczego."
+
+### Sygnał do rozpoznania patternu
+
+Jedno wejście stałe + wiele zapytań → **zawsze** pytaj o preprocessing. To ten sam ruch co prefix sums, sparse table, trie dla wielu wzorców.
+
+### Related problems
+
+- **LC 392** Is Subsequence — wersja podstawowa (two pointers, `O(|s| + |t|)`)
+- **LC 704** Binary Search — kanoniczny wariant na równość
+- **LC 35** Search Insert Position — lower bound
+- **LC 34** Find First and Last Position — lower + upper bound razem
+- **LC 300** LIS — `O(n log n)` opiera się na tym samym prymitywie
+- **LC 792** Number of Matching Subsequences — bezpośrednie rozszerzenie tego zadania
+- **LC 303** Range Sum Query — ten sam sygnał (preprocessing pod wiele zapytań)
+
+### Uwaga o `mid`
+
+`Math.floor((lo + hi) / 2)` i `lo + Math.floor((hi - lo) / 2)` są **algebraicznie identyczne** dla całkowitych `lo`. Druga wersja istnieje tylko po to, by uniknąć przepełnienia `int32` w Javie/C++ (słynny bug w `Arrays.binarySearch` w JDK). W JS liczby to double'e — `lo + hi` nie przekroczy `MAX_SAFE_INTEGER` nawet dla maksymalnej tablicy. Pierwsza wersja jest poprawna, wybierana świadomie.
