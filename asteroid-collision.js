@@ -32,7 +32,7 @@ var asteroidCollision = function (asteroids) {
   // return stack;
 
   // ========================================================================
-  // Czytelniejsza wersja
+  // Czytelniejsza wersjaa
 
   const stack = [];
 
