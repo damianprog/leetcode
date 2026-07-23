@@ -1404,3 +1404,64 @@ Jedno wejście stałe + wiele zapytań → **zawsze** pytaj o preprocessing. To 
 ### Uwaga o `mid`
 
 `Math.floor((lo + hi) / 2)` i `lo + Math.floor((hi - lo) / 2)` są **algebraicznie identyczne** dla całkowitych `lo`. Druga wersja istnieje tylko po to, by uniknąć przepełnienia `int32` w Javie/C++ (słynny bug w `Arrays.binarySearch` w JDK). W JS liczby to double'e — `lo + hi` nie przekroczy `MAX_SAFE_INTEGER` nawet dla maksymalnej tablicy. Pierwsza wersja jest poprawna, wybierana świadomie.
+
+## Two Pointers — converging (posortowana tablica)
+
+**LC 167 — Two Sum II (Input Array Is Sorted)**
+
+**Key insight:** posortowanie pozwala z JEDNEGO porównania sumy wywnioskować
+kierunek ruchu. Za duża suma → jedyny sposób ją zmniejszyć to zmniejszyć
+prawy element. Za mała → zwiększyć lewy.
+
+**Niezmiennik:** jeśli rozwiązanie istnieje, leży wewnątrz okna [left, right].
+Dowód odrzucenia: gdy `a[left] + a[right] > target`, to dla każdego
+j ∈ [left, right) zachodzi `a[j] + a[right] ≥ a[left] + a[right] > target`,
+więc `right` nie należy do żadnej pary w oknie → bezpieczne `right--`.
+
+**Kanoniczna implementacja:**
+
+```javascript
+function twoSum(numbers, target) {
+  let left = 0;
+  let right = numbers.length - 1;
+
+  while (left < right) {
+    const sum = numbers[left] + numbers[right];
+    if (sum > target) right--;
+    else if (sum < target) left++;
+    else return [left + 1, right + 1];
+  }
+  return [-1, -1];
+}
+```
+
+**Pitfalle (z root cause):**
+
+1. `while (left <= right)` zamiast `<` — przy `left === right` porównujesz
+   element z samym sobą i możesz zwrócić parę tego samego indeksu.
+   Root cause: warunek pętli koduje "para", a para wymaga dwóch RÓŻNYCH pozycji.
+2. Brak posortowania jako warunku wstępnego — cały argument o odrzucaniu opiera
+   się na monotoniczności. Bez sortowania `a[j] ≥ a[left]` nie zachodzi i dowód
+   się rozpada. Two pointers na nieposortowanej tablicy jest po prostu BŁĘDNE
+   (nie "wolniejsze").
+3. Przy duplikatach zwraca inne indeksy niż skan lewostronny — nieistotne przy
+   gwarancji unikalności (LC 167), krytyczne w 3Sum.
+4. Odruch sięgnięcia po hashmapę (nawyk z LC 1) — łamie constraint O(1) space,
+   bo mapa rośnie do n wpisów.
+
+**Złożoność:** czas O(n) — każda iteracja zwęża okno o 1, więc ≤ n kroków.
+Pamięć O(1) — dwa indeksy.
+Przy n = 3·10⁴: ~30k operacji vs ~450M dla brute force (15 000×).
+
+**Talking points:**
+
+- "Posortowanie to informacja — brute force ją marnuje, binary search
+  wykorzystuje częściowo (O(n log n)), two pointers w pełni (O(n))."
+- Uzasadnij odrzucenie NIERÓWNOŚCIĄ, nie intuicją — to jest follow-up pytanie.
+- Jeśli tablica NIE jest posortowana: sortowanie kosztuje O(n log n), więc
+  hashmapa O(n)/O(n) wygrywa czasowo. Wybór two pointers vs hashmapa to
+  trade-off czas↔pamięć, nie "lepsze/gorsze".
+
+**Related:** LC 1 (Two Sum, hashmapa), LC 15 (3Sum — two pointers w pętli,
+obowiązkowe pomijanie duplikatów), LC 11 (Container With Most Water — ten sam
+schemat odrzucania, inne kryterium), LC 125 (Valid Palindrome), LC 977.
