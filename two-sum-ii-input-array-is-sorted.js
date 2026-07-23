@@ -3,7 +3,7 @@
  * @param {number} target
  * @return {number[]}
  */
-var twoSum = function (numbers, target) {
+const twoSum = function (numbers, target) {
   for (let i = 0; i < numbers.length - 1; i++) {
     const wanted = target - numbers[i];
 
@@ -13,13 +13,9 @@ var twoSum = function (numbers, target) {
     while (lo <= hi) {
       const mid = Math.floor((lo + hi) / 2);
 
-      console.log(
-        `numbers[i]: ${numbers[i]}, wanted: ${wanted}, numbers[mid]: ${numbers[mid]}`,
-      );
-
       if (numbers[mid] === wanted) {
         return [i + 1, mid + 1];
-      } else if (numbers[mid] > target) {
+      } else if (numbers[mid] > wanted) {
         hi = mid - 1;
       } else {
         lo = mid + 1;
