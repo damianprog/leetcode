@@ -7,6 +7,7 @@ const threeSum = function (nums) {
   for (let i = 0; i < nums.length; i++) {
     const target = -1 * nums[i];
     const numsIndexes = new Map();
+    // do we really need Map?
 
     for (let j = i + 1; j < nums.length; j++) {
       const wanted = target - nums[j];
