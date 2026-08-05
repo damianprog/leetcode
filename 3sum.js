@@ -15,10 +15,15 @@ const threeSum = function (nums) {
       if (numsIndexes.has(wanted)) {
         triplets.push([nums[i], nums[j], wanted]);
       } else {
-        numsIndexes.set(nums[i], i);
+        // change from i to j
+        numsIndexes.set(nums[j], j);
       }
     }
   }
 
   return triplets;
 };
+
+const nums = [-1, 0, 1, 2, -1, -4];
+
+console.log(threeSum(nums));
