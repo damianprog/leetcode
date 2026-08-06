@@ -6,8 +6,7 @@ const threeSum = function (nums) {
   const triplets = [];
   for (let i = 0; i < nums.length; i++) {
     const target = -1 * nums[i];
-    const numsIndexes = new Map();
-    // do we really need Map?
+    const numsIndexes = new Set();
 
     for (let j = i + 1; j < nums.length; j++) {
       const wanted = target - nums[j];
@@ -15,8 +14,7 @@ const threeSum = function (nums) {
       if (numsIndexes.has(wanted)) {
         triplets.push([nums[i], nums[j], wanted]);
       } else {
-        // change from i to j
-        numsIndexes.set(nums[j], j);
+        numsIndexes.add(nums[j]);
       }
     }
   }
@@ -24,6 +22,7 @@ const threeSum = function (nums) {
   return triplets;
 };
 
-const nums = [-1, 0, 1, 2, -1, -4];
+// const nums = [-1, 0, 1, 2, -1, -4];
+const nums = [-1, 0, 1, -1, 0, 1];
 
 console.log(threeSum(nums));
