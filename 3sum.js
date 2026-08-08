@@ -4,17 +4,27 @@
  */
 const threeSum = function (nums) {
   const triplets = [];
+
+  const tripletsStrings = new Set();
+
+  nums.sort((a, b) => a - b);
+
   for (let i = 0; i < nums.length; i++) {
     const target = -1 * nums[i];
-    const numsIndexes = new Set();
+    const numsSpotted = new Set();
 
     for (let j = i + 1; j < nums.length; j++) {
       const wanted = target - nums[j];
 
-      if (numsIndexes.has(wanted)) {
-        triplets.push([nums[i], nums[j], wanted]);
+      if (numsSpotted.has(wanted)) {
+        const tripletString = `${nums[i]}${nums[j]}${wanted}`;
+
+        if (!tripletsStrings.has(tripletString)) {
+          triplets.push([nums[i], nums[j], wanted]);
+          tripletsStrings.add(`${nums[i]}${nums[j]}${wanted}`);
+        }
       } else {
-        numsIndexes.add(nums[j]);
+        numsSpotted.add(nums[j]);
       }
     }
   }
