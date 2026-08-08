@@ -17,11 +17,11 @@ const threeSum = function (nums) {
       const wanted = target - nums[j];
 
       if (numsSpotted.has(wanted)) {
-        const tripletString = `${nums[i]}${nums[j]}${wanted}`;
+        const tripletString = `${nums[i]},${nums[j]},${wanted}`;
 
         if (!tripletsStrings.has(tripletString)) {
           triplets.push([nums[i], nums[j], wanted]);
-          tripletsStrings.add(`${nums[i]}${nums[j]}${wanted}`);
+          tripletsStrings.add(tripletString);
         }
       } else {
         numsSpotted.add(nums[j]);
