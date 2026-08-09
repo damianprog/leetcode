@@ -24,7 +24,7 @@ const threeSum = function (nums) {
   // }
   // return triplets;
   // =========================================================================================
-  // Wersja idiomatyczna Sort + Zbiegające się two pointers
+  // Wersja kanoniczna Sort + Zbiegające się two pointers
 
   nums.sort((a, b) => a - b);
   const res = [];

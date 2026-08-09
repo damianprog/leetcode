@@ -1465,3 +1465,120 @@ Przy n = 3·10⁴: ~30k operacji vs ~450M dla brute force (15 000×).
 **Related:** LC 1 (Two Sum, hashmapa), LC 15 (3Sum — two pointers w pętli,
 obowiązkowe pomijanie duplikatów), LC 11 (Container With Most Water — ten sam
 schemat odrzucania, inne kryterium), LC 125 (Valid Palindrome), LC 977.
+
+## 3Sum (LC 15) — redukcja do Two Sum
+
+### Key insight
+
+3Sum = **dla każdego elementu `x`, znajdź parę sumującą się do `-x`.** Ustalasz jeden element i na reszcie tablicy rozwiązujesz Two Sum z targetem `-x`. Wewnętrzny Two Sum możesz zrobić dwoma sposobami (two-pointers na posortowanej / hashset), ale redukcja jest ta sama.
+
+`sort` robi tu **podwójną robotę**: (1) daje monotoniczność potrzebną dla two-pointers, (2) skleja duplikaty obok siebie, dzięki czemu deduplikacja sprowadza się do pomijania sąsiadów — bez żadnych kluczy.
+
+### Canonical implementation (sorted + two pointers, O(1) space)
+
+```javascript
+const threeSum = function (nums) {
+  nums.sort((a, b) => a - b);
+  const res = [];
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    if (nums[i] > 0) break; // early exit: dalej same dodatnie
+    if (i > 0 && nums[i] === nums[i - 1]) continue; // outer-skip: pomiń powtórzone x
+
+    let lo = i + 1,
+      hi = nums.length - 1;
+    while (lo < hi) {
+      const sum = nums[i] + nums[lo] + nums[hi];
+      if (sum === 0) {
+        res.push([nums[i], nums[lo], nums[hi]]);
+        lo++;
+        hi--;
+        while (lo < hi && nums[lo] === nums[lo - 1]) lo++; // inner-skip lewo
+        while (lo < hi && nums[hi] === nums[hi + 1]) hi--; // inner-skip prawo
+      } else if (sum < 0) {
+        lo++; // za mało → w prawo są większe
+      } else {
+        hi--; // za dużo → w lewo są mniejsze
+      }
+    }
+  }
+  return res;
+};
+```
+
+Trace dla `i=1` na `[-4,-1,-1,0,1,2]` (fix `-1`, szukaj pary o sumie `+1`):
+
+```
+sorted:  -4  -1  -1   0   1   2
+idx:      0   1   2   3   4   5
+-4  -1  [-1]  0   1  [2]    -1 + -1 + 2 = 0  ->  zapis [-1,-1,2]; lo++ hi--
+-4  -1   -1  [0] [1]  2     -1 +  0 + 1 = 0  ->  zapis [-1,0,1];  lo++ hi-- -> koniec
+```
+
+### Alternatywna implementacja (hashset inner Two Sum, O(n) space)
+
+```javascript
+const threeSum = function (nums) {
+  nums.sort((a, b) => a - b); // wciąż potrzebny dla dedup
+  const res = [],
+    seenTriplets = new Set();
+  for (let i = 0; i < nums.length; i++) {
+    if (i > 0 && nums[i] === nums[i - 1]) continue;
+    const spotted = new Set();
+    for (let j = i + 1; j < nums.length; j++) {
+      const wanted = -nums[i] - nums[j];
+      if (spotted.has(wanted)) {
+        const key = `${nums[i]},${wanted},${nums[j]}`; // SEPARATOR obowiązkowy
+        if (!seenTriplets.has(key)) {
+          res.push([nums[i], wanted, nums[j]]);
+          seenTriplets.add(key);
+        }
+      } else spotted.add(nums[j]);
+    }
+  }
+  return res;
+};
+```
+
+### Named pitfalls
+
+**P1 — domyślny `sort()` sortuje leksykograficznie, nie numerycznie.**
+Root cause: bez comparatora `sort()` konwertuje elementy na string i porównuje znak-po-znaku.
+Counterexample: `[-1,-4,2,10].sort()` -> `[-1,-4,10,2]` (numerycznie chaos; `'-'` i cyfry mają swoje kody).
+Fix: zawsze `sort((a, b) => a - b)`.
+
+**P2 — oba dedup-skipy są load-bearing i łapią RÓŻNE klasy duplikatów.**
+Root cause: trójka jest definiowana po **zbiorze wartości**, nie po indeksach; po sorcie duplikaty leżą obok siebie.
+
+- Brak **inner-skip** -> `[-2,0,0,2,2]` daje `[[-2,0,2],[-2,0,2]]` (ta sama trójka z innej pary indeksów).
+- Brak **outer-skip** -> `[0,0,0,0]` daje `[[0,0,0],[0,0,0]]` (powtórzone `x` w zewnętrznej pętli).
+  Uwaga: skip MUSI być po `lo++/hi--`, porównanie do `lo-1`/`hi+1` (właśnie-opuszczona wartość). Wariant „skip przed przesunięciem, porównanie do `lo+1`/`hi-1`" jest równoważny i też poprawny — zweryfikowane; to NIE jest bug.
+
+**P3 — `sort` to warunek poprawności two-pointers, nie optymalizacja.**
+Root cause: ruch `lo++` zwiększa sumę, a `hi--` ją zmniejsza wyłącznie dlatego, że w prawo są większe, w lewo mniejsze. Bez sortu ta monotoniczność nie zachodzi -> algorytm gubi rozwiązania. Gdyby ktoś w code review „wyczyścił niepotrzebny sort", złamałby logikę.
+
+**P4 — [wariant hashset] klucz dedup przez konkatenację bez separatora = kolizja.**
+Root cause: `"-4"+"10"` jest nieodróżnialne od `"-41"+"0"`.
+Counterexample (schemat klucza `${min}${max}${mid}` w ogólności): `[-41,-4,0]` i `[-4,-4,10]` -> oba `"-410-4"`.
+W 3Sum ratuje go WYŁĄCZNIE constraint sum=0 (przypina 3. wartość); empirycznie brak kolizji do ±1e5 na 5M prób. Ale to poprawność **przez przypadek, nie przez konstrukcję**.
+Fix: separator albo `[a,b,c].sort((x,y)=>x-y).join(",")` -> injektywny z definicji.
+
+### Complexity
+
+- Time: **O(n²)** — `O(n log n)` sort zdominowany przez `O(n²)` pętlę główną.
+- Space: **O(1)** dla two-pointers (poza wynikiem; sort in-place) / **O(n)** dla wariantu hashset.
+
+### Talking points
+
+- Redukcja: „3Sum to dla każdego `x` Two Sum na `-x`" — to samo jądro w obu wariantach; różni się tylko JAK rozwiązujesz wewnętrzny Two Sum.
+- Znać **oba warianty** i trade-off: two-pointers O(1) space vs hashset O(n). Two-pointers to domyślna odpowiedź.
+- Sort robi podwójną robotę (monotoniczność + kanoniczna dedup) — dobre do pokazania, że rozumiem _dlaczego_ on tam jest.
+- „Correct by construction vs by accident" na przykładzie klucza-stringa — sygnał seniority.
+- Uogólnia się do **kSum**: rekurencja redukująca k -> k-1, z 2-pointer 2Sum jako przypadkiem bazowym.
+
+### Related problems
+
+- Two Sum (LC 1) — hashmap, tablica nieposortowana, zwraca indeksy.
+- Two Sum II – Input Array Is Sorted (LC 167) — czysty two-pointers, baza dla 3Sum.
+- 3Sum Closest (LC 16) — ten sam szkielet, minimalizujesz `|sum - target|`.
+- 4Sum (LC 18) — dwie zewnętrzne pętle + two-pointers; krok w stronę kSum.
