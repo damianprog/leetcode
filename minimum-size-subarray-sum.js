@@ -3,7 +3,7 @@
  * @param {number[]} nums
  * @return {number}
  */
-var minSubArrayLen = function (target, nums) {
+const minSubArrayLen = function (target, nums) {
   let windowSize = 1;
 
   while (windowSize <= nums.length) {
@@ -13,18 +13,18 @@ var minSubArrayLen = function (target, nums) {
       windowSum += nums[i];
     }
 
-    if (windowSum === target) {
+    if (windowSum >= target) {
       return windowSize;
     }
 
     let left = 0;
     let right = windowSize - 1;
 
-    while (right < nums.length) {
+    while (right < nums.length - 1) {
       windowSum -= nums[left];
       windowSum += nums[right + 1];
 
-      if (windowSum === target) {
+      if (windowSum >= target) {
         return windowSize;
       }
 
@@ -34,4 +34,6 @@ var minSubArrayLen = function (target, nums) {
 
     windowSize++;
   }
+
+  return 0;
 };
