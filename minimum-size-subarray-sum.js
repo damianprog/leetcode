@@ -4,36 +4,61 @@
  * @return {number}
  */
 const minSubArrayLen = function (target, nums) {
-  let windowSize = 1;
+  // let windowSize = 1;
+  // while (windowSize <= nums.length) {
+  //   let windowSum = 0;
+  //   for (let i = 0; i < windowSize; i++) {
+  //     windowSum += nums[i];
+  //   }
+  //   if (windowSum >= target) {
+  //     return windowSize;
+  //   }
+  //   let left = 0;
+  //   let right = windowSize - 1;
+  //   while (right < nums.length - 1) {
+  //     windowSum -= nums[left];
+  //     windowSum += nums[right + 1];
+  //     if (windowSum >= target) {
+  //       return windowSize;
+  //     }
+  //     left++;
+  //     right++;
+  //   }
+  //   windowSize++;
+  // }
+  // return 0;
 
-  while (windowSize <= nums.length) {
-    let windowSum = 0;
+  // ================================================================================
+  // O(n)
 
-    for (let i = 0; i < windowSize; i++) {
-      windowSum += nums[i];
-    }
+  let sum = 0;
+  let left = 0;
+  let right = 0;
 
-    if (windowSum >= target) {
-      return windowSize;
-    }
+  // for (let i = 0; i < nums.length; i++) {
+  //   sum += nums[i];
 
-    let left = 0;
-    let right = windowSize - 1;
+  //   if (sum < target) {
+  //     continue;
+  //   }
+  // }
 
-    while (right < nums.length - 1) {
-      windowSum -= nums[left];
-      windowSum += nums[right + 1];
+  while (right < nums.length) {
+    sum += nums[right];
 
-      if (windowSum >= target) {
-        return windowSize;
-      }
+    // = r u sure?
+    // if (sum >= target) {
 
+    // }
+
+    while (sum >= target && left < right) {
       left++;
-      right++;
+
+      sum -= nums[left];
     }
 
-    windowSize++;
+    right++;
   }
 
-  return 0;
+  // ================================================================================
 };
