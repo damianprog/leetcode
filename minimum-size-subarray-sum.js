@@ -31,10 +31,6 @@ const minSubArrayLen = function (target, nums) {
   // ================================================================================
   // O(n)
 
-  let sum = 0;
-  let left = 0;
-  let right = 0;
-
   // for (let i = 0; i < nums.length; i++) {
   //   sum += nums[i];
 
@@ -42,23 +38,34 @@ const minSubArrayLen = function (target, nums) {
   //     continue;
   //   }
   // }
+  let sum = 0;
+  let left = 0;
+  let right = 0;
+
+  let minimumWindowSize = Infinity;
 
   while (right < nums.length) {
     sum += nums[right];
 
-    // = r u sure?
-    // if (sum >= target) {
+    while (sum >= target && left <= right) {
+      const currentWindowSize = right - left + 1;
 
-    // }
-
-    while (sum >= target && left < right) {
-      left++;
+      minimumWindowSize = Math.min(currentWindowSize, minimumWindowSize);
 
       sum -= nums[left];
+
+      left++;
     }
 
     right++;
   }
 
+  return minimumWindowSize !== Infinity ? minimumWindowSize : 0;
+
   // ================================================================================
 };
+
+const target = 7;
+const nums = [2, 3, 1, 2, 4, 3];
+
+console.log(minSubArrayLen(target, nums));
