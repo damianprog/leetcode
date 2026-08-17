@@ -47,7 +47,7 @@ const minSubArrayLen = function (target, nums) {
   while (right < nums.length) {
     sum += nums[right];
 
-    while (sum >= target && left <= right) {
+    while (sum >= target) {
       const currentWindowSize = right - left + 1;
 
       minimumWindowSize = Math.min(currentWindowSize, minimumWindowSize);
