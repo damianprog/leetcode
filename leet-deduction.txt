@@ -1,0 +1,4022 @@
+n(n+1)/2
+
+[3,0,1]
+
+n = 3
+
+3 * (4) / 2
+
+12 / 2 = 6
+
+TAUXXTAUXXTAUXXTAUXXTAUXX
+TAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXX
+TAUXXTAUXXTAUXXTAUXXTAUXX
+
+[5,1,2,3,1]
+
+
+[2,1,5,0,4,6]
+
+[2,1,5,3,4,1]
+
+[2,1,5,0,4,5]
+
+Skąd możemy wiedzieć po jednym przejśćiu arraya 
+że przynajmniej raz zdarzyła się sytuacja 
+w której kolejno napotkaliśmy 3 takie liczby 
+że każda jest większa od poprzedniej
+
+["a","a","b","b","c","c","c","c","d","d","e"]
+
+a — liczba kroków od head do początku cyklu
+b — liczba kroków od początku cyklu do punktu spotkania
+L — długość całego cyklu
+kL — jakaś liczba pełnych okrążeń cyklu
+
+[0,1,0,3,12]
+
+[1,3,12,0,0]
+
+[2,1,5,0,4,6]
+
+[2,1,5,0,4,5]
+
+[2,1,5,0,6,5]
+
+[0,4,2,1,0,-1,-3]
+
+["a","b","b","b","b","b","b","b","b","b","b","b","b","z","c","c","c"]
+
+Potem dla każdego znaku z s:
+
+patrzysz na listę jego indeksów w t
+znajdujesz najmniejszy indeks większy od poprzednio użytego
+robisz to binary searchem
+
+9
+
+[1,3,4,7,9,12,15]
+
+Im większy rozstaw tym lepiej
+Im większa liczba tym lepiej
+
+
+
+
+jeśli wskaźnik wskazuje na liczbe >= k to na pewno tę liczbę możemy odrzucić
+
+[3,1,3,4]
+
+[3,7,5,4,4,9,5,3,2,2] k = 6
+
+interesuje nas najdłuższy ciąg jedynek wśród których może się znaleźć jedno 0
+
+[1,1,1,0,1,0]
+
+Jeśli word1 i word2 składają się z tych samych liter występujących tyle samo razy to napewno można osiągnąć jeden z drugiego za pomocą operation1
+
+operation2 umożliwia zamianę liczb wystąpień
+
+word1 i word2 muszą się składać z tych samych liter ale liczba wystąpień tych liter może się różnić
+
+word1 i word2 muszą mieć tę samą długość
+
+word1 i word2 muszą się składać z tych samych liter a liczby wystąpień tych liter muszą być takie same
+
+aaabbc
+
+1: 1
+2: 1
+
+a: 2
+b: 2
+c: 1
+z: 2
+
+a: 1
+b: 2
+c: 1
+z: 3
+
+zaaabbbc
+
+z 1: 1
+
+a 1: 2
+
+a 1: 1
+  2: 1
+
+
+
+aaaaaaaaabc
+abccccccccc
+
+abc
+abc
+
+
+"cabbba"
+
+"abbccc"
+
+a: 2
+b: 3
+c: 1
+
+a: 1
+b: 2
+c: 3
+
+
+word1OccurrencesMap:  Map(3) { 2 => 2, 3 => 1, 1 => NaN }
+word2OccurrencesMap:  Map(3) { 1 => 1, 2 => 1, 3 => 1 }
+
+
+
+
+row i col są equal wtedy kiedy zawierają te same liczby w tej samej kolejności
+
+trzeba wymyślić rozwiązanie które będzie zawierało jedno przejście po każdym row i jedno przejscie po każdym col
+
+albo tylko jedno przejście po każdym row 
+
+[ [ 3, 1, 2 ], [ 2, 7, 7 ], [ 1, 6, 7 ] ]
+
+leet**cod*e
+lee*cod*e
+lecod*e
+lecoe
+
+erase*****
+eras****
+era***
+er**
+e*
+
+
+
+
+
+
+
+
+
+
+
+Po liczbie zawsze musi byc bracket [
+
+liczbę na stos a sięgamy na stos kiedy napotkamy ] 
+
+w napotkanym stringu nie napotkalismy zadnej liczby wiec mozemy zwracac
+
+najpierw wycinasz fragment do osobnego stringa
+potem rekurencyjnie parsujesz ten fragment od nowa
+
+"3[a2[c]]"
+
+[1,2,3,6000,6001]
+
+"RDDRRDDDR"
+
+"rddrRdddr"
+
+jednych może być więcej niż drugich ale podlegają jeszcze kolejności głosowania
+skoro wiemy że będą głosować najoptymalniej to czy sama większość w takim razie wystarczy?
+Jaka strategia kryje się za "optymalnym" głosowaniem
+z treści zadania wynika że samo "optymalne" głosowanie prawdopodobnie nie daje pewności wygranej bo w gre wchodzi jeszcze odgórna kolejność
+
+"RdRRDDDR"
+
+Pierwszy R zbanował pierwsze D po jego prawej stronie
+i tym samym kolejny głosować będzie kolejny R 
+
+można w secie trzymać indeksy zbanowanych senatorow
+
+"RDRRDDDR"
+
+"RdRRdddr"
+
+"Rdrrdddr"
+
+z tego co mi sie wydaje to optymalnym jest banować tego najbliższego co bedzie miał głosowac po nas
+
+"RdRRddDR"
+
+"RdRRdddr"
+
+"RDRRDDDR"
+
+"RRRDDD"
+
+"DDRRR"
+
+"dDrrr"
+
+Po tych dwóch D powinno być raz R a następnie znowu D
+
+jeśli natrafimy na D to najbliższe R pomijamy (nie ma prawa głosu)
+
+możemy liczyc R / D toSkip a kiedy skipujemy to wstawiamy * 
+bo skipnięty ma już nie być brany pod uwagę
+
+"DRDRR"
+
+"drDrr"
+
+let RQty = 3;
+let DQty = 2;
+
+"DRDRR"
+
+RQty = 2
+RToSkip = 1
+
+"D*DRR"
+
+RToSkip = 0
+
+RQty = 1
+RToSkip = 1
+
+"D*D*R"
+
+RToSkip = 0
+
+DQty = 1
+DToSkip = 1
+
+"**D*R"
+
+DToSkip = 0
+
+RQty = 0
+RToSkip = 1
+
+"DRDRR"
+
+"drDrr"
+
+"DRDRR"
+
+"**D*R"
+
+"DRDRR"
+
+gwiazdki są po to aby uwzględniać nową kolejność głosowania zmienianą poprzez banowanie senatorow przez innych senatorow
+
+D: [0, 2]
+R: [1, 3, 4]
+
+D: [2]
+R: []
+
+będąc na D możemy zmniejszyć ilość R tylko wtedy kiedy to D nie jest zbanowane
+
+gdyby zrobić tak żeby nie musieć się iterować po tych które nie mają prawa głosu
+
+"DRDRR"
+
+D: [0, 2]
+R: [4]
+
+"DRDRR"
+
+"RD"
+
+DIndexes: [1]
+RIndexes: []
+
+
+"DRDRR"
+
+rQueue = [1,3,4]
+dQueue = [0,2]
+
+rQueue = [9]
+dQueue = [7]
+
+chodzi o to aby ostatni oddNode wskazywał na pierwszy even node
+
+W każdej iteracji:
+odd zabiera następny węzeł (który jest parzystym sąsiadem bieżącego even's next)
+
+
+Gdy even === null - lista się skończyła, koniec
+Gdy even.next === null - nie ma kolejnego nieparzystego do doklejenia, koniec
+
+zapisywać największą napotkaną wartość na danej path
+i wtedy sprawdzamy czy obecny node jest większy bądź równy największej napotkanej wartości na tej path
+
+
+[10,5,3,3]
+
+10
+
+10,5 5
+
+10,5,3 5,3 3
+
+10,5,3,3 5,3,3 3,3 3
+
+10 : 1
+15 : 1
+18 : 0
+21 : 0
+16 : 0
+17 : 1
+
+count = 2
+
+Musimy przemierzyć całe drzewo w poszukiwaniu możliwości zigzag
+prefereować przejście zigzagiem i jak bedziemy wracać to node może pamiętać który child node wybraliśmy i spróbować wybrać przeciwny przy poworcie
+
+wzorzec "postorder z globalnym max". Klasycy tej rodziny:
+
+Diameter of Binary Tree
+Binary Tree Maximum Path Sum
+Longest Univalue Path
+
+3,5,6
+3,5,2,7
+
+const check = (s) => {
+    let i = 0;
+
+    for (const char of t) {
+      if (char === s[i] && ++i === s.length) return true;
+    }
+
+    return i === s.length;
+  };
+
+basdbcbjeway
+
+najpierw bierzemy najwcześniejsze wystąpienie pierwszej litery s
+
+a: [1,10]
+b: [0,4,6]
+
+a: [5,7,8]
+b: [0,3,4]
+
+następnie bierzemy najwcześniejsze wystąpienie drugiej litery po indeksie pierwszej litery itd.
+
+abc
+
+binary search który będzie zwracać pierwsze znalezisko które jest większe od parametru
+
+szukajmy currentIndex i zwróćmy wynik o 1 większym indeksie
+
+[1,1,1,0,0,0,1,1,1,1,0]
+
+[1,1,1,0,0,0,1,1,1,1]
+
+a teraz wyjaśnij mi 5.3 Prisma schema (Prisma 7, TypeScript-based query compiler)
+
+
+
+muszą zawierać te same litery 
+muszą być tej samej długości
+
+aaaxxbbbbb
+xvbhjbbbbb
+
+word1 =
+"abbzzca"
+word2 =
+"babzzcz"
+
+word1
+a: 2
+b: 2
+c: 1
+z: 2
+
+word2
+a: 1
+b: 2
+c: 1
+z: 3
+
+[0][0] [1][0] [2][0]
+[0][1] [1][1] [2][1]
+
+
+rows:  [ '321', '176', '277' ]
+cols:  [ '312', '277', '167' ]
+
+
+[[11,1],[1,11]]
+
+
+prefix[0] = 0, prefix[1] = 10, prefix[2] = 30, prefix[3] = 60, prefix[4] = 100
+
+Suma nums[1..2] (czyli 20 + 30 = 50) za pomocą wzoru prefix[3] - prefix[1]
+
+
+
+
+
+
+
+
+
+nums = [1, 2, 3, -3, 1, 1, 1, 4, 2, -3]
+k = 3
+
+p[0] = 0
+p[1] = 1
+p[2] = 3
+p[3] = 6
+p[4] = 3
+p[5] = 4
+p[6] = 5
+p[7] = 6
+p[8] = 10
+p[9] = 12
+p[10] = 9
+
+nums[4] do nums[6]
+prefix[7] - prefix[4]
+
+prefix[7] - 3 = 3
+
+nums = [1, 2, 3, 50, 1, 1, 1, 4, 2, -3]
+
+nums = [1, 2, -3, -3, 1, 1, 1, 4, 2, -3]
+
+
+1. currentStr jest tym co zbudowaliśmy dotychczas przy napotkaniu [ zapiujemy go a następnie budujemy to co jest zagnieżdżone kiedy skończymy to wracamy do tego niego i doklejamy nowe
+
+2. dlatego że będziemy robić repeat z tego co zbudujemy w zagnieżdżeniu, doklejamy to co zbudowaliśmy w zagnieżdżeniu do zapisanego zewnętrznego stringa
+
+3. Bo chcemy to co zbudowaliśmy nowego dokleić do starego a nie na odwrót
+
+4. Hmmm... Bo z dwoma stosami jest mniejsza szansa na pomyłkę? nie musimy pamiętać kolejności tylko z jednego stosu ściągamy number a z drugiego string
+
+3, "", 2, a
+
+1. i jest wspólna dla wszystkich wywołań decode. Gdyby i było w decode to musieli byśmy przekazywać i do kolejnego wywołania decode. Wtedy i musiała by być zwracana z decode. Gdyby let i = 0 było na początku decode() i nie przekazywali byśmy to i zawsze wskazywało by na pierwszy indeks stringa. 
+
+2. Actually to koniec stringa również jest warunkiem stopu. ] Oznacza że skończyliśmy decode obecnego fragmentu i result możemy zwrócić.
+
+3. Znaki wewnątrz nawiasu konsumuje/ą wywołanie/nia wewnętrzne. 
+przy drugim i++ wiemy że właśnie skończyliśmy wywołanie decode a to się kończy przy napotkaniu znaku ]. 
+
+4. 3
+
+
+
+
+rdddrrddr
+
+LC 649 — Dota2 Senate: senatorzy "R"/"D" banują się po kolei wg indeksu, każdy banuje jednego przeciwnika lub ogłasza zwycięstwo. Sketch + complexity?	• Dwie kolejki indeksów (radiant[], dire[]) • While obie niepuste: r = radiant.shift(), d = dire.shift(); if r<d → radiant.push(r+n) (d zbanowany); else → dire.push(d+n) (r zbanowany) • Wygrywa partia z niepustą kolejką • KLUCZ: każdy banuje najbliższego przeciwnika "po prawej" = min indeks w kolejce przeciwnika; +n gwarantuje że senator wraca dopiero w następnej rundzie • O(n²) z Array.shift (shift = O(n) w JS), O(n) z head pointerem; O(n) space
+
+while (fast && fast.next) {
+    prevSlow = slow;
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+
+na co dokładnie wskazuje prevSlow? na referencje jaka siedzi w slow?
+więc co jeśli do slow przypiszemy nową referencje? czy zmieni sie wtedy również i prevSlow?
+
+
+wersja 1 let slow = head;
+  let fast = head.next.next;  // fast startuje 2 kroki do przodu
+  
+  więc slow zatrzyma sie na popredniku środka 
+  czyli fast już na początku wyprzedza slow o 2 miejsca
+  ale w wersji z dummy fast początkowo wyprzedza slow o 1 miejsce a i tak slow sie zatrzyma na poprzedniku środka?
+
+odp. w Czacie Strategia powtórek zadań na LeetCode
+
+1. slow zatrzyma sie na B
+2. 
+[A, B, C, D, E]
+
+zatrzyma sie na środku bo fast.next będzie null
+ale nie wiem o co chodzi z intuicją "fory dla slow"
+
+[A, B, C, D]
+
+Rozumiem że jeśli slow i fast startują z tej samej pozycji i fast porusza się 2x szybciej niż slow to fast w tej samej liczbie iteracji pokona dokładnie 2x większą odległość niż slow i slow wyląduje dokładnie w połowie listy. Więc jeśli początkowo slow będzie startowało z dummy node zatem z pozycji -1 to skończy w pozycji środek - 1 więc w node poprzedzającym środek. Ale jeśli zaczniemy slow w A i fast w B to slow też przecież jest początkowo o 1 przed B więc czemu slow i tak wyląduje na środku tak jakbyśmy startowali z tego samego node?
+
+[A, B, C, D, E]
+
+To gdzie wyląduje slow zależy od tego ile razy może się wykonać iteracja fast 
+czyli koncowa pozycja slow to slow początkowe + liczba iteracji fast
+Dummy nie ogranicza liczby możliwych do wykonania iteracji fast
+Dummy ↔ Razem: ten sam fast (A), ale slow startuje 1 wcześniej → slow ląduje 1 wcześniej
+a jak fast by startowało z B to zmniejszamy liczbe możliwych iteracji z 2 do 1
+
+potrzebuję zapisać drugiego node'a skoro mam zamiar ustawić next pierwszego na kolejny odd czyli na trzeci
+
+1. Stos wywołań. Czasowo O(n) i pamięciowo też O(n)
+2. Nie wiem
+3. Pewnie stosem
+
+O(h) gdzie h to wysokość drzewa, w najgorszym przypadku O(n), w zbalansowanym O(log n)"
+
+
+ø å æ
+
+śledzić największe value jakie padło na danej ścieżce i porownywac
+jeśli się cofamy z node w którym jest value które jest najwyższą spotkaną value 
+to kasujemy te value ze stacka?
+
+path sum - target sum = prefix sum
+
+18 - 8 = 10
+
+Pytanie czy na obecnej ścieżce był prefix 10
+Jesli tak to zliczamy 
+
+chodzi o to aby usuwać prefixy których nie ma już na obecnej ścieżce
+
+
+każdy node może być tym node od którego rozpocznie się sekwencja
+node nie wie czy jest node lewym czy prawym więc musi zwrócić dwie możliwosci
+musi zwrócić wynik scenariuszu pójścia w lewo i wynik pójscia w prawo
+
+
+[1,2,3,0]
+
+[1]
+
+[1,1,2,3]
+
+
+[1,2,3,0,0]
+
+[2,2]
+
+[1,2,2,2,3]
+
+
+Tryb Sokratejski. Robię zadanie Merge Sorted Array i wiem że posortowany array ma być w nums1. Gdyby funkcja miała zwracać posortowany array to rozwiązanie było by dla mnie oczywiste: pointer na pierwszy element nums1 oraz pointer na pierwszy element nums2 i ten który jest mniejszy wrzucamy do nowego array i przesuwamy ten wskaźnik który wskazywał na mniejszą liczbę. Natomiast tutaj trzeba wstawić i poprzestawiać liczby w nums1. Dajmy na to [1,2,3,0] [1] no to jedynka z nums2 powinna się znaleźć w nums1 w miejscu gdzie początkowo była 2 zatem 1 w miejsce 2 i 2 w miejsce 3 i 3 w miejsce 0?
+
+
+[1,2,3,0]
+
+[1]
+
+[1,1,2,3]
+
+[1,2,2,3,5,6]
+
+let i = m - 1;
+  let j = n - 1;
+  let k = nums1.length - 1;
+
+  while (i >= 0 && j >= 0) {
+    if (nums1[i] >= nums2[j]) {
+      nums1[k] = nums1[i];
+      i--;
+    } else {
+      nums1[k] = nums2[j];
+      j--;
+    }
+
+    k--;
+  }
+
+
+[1,2,2,3,5,6]
+
+[0]
+
+[1]
+
+i = -1
+j = 0
+
+wersja 1:
+
+nums[-1] = undefined
+
+wtedy nums1[i] >= nums2[j] czyli undefined >= nums2[j]
+nie powinno dochodzić do takiego porównania
+
+wersja 2: 
+
+nums1 = [4,5,6,0,0,0]
+m = 3
+
+nums2 = [1,2,3]
+n = 3
+
+[4,5,6,4,5,6]
+
+skończyły się nam liczby z nums1 a nie wstawiliśmy liczb z nums2
+
+
+nums1 = [1,2,3,0,0,0]
+m = 3
+
+nums2 = [4,5,6]
+n = 3
+
+[1,2,3,4,5,6]
+
+wstawiliśmy wszystkie liczby z nums2
+liczby z nums1 są na swoim miejscu 
+
+1. Nic nie trzeba robić, liczby z nums1 są na swoim miejscu
+2. Wstawiliśmy liczby z nums1, trzeba wstawić pozostałę liczby z nums2
+
+
+[3,2,2,3]
+
+wszystkie nietrójki powinny znaleźć się na początku arraya
+
+[2,2,3,3]
+
+skoro mają być na początku to możemy pisać na początek
+
+do wpisywania interesują nas nietrójki
+a do nadpisywania interesują nas trójki
+
+skoro to co jest na koncu nas nie interesuje to jest to strefa śmietnika
+czyli miejsce na umieszczenie trójki a przeniesienie w miejsce tej trójki nietrójki
+
+więc pointer wskazujący miejsce do wspisu niech leci od przodu
+a pointer wskazujący element do wpisania niech leci od końca
+
+[1]
+
+[1]
+
+[3,2,2,3]
+
+val = 3
+
+[2,2,3,3]
+
+
+czyli w tym przypadku left na końcu wskazuje na ostatni dobry
+left + 1 zatem zakłada że left na końcu zawsze wskazuje na indeks ostatniego dobrego elementu
+
+[2,2]
+
+val = 2
+
+[2,2]
+
+w tym przypadku left będzie 0 a 0 to nie jest index ostatniego dobrego elementu
+w takim przypadku obecny kod by zwrócił 0 + 1
+
+[3,2,2,3]
+
+val = 3
+
+[3,2,2,3]
+
+1. 2 dobre elementy 
+2. 0 dobrych elementow
+3. Tak
+
+[3,2,2,3] 
+
+val = 3
+
+[2,2,2,3] 
+
+k = 2
+
+[2,2]
+
+val = 2
+
+k = 0
+
+[3]
+
+val = 1
+
+[1]
+
+val = 1
+
+nie wejdziemy do while i zwrocimy left + 1 czyli 1 a powinno być 0
+
+
+[1]
+
+val = 1
+
+[2,2]
+
+val = 2
+
+right konczy na -1
+wtedy w trzecim ifie dojdzie do tego ze porównamy undefined !== val
+
+[2,2]
+
+val = 2
+
+kończymy pętle left = 0 a right = -1
+lecz nie robimy śmieciowych podmian
+
+[3,2,2,3]
+
+val = 3
+
+[2,2,2,3]
+
+left konczy na 2
+w tym przypadku left to na pewno liczba dobrych
+
+[0,1,2,2,3,0,4,2]
+
+val = 2
+
+[0,1,4,0,3,2,2,2]
+
+left konczy na 5
+
+[2,2]
+
+val = 2
+
+[2,2]
+
+right kończy na -1 lecz nie ruszamy zadnego smieciowego indexu -1
+tylko konczymy pętle a left = 0 czyli prawidłowo
+
+[1]
+
+val = 3
+
+left = 1
+
+[3,2,2,3]
+
+val = 3
+
+[2,2,2,3]
+
+
+[0,1,2,2,3,0,4,2]
+
+val = 2
+
+[0,1,2,2,3,0,4,2]
+
+1 zapis 0 w 0 
+[0,1,2,2,3,0,4,2]
+
+2 zapis 1 w 1
+[0,1,2,2,3,0,4,2]
+
+3 zapis 3 w 2
+[0,1,3,2,3,0,4,2]
+
+4 zapis 0 w 2
+[0,1,3,0,3,0,4,2]
+
+5 zapis 4 w 3
+[0,1,3,0,4,0,4,2]
+
+
+dobry ale zbędny element oznacza że został on już skopiowany na wcześniejszą pozycje w miejsce złego elementu. 
+
+[2,3,4]
+
+val = 2
+
+[2,3,4]
+
+Pierwszy zapis - 3 w miejsce 2
+[3,3,4]
+
+Następnie inkrementujemy k i teraz k wskazuje na wartość 3 która już jest wpisana wcześniej w array w miejsce val. Inkrementujemy też i które teraz wskazuje na wartość 4
+
+Drugi zapis - 4 w miejsce 3 zatem w tym momencie nadpisujemy dobrą wartość która jest juz wpisana wczesniej w array w miejsce val
+[3,4,4]
+
+
+
+duplikaty są obok siebie
+
+miejsce pierwszego duplikatu to valid miejsce na wpisanie tam kolejnej wartości
+
+więc slow powinien się zatrzymać na miejscu pierwszego duplikatu
+
+fast będzie zwiekszac sie o 1 index co pętle
+
+kiedy chcemy zwiekszac slow
+po zapisie w jego obecne miejsce
+
+nową napotkaną wartość chcemy wstawić w miejsce pierwszego duplikatu poprzedniej wartości
+
+[0,0,1,1,1,2,2,3,3,4]
+
+[0,1,2,3,4,2,2,3,3,4]
+
+
+
+[0,0,0,1,1,2,3]
+
+pętla która zatrzymała by slow indeks na pierwszym duplikacie
+
+[0,0,0,1,1,2,3]
+
+[0,1,2,3,1,2,3]
+
+zalozenie: inkrementujemy slow tylko wtedy gdy napotakmy nową wartość
+
+[1,2,2]
+
+
+
+za każdym razem kiedy napotkamy nową wartość to inkrementujemy slow i wpisujemy w nowe miejsce slow nową wartość
+
+[0,0,0,1,1,2,3]
+
+[0,1,2,3,1,2,3]
+
+[0,1,2,3]
+
+
+[0,0,1,1,1,2,2,3,3,4]
+
+
+[0,1,2,3,1,2,2,3,3,4]
+
+
+[0,0,1,1,1,2,2,3,3,4]
+
+róznica jest tylko taka że nowa wartośc jest rejestrowana poprzez porównanie z indexem slow a nie z fast - 1
+
+
+[1,1,1,2,2,3]
+
+
+[1,1,1,2,2,3]
+
+Napotykając nową wartość chcemy ją wpisać po pierwszym duplikacie poprzedniej wartości
+
+
+[1,2,2,3]
+
+Nie chcemy nadpisywać pierwszego duplikatu
+
+
+[1,1,2,2,3,3]
+
+
+[0,0,1,1,1,1,2,3,3]
+
+
+[1]
+
+
+
+
+
+
+[0,0,1,1,1,1,2,3,3]
+
+
+[0,0,1,1,2,3,3,3,3]
+
+może chcemy zwiększać slow o 2 wtedy kiedy po slow występuje duplikat
+a o 1 kiedy nie występuje
+
+
+[0,0,1,1,1,1,2,3,3]
+
+jeśli nums[fast] !== nums[slow] && 
+
+
+[1,1]
+
+
+[1,1,1,2,2,3]
+
+
+po 1 iteracji
+slow = 0
+fast = 2
+nums = [1,1,1,2,2,3]
+
+po 2 iteracji
+slow = 2
+fast = 3
+nums = [1,1,2,2,2,3]
+
+po 3 iteracji
+slow = 2
+fast = 4
+nums = [1,1,2,2,2,3]
+
+po 4 iteracji
+slow = 4
+fast = 5
+nums = [1,1,2,2,3,3]
+
+
+[1,1,1]
+Nie wchodzimy do warunku w pętli
+slow = 0
+zwracamy 0 + 1 czyli 1
+Błąd bo powinno byc zwrócone 2
+
+[1, 1, 2, 2]
+slow = 2
+wpisujemy nums[slow] = nums[fast] czyli 2 w 2
+więcej nie wchodzimy do warunku w pętli
+zwracamy 2 + 1 czyli 3
+Błąd bo powinno być oczywiście 4
+
+2. Teoretycznie to slow po każdej pętli powinno stać na ostatniej "unikalnej" wartości.
+od 0 do slow włącznie powinny być unikalne wartości. Unikalne w tym zadaniu znaczy że występują max 2 razy. Gdyby tak było to zwrot na końcu slow + 1 spełniał by swoje zadanie.
+
+[0,0,1,1,1,1,2,3,3]
+
+dałem || nums[fast] !== nums[slow + 1]
+bo gdybyśmy mieli 	
+if (nums[fast] !== nums[slow]) {
+slow += 2
+
+[0,0,1,1,2,1,3,3,3]
+
+doszło do tego że skopiowaliśmy 3 z indeksu 7 do indeksu 6
+
+Zatem slow powinno wskazywać następne wolne miejsce do zapisu
+czyli start slow = 2
+
+[0,0,1,1,1,1,2,3,3]
+
+[0,0,1,1,2,3,3,3,3]
+
+[1]
+
+[1,1,1,1,2,2]
+
+[1,1,1,1,2,2]
+
+slow się zatrzyma na 3 a powinno być 4
+
+
+musimy wiedzieć ile razy występuje number aby orzec czy występuje więcej niż 
+n / 2 razy
+
+kandydaci 
+
+w zasadzie to czy nie jest tak że szukamy elementu który występuje najczęściej?
+
+element który występuje najczęściej to na pewno będzie majority element
+
+[2,2,1,1,1,2,2]
+
+[2,2,1,1,1,3,2,2,2]
+
+[2,2,1,1,1,2,2]
+
+kandydat którego pozycja rośnie i słabnie
+
+
+[3,2,3]
+
+[2,2,1,1,1,2,2]
+
+[1,1,2,3,4,5,5,5,5,5,5,5,5,6,7]
+
+
+
+
+1,1,1,1,2,2,2,2,3
+
+
+tylko max 2 wartości mogą występować w array więcej niz n/3
+
+w zasadzie to szukamy max 2 elementow które występują najczęsciej w array
+potem możemy orzec czy spełniają one >n/3
+
+3,2,3,4,4
+
+zmniejszanie robimy wtedy kiedy napotkamy coś co jest inne od obu kandydatow
+
+
+3,3,2,3,4,4
+
+
+3,2,3
+
+
+2,2,1,1,1,2,2
+
+2,2,1,1
+
+
+Czy to że spotykamy drugiego kandydata powinno szkodzić pierwszemu?
+
+Co jeśli byśmy dodatkowo liczyli wystąpienia kandydatów bez dekrementacji
+
+1. Myślałem o tym aby na końcu upewniać się czy kandydaci spełniają >n/3
+ale przecież nie liczymy ich wystąpień.
+
+
+
+c1 = 7   count1 = 0   c2 = null   count2 = 0      kolejny num = 7
+pierwszy if: candidate1 === null || candidate1Count === 0 → ?
+co ląduje w candidate1? 7 zostanie przypisany do candiate1
+
+c1 = 7   count1 = 0   c2 = 9   count2 = 0      kolejny num = 9
+Tu jest kłopot bo w pierwszym if jest spełniony warunek candidate1Count === 0
+No to łateczka do pierwszego ifa analogiczna do tej w else if
+&& num !== candidate2
+
+
+3,3,2,3,4,4
+
+konczy sie na c1 = 3 count1 = 2 c2 = 4 count2 = 1
+
+
+1,1
+
+Początkowo w pierwszym przebiegu najpierw sprawdzaliśmy wolne sloty a następnie czy napotkany num jest candidate1 czy candidate2 co było realizowane w dwóch osobnych blokach if. Aby nie doszło do sytuacji że candidate1 oraz candidate2 miały by ten sam num dodawaliśmy łatki do warunków num !== candidate1/2. W ostatecznej wersji mamy jeden blok if najpierw sprawdzamy i zliczamy czy num jest candidate1/2 a jeśli num nie jest candidate1/2 to dopiero wtedy sprawdzamy wolne sloty a jeśli nie ma wolnych slotów to dekrementujemy count obu kandydatów. Dzięki temu podejściu zapobiegamy sytuacji że candidate1/2 będą miały ten sam num bo np jeśli num jest candidate1 to zostaje odpalona gałąź ifa inkrementująca c1 count czyli najpierw weryfikujemy czym jest num a nie próbujemy go wkładać do slotów. 
+
+1,2,3 
+k = 3
+
+Start
+1,2,3 
+
+First step
+3,1,2
+
+Second step
+2,3,1
+
+Third step
+1,2,3
+
+k = nums.length daje taki array jak na początku
+
+krok dalej za ostatnią pozycją jest pierwsza pozycja
+
+ostatni element wyląduje na indeksie k - 1
+
+elementy mają zostać przeniesione do indeksu + k
+
+może da się wykorzystać jakieś tricki array'owe
+
+unshift wstawia element na początek arrayu przesuwając wszystkie pozostałe elementy o 1
+
+1,2,3,4
+
+k = 1
+
+1,1,3,4
+
+tracimy w ten sposób to co znajdowało się pod indeksem i + 1
+bo teraz pod indeksem i + 1 znajduje się nums[i]
+
+1,2,3,4
+
+prev = 2
+
+1,1,3,4
+
+Przenieśliśmy 1 do i + 1 i mamy zapisane to co było wcześniej pod indeksem i + 1
+
+1,2,3,4
+
+1,2,3,4
+
+k = 2
+
+3,4,1,2
+
+Wykorzystanie modulo
+
+length = 4
+
+k = 3
+i = 2
+
+(i + k) % 4
+
+(2 + 3) % 4
+
+5 % 4 = 1
+
+k = 2
+i = 1
+
+(1 + 2) % 4
+
+3 % 4 = 3
+
+
+1,2,3
+
+k = 2
+
+2,3,1
+
+
+1,2,3,4
+
+k = 2
+i = 0
+
+1,2,1,4
+
+k = 2
+i = 1
+
+1,2,1,2
+
+k = 2
+i = 2
+
+i tu się pojawia problem bo w indeksie 2 znajduje się wartość 1 przeniesiona z indeksu 0 zamiast oryginalnej wartości czyli 3
+
+follow-up mówi tylko o O(1) space to może za razem być wskazówka że da się to zrobić z time O(n2)
+
+1,2,3,4
+
+k = 2
+i = 0
+
+1,2,4,4
+
+k = 2
+i = 1
+
+1,2,4,6
+
+k = 2
+i = 2
+
+4 - to co jest pod indeksem i - k (0)
+4 - 1 = 3
+w ten sposób wiemy że w tym indeksie ma być to co jest obecnie pod indeksem i - k
+ale odczytujemy że wcześniej było tu 3
+założenie jest takie że pod i - k musi być oryginalna wartość
+
+3,2,1,6
+
+6 - 2 = 4
+
+3,4,1,2
+
+k = 2
+i = 3
+
+wiemy że tutaj powinno być 2 a wcześniej było 4
+
+
+1,2,3,4
+
+k = 5
+i = 0
+
+na i = 0 w pierwszym indeksie na pewno znajduje się oryginalna wartość
+
+1,3,3,4
+
+k = 5
+i = 1
+
+Tryb Sokratejski. Rozwiązuję zadanie Rotate Array i rozwiązanie z dodatkowym array jest banalne: 
+const originalNums = [...nums];
+
+    for (let i = 0; i < originalNums.length; i++) {
+      const destination = (i + k) % nums.length;
+      nums[destination] = originalNums[i];
+    }
+
+Teraz próbuję rozwiązać je z zachowaniem O(1) space. No i założyłem że mamy dajmy na to [1,2,3,4] k = 2 robimy pętle i zaczynamy od indeksu 0. Robimy nums[i + k] = nums[i]. Mamy [1,2,1,4]. Kolejny indeks to samo to mamy [1,2,1,2]. Tera przychodzi pora na nums[2] pod którym leży 1 a nie oryginalna wartość 3. Czyli gubimy wartości przez ich nadpisywanie. To pomyślałem że można by było nie nadpisywać wartości ale je sumować. Zatem lecimy od początku pętli. Robimy nums[i + k] = nums[i] + nums[i + k] [1,2,4,4]. Następnie to samo i mamy [1,2,4,6]. Teraz przychodzi pora na nums[2], przy założeniu że w nums[i - k] leży oryginalna wartość to wiemy że w tym miejscu powinna leżeć ta oryginalna wartość a poprzednią wartość odczytujemy robiąc nums[2] - oryginalna wartość czyli 4 - 1 = 3. Można by było też wykorzystać do przewidywania destination modulo jak w pierwszym rozwiązaniu. Kłopot pojawia się kiedy k = 5 bo wtedy na początku robmy [1,3,3,4]. Chyba na początku możemy założyć że w nums[0] znajduje się oryginalna wartość. Ale tu się w sumie gubie i nie wiem za bardzo co dalej. 
+
+1. Każdą nadpisaną wartość musielibyśmy przechowywać. Zatem potrzebowalibyśmy np. Array(nums.length). 
+2. (destination + k) % nums.length
+3. 
+
+
+1,2,3,4
+
+k = 2
+i = 0
+
+destination = 2
+prevDestination = 3
+
+1,2,1,4
+
+destinationOfDestination = (destination + k) % nums.length
+destinationOfDestination = (2 + 2) % 4
+destinationOfDestination = 4 % 4 = 0
+nums[destinationOfDestination] = prevDestination
+
+wtedy w pierwszej iteracji pętli zrobimy 
+3,2,1,4
+
+kolejna iteracja
+3,4,1,2
+
+kolejna iteracja
+W sumie to już dobry wynik
+3,4,1,2
+
+
+1,2,3,4,5,6
+
+cykl się zamyka kiedy destinationOfDestination = i?
+
+1,2,3,4,5,6
+
+k = 2 
+i = 0
+
+wewnętrzna pętla będzie wykonywała cykl który będzie rozpoczynany od nums[i]
+Można zmienić i na start bo jest to wskaźnik indeksu od którego rozpoczynamy nowy cykl
+
+1,2,3,4
+
+k = 2
+start = 0
+
+1,2,3,4,5,6
+
+
+1,2,3,4,5,6,7
+
+k = 2
+
+1,2,1,4,3,6,7
+
+
+6,2,1,2,3,4,7
+
+
+1,2,3,4,5,6
+
+
+5,2,1,4,3,6
+
+
+1,2,3,4,5,6,7
+
+
+5,6,7,1,2,3,4
+
+k = 3
+
+
+"Co jest charakterystyczne dla ostatniego kroku cyklu? Wracasz do indeksu, od którego zacząłeś.", "„wróciłem do startu" → koniec tego cyklu (porównanie indeksów),"
+a co jeśli mamy [1,2,3,4,5,6,7] oraz k = 3
+
+
+1,2,3,4,5,6,7
+
+k = 3
+
+
+
+co z k mogło by być nie tak gdyby nie normalizacja?
+
+
+
+1,2,3,4
+
+k = 2
+
+3,4,1,2
+
+
+1. Indeksy 0 do 6. Cała tablica jest na odwrót. Tylko wartość 4 jest w tym samym indeksie co była na początku.
+
+2. Indeksy 0 do 2 zmienione 3 elementy 3 jak k = 3. Indeksy 3 do 6 nieruszone.
+Czyli odwracamy kolejność peiwrszych k elementów.
+
+3. Indeksy 3 do 6. 4 elementy. Czyli n - k.
+
+4. 
+reverse(nums, 0, n - 1)   // cała tablica?
+reverse(nums, 0, k - 1)   // pierwsze ile?
+reverse(nums, k, n - 1)   // ostatnie ile?
+
+
+1,2,3,4
+
+4,2,3,1
+
+4,3,2,1
+
+1. Jeśli się zejdą to znaczy że oba wskaźniki natrafiły na środkowy element w arrayu o nieparzystej length więc nic się nie stanie nieporządanego.
+
+2. Jasne z normalizacją chodzi o to żeby dało się przemieścić elementy o więcej miejsc niż length array. 
+1,2,3
+k = 5
+Więc wartość 1 powinna wylądować w ostatnim indeksie
+5 % 3 = 2
+Osiągniemy to dzięki normalizacji.
+
+[1,2,3,4,5,6,7] 
+
+[7,6,5,4,3,2,1]
+
+
+[7,1,5,3,6,4]
+
+lowest = 7
+
+highest = 7
+
+lowest = 1
+
+highest = 7
+
+ustawiając nowy lowest musimy unieważnić poprzedni highest
+
+1 - 7 = -6
+
+Może najpierw sprawdzać profit a następnie zmieniać lowest, highest
+
+Może powinniśmy aranżować najlepszy scenariusz do tej pory
+
+maxProfit = -Infinity
+
+slow i fast gdzie slow ma na celu wskazywanie najmniejszej wartości
+
+chcąc obliczyć aktualny profit zawsze robimy fast - slow
+
+może odwiedzamy każdą komórkę i najpierw liczymy a potem zmieniamy
+Najpierw liczymy a potem sprawdzamy czy lepiej sie nada na kandydata
+
+[7,1,5,3,6,4]
+
+1 - 7 = -6 > -Infinity
+Jak do tej pory to jest najlepszy możliwy deal
+lowest = 1
+
+5 - 1 = 4 > -6
+lowest = 1
+
+3 - 1 = 2
+lowest = 1
+
+6 - 1 = 5
+lowest 1
+
+
+[7,1,5,3,6,4]
+
+Teoretycznie można kupić akcje w dzien 0 a nastepnie sprzedać ją w dzien 1
+1 - 7 = -6
+
+Następnie można kupić akcje w dzień 1 a następnie sprzedać ją w dzień 2
+5 - 1 = 4
+łączny profit -6 + 4 = -2
+
+Już na tym etapie jeśli wstrzymali byśmy się z kupnem akcji w dzień 0
+i kupili akcje dopiero w dzień 1 a następnie byśmy ją sprzedali w dzień 2
+to zysk by był:
+5 - 1 = 4
+
+Czy w ogóle chcemy doprowadzać do sytaucji w której sprzedajemy za mniej niż kupiliśmy?
+
+Nie chcemy dopuszczać do sytuacji sprzedwania za mniej niż kupiliśmy
+
+ale jak nie pozbędziemy się trzymanej drogiej akcji to nie możemy kupić innej akcji
+
+[7,6,4,3,1]
+
+w tym przyapdku nie robimy żadnego deal'a
+
+Natomiast jeśli kupiliśmy akcje w dzień 0
+to chcąc kupić następną akcje musimy sprzedać tą co już kupiliśmy jako że nie możemy trzymac więcej niz 1 akcje na raz
+
+czyli niedozwolona jest taka sytuacja
+kupujemy w dzien 0 za 7
+następnie w dzien 1 nie sprzedajemy jej i kupujemy akcje za 1
+jeśli trzymanie więcej niż 1 akcji na raz było by dozwolone 
+to po kupnie akcji w dzien 0 chcąc kupić akcje w dzien 1 nie trzeba było by jej sprzedawać w dzien 1 ze stratą 1 - 7 = -6 tylko można było by ją trzymać bo może w przyszłości spotkamy akcje za 8
+
+
+[7,1,5,3,6,4]
+
+różnica pomiędzy pierwszym zadaniem a obecnym jest taka że w pierwszym 
+mogliśmy kupić akcje i sprzedać tylko raz
+
+zatem najlepszy deal jaki moglismy zrobić w tym przypadku to kupno za 1 a sprzedaż za 6 więc maxProfit = 5
+
+a w tym zadaniu możemy robić dowolną ilość deal'i
+
+zatem bardziej niż jedno kupno za 1 i jedna sprzedaż za 6 
+opłaca się kupić za 1 sprzedać za 5 następnie kupić za 3 i sprzedać za 6
+
+5 - 1 = 4
+6 - 3 = 3
+4 + 3 = 7
+
+w best rozwiązaniu nie chcemy ani razu dopuścić do sytuacji że kupujemy za więcej niż sprzedajemy
+
+
+kandydaci na kupioną akcje?
+odwiedzenie ceny akcji nie musiało by wtedy oznaczać kupna
+zapisali byśmy tylko tą akcje i w przyszłości rozważyli byśmy profit po jej sprzedaży w dany dzień
+
+jeśli cena sprzedaży miała by być mniejsza niż cena kupna to nie robimy w ogóle takiego deala
+
+może nie candidates ale lowest i po wykorzystaniu danego lowest
+ustawić kolejne lowest
+
+ale czy zawsze kiedy da się zrobić deal to powinniśmy go robic?
+może będą sytaucje że może i dało by się zarobić na sprzedaży akcji w dany dzień
+ale wstrzymamy się i sprzedamy ją później i tym samym zarobimy z jej kupna i sprzedaży więcej
+
+
+nie zawsze robimy deal ale zawsze updatujemy lowest
+
+
+każdy zysk z wielodniowego holdu rozkłada się na sumę zysków z pojedynczych dni. 
+
+
+w (5−1) + (3−5) + (6−3) (3−5) to jest strata a od przeciwdziałania stratom mamy warunek zakladający że cena sprzedaży musi być większa niż cena kupna
+
+korzystanie z każdego możliwego zysku po drodze jest niemniej opłacalne niż jakikowliek hold
+
+
+"nie ma żadnej zasady, która by mówiła „jak wziąłeś ten, to tamtego nie możesz"." - wybranie +4 zamyka możliwość zdobycia +8 na końcu
+
+
+Tu Twoja intuicja działa odwrotnie, niż myślisz. Skoro +8 = +4 -2 +6, to żeby w ogóle dojść do +8, musisz wziąć +4. +4 jest pierwszym składnikiem +8. Nie istnieje sposób, żeby mieć +8 bez +4. - Ale jak to nie istnieje taki sposób jeśli kiedy pominiemy +4 to zachowamy 1 na koniec i będziemy mogli ją wymienic na +9 zatem +8
+
+Ale dlaczego +8 to akurat suma wszystkich kroków. Dlaczego tak jest że kupno pierwszej akcji hold i sprzedaż jej za ostatnią cene to jest akurat suma wszystkich kroków. 
+
+Nie zrezygnował z „dużej liczby na końcu". Wziął ją. Po prostu nie zapłacił za nią dołkiem. - ale zapłacił 3 -> 9 zamiast 1 -> 9.
+
+
+1, 5, 3, 9
+
+5 się pojawia i znika
+3 się pojawia i znika
+
+pośrednie liczby czyli każda poza pierwszą i ostatnią pojawiają się raz z plusem a raz z minusem
+
+
+w każdym indeksie mamy tyle możliwości ruchu ile wynosi liczba pod tym indeksem
+
+chodzi o to aby wybrać takie możliwości aby razem zsumowały się do n - 1
+
+każda decyzja na danym polu oznacza wylądowanie w innym indeksie 
+ale dostać się do danego indeksu można na różne sposoby
+
+można by było zrobić brute force i testować każdą możliwość
+
+czyli [2,3,1,1,4]
+ 
+na indeksie 0 mamy 2 możliwości i sprawdzać co będzie jeśli wybierzemy 1 zatem przemieścimy się o 1 indeks do przodu jakie będziemy mieli możliwości stojąc o 1 indeks dalej?
+
+to co się znajduje w ostatnim indeksie jest nieistotne
+
+jeśli na każdym polu jest > 0 to na pewno możemy się dostać do ostatniego indeksu
+
+jeśli w indeksie 0 jest 0 to na pewno false
+
+więc czy problem polega na tym aby omijać zera?
+
+[2,0,1,1,4]
+
+jeśli mamy tylko jedno zero i nie jest ono na 0 indeksie
+to jeśli uda nam się ominąć to 0 to mamy true 
+
+iteracja od końca i jeśli napotkamy 0 to sprawdzamy czy liczby w następnych indeksach umożliwiają ominięcie 0
+
+[2,3,1,0,4]
+
+0 w indeksie 3
+czy indeks w którym jest 1 + 1 sprawi że ominiemy 0?
+
+może najpierw sprawdzić czy da się ominąć pierwsze napotkane od końca 0
+
+jeżeli uda się ominąć pierwsze napotkane od konca 0 to mamy true
+
+jeśli uda nam się ominąć jakieś 0 to czy sposób jego ominięcia może nam przeszkodić w dotarciu do last indeks?
+
+2,1,0,2,0,4
+
+Hipoteza: 
+2 umożliwia ominięcie pierwszego 0 od końca ale 2 jest nieosiągalna
+
+2,1,0,2,0,4
+
+ale nieosiągalność jest wynikiem problemu z ominięciem kolejnego napotkanego 0
+
+czyli sprawdzamy iterując się od końca czy da się ominąć każde napotkane 0
+
+5,0,0,0,0
+
+
+2,1,0,2,0,4
+
+czy jeśli liczba pod danym indeksem umożliwia ominięcie danego 0
+to czy to oznacza że problem z tym 0 jest na pewno już rozwiązany
+
+
+2,5,0,1,0,4
+
+jeśli jakieś 0 jest pomijalne to kasujemy 0 z zeroIndexes
+
+na końcu musimy mieć puste zeroIndexes
+
+a co jeśli jakaś liczba będzie nam umożliwiwała ominięcie jakiegoś zera ale nie ostatniego
+
+2,2,0,1,0,4
+
+czy jeśli dana liczba nie umożliwia ominięcią ostatniego zera to czy jest dla nas istotne że umożliwia ona ominięcie innego zera?
+
+jesli przyjdzie liczba umożliwiająca ominięcie jakiegoś zera ale nie ostatniego
+
+
+2,2,0,2,0,4
+
+
+3,2,1,0,4
+
+lastZeroIndex = 3
+
+
+2,3,1,0,4
+
+lastZeroIndex = 3
+
+
+2,2,0,1,0,4
+
+lastZeroIndex = 4
+
+
+2,3,1,1,4
+
+maxReach = 2
+
+maxReach = 4
+
+
+3,2,1,0,4
+
+maxReach = 3
+
+jeśli znajdziemy indeks do którego nie da się dotrzeć to mamy false
+
+
+
+2,3,1,1,4
+
+
+dotrzeć w dane miejsce możemy tylko za pośrednictwem poprzednich miejsc
+
+jeśli do jakiegoś miejsca nie da się dotrzeć to znaczy również to że poprzednie miejsca nie pozwalają na dotarcie również poza to miejsce
+
+jeśli jakieś miejsce jest niedocieralne to znaczy że nie ma takiej możliwości żeby w nie wskoczyć
+
+
+
+
+
+
+Dotarcie do końca jest możliwe w każdym test case. Pytanie tylko jaka jest minimalna ilość skoków na dotarcie do końca
+
+
+2,3,1,1,4
+
+najmniej opłacalne było by skakanie o 1 miejsce co miejsce
+
+a najbardziej opłacalne jest przeskoczenie z indeksu 0 do 1 i z 1 do 4
+
+może się pojawić w którymś miejscu 0 ale dotarcie do końca i tak będzie możliwe w jakiś sposób który to 0 ominie
+
+aby nie stracić żadnej okazji musimy odwiedzić każde pole
+
+nie chodzi o to aby wykorzystywać maksymalnie potencjał na przeniesienie nas jak najdalej z danego pola bo przez to możemy ominąć bardziej opłacalne miejsca np takie które dostarczą nas do miejsca docelowego
+
+Hipoteza:
+jeśli jesteśmy w danym miejscu chcemy dowiedzieć się jaki jest najbardziej optymlany scenariusz na dotarcie do tego miesjca czyli jaka jest minimalna liczba kroków na dotarcie do tego miejsca
+
+czy interesuje nas najbardziej optymalny sposób na dotarcie do danego miejsca jeśli ostatecznie najbardziej optymalny sposób na dotarcie do końca będzie to miejsce omijał?
+
+2,3,1,100,1,1,1,1
+
+trafienie na 100 jest na pewno w najbardziej optymalnym scenariuszu
+ale interesuje nas również to jaki jest najbardziej optymlany scenariusz na dotarcie do tej 100
+
+2,3,1,1,4
+
+jeśli wiemy że 3 jest w stanie nas dostarczyć do celu to skok z trójki na pole które nie jest celem będzie mniej optymalne
+
+
+2,3,1,100,1,1,1,1
+
+możemy dotrzeć w dane miesce ale to miejsce nam też coś będzie umożliwiało
+
+
+1,100,0,0,0,0,0,0
+
+dotarcie w każde miesjce jest możliwe
+
+
+2,3,1,100,1,1,1,1
+
+wejście w 1 jest nieopłacalne bo reach który umożliwia 1 jest mniejszy niż reach który umożliwia 3
+
+wejście w pole jest opłacalne tylko wtedy kiedy to pole umożliwia najdalszy dotąd reach
+
+jeśli pole umożliwia nam dotarcie do końca to na pewno nie chcemy sprawdzac następnych po nim pól
+
+może liczyć krok wtedy kiedy znajdujemy miejsce umożliwiające najdalszy dotąd reach
+
+2,1,1
+
+7,0,9,6,9,6,1,7,9,0,1,2,9,0,3
+
+Gdyby z 7 wejść w kolejne miejsce i tam by było 100
+to było by to identycznie opłacalne jak przejście z 7 na 7
+
+Wejście w 9 i fakt że daje nam ona najdalszy możliwy dotychczasowy reach
+wcale nie jest czymś opłacalnym
+
+ilość miejsc które umożliwjają nam najdalszy dotychczasowy reach niekoniecznie musi być rozwiązaniem
+
+stanięcie na jakimkolwiek z pól pomiędzy siódemkami będzie mniej opłacalne
+niż skok z 7 na kolejną 7 
+
+
+2,2,2,1,1
+
+Optymalnie 2 kroki
+
+mój kod zwróci 3 kroki bo pomimo faktu że stanięcie na nums[1] zawiera 2 i umożliwi dotarcie dalej niz umożliwia 2 w nums[0] to można było nums[1] ominąć i wskoczyć z nums[0] na nums[2] i z nums[2] juz na koniec
+
+Czy jeśli liczba jest na indeksie w zakresie
+to czy ta liczba powinna nas interesować?
+
+2,2,0,1,1
+
+To że jakaś liczba jest na indeksie w zakresie 
+nie znaczy że nie powinniśmy jej rozważyć
+
+2,2,2,1,1
+
+z nums[0] = 2 możemy skoczyć do nums[1] oraz do nums[2]
+z tych dwóch możliwości wybieramy skok do nums[2] bo nums[2] zaprowadzi nas dalej niż nums[1]
+
+
+2,2,0,1,1
+
+z nums[0] = 2 możemy skoczyć do nums[1] oraz do nums[2]
+z tych dwóch możliwości wybieramy skok do nums[1] bo nums[1] zaprowadzi nas dalej niż nums[2]
+
+if i === range
+range = maxReach
+
+
+
+
+
+numer indeksu oznacza numer papieru danego badacza
+a liczba która się pod nim znajduje to ilość cytacji jaką ten papier dostał
+
+Czym jest h-index?
+
+chodzi o to że opublikował on h papierów które zdobyły conajmniej h cytacji
+
+3,0,6,1,5
+
+otóż w tym przypadku 1 oraz 2 to też valid h-indexes ale nast interesuje nawiększy h-index
+
+1 bo owszem ma conajmniej 1 artykuł który zdobył conajmniej 1 cyatcje
+
+2 bo owszem ma conajmniej 2 artykuły które zdobyły conajmniej po 2 cytacje
+
+3 bo owszem ma conajmniej 3 artykuły które zdobyły conajmniej 3 cytacje
+
+4? Nie bo nie ma conajmniej 4 artykułów które by zodyły conajmniej 4 cytacje każdy
+
+1,3,1
+
+1 bo owszem ma conajmniej 1 artykuł który zdobył conajmniej 1 cytacje
+
+2? Nie bo nie ma conajmniej 2 artykułów które zdobyły conajmniej 2 cytacje
+
+3 też odpada
+
+
+3,0,6,1,5
+
+możemy sprawdzać po kolei od 1 a jak jakaś liczba odpadnie to liczby większe od niej również się nie sprawdzą. Exit pod warunkiem.
+
+1 czy ma conajmniej jeden artykuł?
+
+Tak bo ma ich 5
+
+sprawdzamy citations[0] = 3
+3 >= 1
+
+currentHIndex = 1
+
+2 czy ma conajmniej 2 artykuły
+
+Tak bo ma ich 5
+
+zatem celem jest znalezienie 2 artykułów które mają >= 2 citations
+
+currentHIndex = 2
+
+3 czy ma conajmniej 3 artykuły?
+
+Tak bo ma ich 5
+
+zatem celem jest znalezienie 3 artykułów które mają >= 3 citations
+
+currentHIndex = 3
+
+
+1,3,1
+
+1
+
+
+3,0,6,1,5
+
+Wynik nie może być większy niż ilość artykułów czyli n
+
+W najlepszym przypadku wynikiem będzie n
+a w najgorszym 0
+
+Więc możemy zacząć od góry aż na coś trafimy
+
+
+3,0,6,1,5
+
+6,5,3,1,0
+
+
+6 >= 1
+
+w takim przypadku 1 mamy na pewno
+
+5 >= 2
+
+3 >= 3
+
+1 >= 4 === False
+
+
+1,3,1
+
+3,1,1
+
+3 >= 1
+
+1 >= 2 False
+
+3,4,5,2
+
+5,4,3,2
+
+5 >= 1
+
+4 >= 2
+
+3 >= 3
+
+2 >= 4 False
+
+
+
+
+3,0,6,1,5
+
+6,5,3,1,0
+
+
+6 >= 1
+
+w takim przypadku 1 mamy na pewno
+
+5 >= 2
+
+3 >= 3
+
+1 >= 4 === False
+
+1. Stojąc na trzeciej pracy wiemy że prace wcześniej mają co najmniej 3 cytowania bo wartości są posortowane malejąco więc to co jest przed 3 pracą musi mieć >= wartości
+
+
+5,4,3,2
+
+citations[k-1] >= k
+
+stojąc na citations[2] = 3 
+
+warunek citations[k-1] >= k jest spełniony bo
+
+stojąc na trzeciej pracy citations[2] = 3 >= 3
+zatem wiemy że wcześniejsze prace mają conajmniej 3 cytowania
+
+100,99,98
+
+H-Index: 3
+
+
+5,2,3,1
+
+Bez sortowania będąc na wartości 3 nie mamy żadnej pewności że wszystkie dotychczasowe prace mają conajmniej 3 cytowania
+i w rzeczy samej praca przed 3 ma 2 cytowania
+
+0
+
+1
+
+1. Żeby osiągnąć 100 potrzebowalibyśmy conajmniej 100 prac które by miały conajmniej po 100 cytowań. Jeśli mamy 1 pracę to o ile ma ona conajmniej 1 cytowanie to mamy h-index = 1 niezależnie od większej ilości cytowań niż 1; 
+
+
+wszystkie istotne wartości cytowań mieszczą się w zakresie 0 do n
+
+Celem jest dowiedzieć się ile prac ma daną liczbę cytowań
+
+
+5,3,2,1,100
+
+h = 3
+
+0,1,1,1,0,2
+
+
+100,100,100
+
+0,0,0,3
+
+
+5,3,2,1,100,100
+
+
+3,0,6,1,5
+
+1,1,0,1,0,2
+
+
+czy chodzi o to aby suma prac od prawej do indeksu włącznie była równa indeksowi?
+
+sumując od prawej do indeksu włącznie mamy na pewno tyle prac które mają conajmniej i cytowań ile wynosi suma
+
+
+1,3,1
+
+0,2,0,1
+
+citations[0] oznacza że jego pierwszy artykuł zdobył 1 cytowanie
+
+indeks oznacza ilość cytowań
+
+wartość oznacza dokładną ilość artykułów które zdobyły dokładnie tyle cytowań ile wynosi indeks
+
+0,2,0,1
+
+pierwsze 0 od końca mówi nam że mamy dokładnie 0 artykułów które zdobyły dokładnie 2 cytowania.
+Ale dotychczasowa suma mówi nam że mamy dokładnie 1 (suma) artykuł który ma conajmniej 2 cytowania
+
+
+1,3,1,0
+
+1,2,0,1
+
+
+będąc na każdym i wiemy jaka jest dokładna ilość artykułów które zdobyły conajmniej i cytowań
+
+
+3,0,6,1,5
+
+
+6,5,3,1,0
+
+sprawdzamy czy 6 jest mniejsze niż 0 + 1
+
+1,3,1
+
+3,1,1
+
+
+1,3,1
+
+0,2,0,1
+
+
+
+3,0,6,1,5
+
+1,1,0,1,0,2
+
+total = 2
+
+bucket[4] = 0. Znaczy to że mamy dokładnie 0 artykułów które mają dokładnie 4 cytowania. Ale dzięki sumie wiemy że mamy dokładnie 2 artykuły które mają conajmniej 4 cytowania.
+
+total = 2
+
+bucket[3] = 1. Znaczy to że mamy dokładnie 1 artykułów które mają dokładnie 3 cytowania. Ale dzięki sumie wiemy że mamy dokładnie 3 artykuły które mają conajmniej 3 cytowania.
+
+total = 3
+
+zatem total >= i czyli 3 >= 3 więc zwracamy 3
+
+Zatem jeśli łącza ilość artykułów jest większa bądź równa sprawdzanej od góry ilości cytowań to zwracamy tę ilość cytowań 
+
+zaczynamy od i = 5. Zatem zadajemy pytanie a co gdyby h-index wynosił 5?
+Żeby h-index wynosił 5 to musielibyśmy mieć 5 prac po 5 cytowań
+a ile mamy? Mamy 2 prace po 5 cytowań. To h-index wynosi 5? Nie bo mamy tylko 2 prace po 5 cytowań a potrzebowali byśmy 5 prac po 5 cytowań żeby h-index wynosił 5.
+
+4,5,5,5,5
+
+0,0,0,0,1,4
+
+stojąc na i = 5. Sprawdzamy co jeśli h-index wynosił 5. Potrzebujemy do tego 5 prac każda po 5 cytowań. Mamy to.
+
+idąc dalej kolejne pytanie zadali byśmy czy 4 nadaje się na h-index. Do tego potrzebujemy conajmniej 4 prac każda po conajmniej 4 cytowania. Ten warunek jest spełniony bo mamy aż 5 prac każda co najmniej 4 cytowania (bo każda ma aż 5 cytowań). Więc to też jest h-index ale nas interesuje nawiększy możliwy h-index.
+
+Potencjalny największy h-index jest wielkości citations.length
+idąc od końca zaczynamy sprawdzanie możliwych h-index od największego możliwego
+
+
+
+
+
+W jaki sposób można sprawdzić czy array zawiera daną val z O(1) Time?
+
+można zrobić array oraz set i przy insert będzie można użyć set.has
+i dodawać do setu oraz do values
+
+
+1. Można sprawdzić pod jakim indeksem znajduje się val w tablicy poprzez pomocniczą Map gdzie key to będzie val a value to będzie indeks
+
+Także wiemy pod jakim indeskem w array znajduje sie val które chcemy usunąć
+
+sprawdzać scenariusze 
+
+[22,44,12,X,X]
+
+insert nie ma być robiony (zawsze) przez push tylko val ma być wsadzane w pierwszy indeks w którym jest jakaś usunięta val  
+
+czyli wsadzamy nowe val w this.map.size jeśli this.map.size < this.array.length
+
+w tym przypadku map.size = 3 a array.length = 5
+
+val = 6
+
+[22,44,12,6,X]
+
+remove(44)
+
+index = 1
+
+[22,6,12,44,X] więc [22,6,12,X,X]
+
+
+RandomizedSet
+[], {}
+
+
+insert(1)
+
+this.array.push(1) 
+
+this.map.set(val, this.array.length - 1);
+this.map.set(1, 0);
+
+[1], {1:0}
+
+return true
+
+
+remove(2)
+
+index = undefined
+
+[1], {1:0}
+
+return false
+
+
+insert(2)
+
+this.array.push(2)
+
+this.map.set(val, this.array.length - 1);
+this.map.set(2, 1)
+
+[1,2], {1:0, 2:1}
+
+
+remove(1)
+
+index = 0
+
+
+insert(0)
+
+[0], {0:0}
+
+
+insert(1)
+
+[0,1], {0:0, 1:1}
+
+
+remove(0)
+
+index = 0
+
+this.array[0] = 1
+this.array[1] = 0
+
+[1,0], {1:1}
+
+Zapomnieliśmy zaktualizować w mapie indeks pod którym znajduje się 1
+
+
+insert(2)
+
+this.array[1] = 2
+
+this.map.set(2, 1)
+
+[1,2], 
+
+
+
+Masz slot „potrzebuję maszyny robiącej snacki". Czy możesz tam wstawić maszynę robiącą wyłącznie ciastka? Tak — ciastko zawsze jest snackiem, więc kto czekał na snacki, dostanie snacki. Działa.
+
+To tłumaczenie mi się nie podoba bo skoro potrzebuje maszyny robiącej snacki to potrzebuje maszyny która będzie mogła produkować zarówno cookie jak i pretzel. Przecież maszyna produkująca cookie to okrojona wersja maszyny robiącej snacki więc nie można powiedzieć że jeśli istnieje potrzeba maszyny robiącej snacki to maszyna cookie tę potrzebę spełni.
+
+
+ „prowadź mnie sokratejsko przez błędy typów, nie podawaj gotowych rozwiązań dopóki nie poproszę"
+
+
+„Migrujemy tę React-ową apkę z JS na TS, stopniowo. Dopiero uczę się TypeScript. Najpierw przeczytaj package.json i powiedz mi, jakiego mamy bundlera i strukturę, ale jeszcze nic nie zmieniaj. Prowadź mnie przez błędy typów sokratejsko — wyjaśniaj, nie wklejaj gotowców, dopóki nie poproszę. Jeden plik, jeden commit."
+
+
+
+
+
+
+
+
+każdy element i w answer to efekt wymnożenia wszystkiego w oryginalnym arrayu na lewo od nums[i] przez wszystko na prawo od nums[i]
+
+najpierw niech każdy element w answer stanie się produktem na lewo od każdego nums[i]
+
+1,2,3,4
+
+1,1,2,6
+
+1,1,2,6
+
+
+
+
+
+koszt jednostek gazu za przejazd od stacji i do stacji i + 1 wynosi cost[i]
+na każdej stacji i tankujemy tyle gazu ile oferuje stacja i w gas[i]
+
+biorąc pod uwagę koszty przejazdów od stacji do stacji i to ile gazu zyskujemy na każdej stacji szukamy takiej startowej stacji od której start umożliwi przejechanie wszystkich stacji aż do tej startowej stacji
+
+sprawdzamy czy start od stacji o indeksie 0 umożliwi nam przemierzenie wszystkich stacji aż do tej startowej stacji
+
+gas = [1,2,3,4,5]
+
+cost = [3,4,5,1,2]
+
+tank: 0 + 1 = 1 zatem startując od stacji 0 zyskujemy 1 jednostke gazu na dalszą podróż
+
+koszt przejazdu od stacji 0 do stacji 1 wynosi cost[0] czyli 3 jednostki gazu
+więc nie jesteśmy w stanie nawet ruszyć ze startowej stacji bo mamy tylko 1 jednostke gazu a na dojechanie do następnej stacji potrzebne są 3 jednostki gazu. Zatem zabrakło nam 2 jednostek aby być w stanie dotrzeć do kolejnej stacji.
+
+każda stacja jest potencjalnym kandydatem na bycie startową stacją umożliwiającą podróż po wszystkich pozostałych stacjach wraz z powrotem na tę startową stacje
+
+jeśli dojdzie do sytuacji że koszt dojazdu na kolejną stacje sprawi że będziemy mieli tank < 0 to znaczy że dojazd na tę stację jest niemożliwy
+
+Hipoteza:
+Obliczać w każdej pętli czy możliwy jest dojazd na następną stacje
+pozwolić na przejście do kolejnego obrotu wewnetrznej pętli tylko wtedy kiedy możliwy jest dojazd na kolejną stacje
+
+
+2,4,5,6
+
+gas.length = 4
+
+currentStation = 3
+
+currentStation + 1 ma być = 0
+
+4 % 4 = 0
+
+1 % 4 = 1
+
+
+0,0,0,2
+
+0,0,1,0
+
+If there exists a solution, it is guaranteed to be unique.
+
+chodzi o to że jeśli istnieje rozwiązanie dla danego inputu to jest to jedyne rozwiązanie tego inputu?
+
+skupmy się na O(n) rozwiązaniu
+
+nie wiemy czy istnieje rozwiązanie dopóki nie sprawdzimy wszystkich gas i cost
+
+po jednym przejściu po cost wiemy ile kosztuje pełen obrót po wszystkich stacjach bo na pewno musimy odwiedzić wszystkie stacje
+
+koszt pełnego obrotu dla każdej startowej stacji jest taki sam czyli suma wszystkich cost
+
+to od czego to zależy że możliwe jest przejście po wszystkich stacjach startując z jednej stacji a niemożliwe startując z innych
+
+TTS 0: 0 + 5 - 2 = 3
+TTS 1: 3 + 1 - 3 = 1
+TTS 2: 1 + 2 - 4 = -1
+
+Chodzi o to że na udanej startowej stacji zarobimy tyle żeby pokryć koszta podróży po wszystkich stacjach
+
+
+sum(gas) >= sum(cost)
+
+gas = [1,2,3,4,5], cost = [3,4,5,1,2]
+
+na pierwszy rzut oka widać że w tym przypadku sum(gas) === sum(cost)
+
+
+sprawdzamy start ze stacji o indeksie 2
+
+TTS 3: 3 - 5 = -2 nie możliwe
+
+gas  = [3, 2, 1, 4, 5]
+cost = [1, 1, 5, 2, 1]
+
+TTS 1: 0 + 3 - 1 = 2
+TTS 2: 2 + 2 - 1 = 3
+TTS 3: 3 + 1 - 5 = -1
+
+TTS 2: 0 + 2 - 1 = 1
+
+startując od 0 dojeżdżam do stacji o indeksie 2 z 3 jednostkami gazu
+startując od 1 dojeżdżam do stacji o indkesie 2 z 1 jednostką gazu więc mam mniej niż bym dojechał tu startując od 0
+
+jeśli wystartujemy od stacji 1 to tracimy możliwy zarobek ze stacji 0
+
+gas  = [3, 2, 1, 4, 5]
+cost = [1, 1, 5, 2, 1]
+
+
+żeby być w stanie przejechać indeks 2 najlepiej by było zarobić po drodze do niego jak najwięcej bo im więcej zarobimy tym większa szansa na to że uda nam się przejechać ten najbardziej nieopłacalny indeks. A wiemy że jeśli pominiemy indeks 0 i wystartujemy z indkesu 1 to tracimy możliwy zarobek z indeksu 0. Ponownie startować powinniśmy z indeksu j + 1 to jest jedyna sensowna opcja.
+
+jeśli sprawdzimy potencjalny start z ostatniego indeksu to nie chcemy sprawdzac nic dalej
+
+bo wybraliśmy ostatni indeks na potencjalny start to jeśli nie uda się zrobić okrążenia startując z niego to skończyły nam sie możliwości
+
+gas  = [1, 1, 10]
+cost = [11, 1, 1]
+
+nie byłem pewny czy sum(gas) >= sum(cost) gwarantuje że rozwiązanie istnieje. Byłem jedynie pewny że sum(gas) < sum(cost) gwarantuje że rozwiązanie nie istnieje.
+
+gas  = [3, 2, 1, 4, 5]
+cost = [1, 1, 5, 2, 1]
+
+
+gas =  [1, 2, 3, 4, 5]
+cost = [3, 4, 5, 1, 2]
+
+gas  = [ 1,  2,  3,  4,  5]
+cost = [ 3,  4,  5,  1,  2]
+diff = [-2, -2, -2, +3, +3]      total = 0
+index: [ 0] [ 1] [ 2] [ 3] [ 4]
+S[i]:   -2   -4   -6   -3    0
+
+Najniższy punkt na całej trasie startującej tuż za doliną wynosi dokładnie total. Skoro total >= 0, nigdy nie schodzisz pod zero.
+
+ok jeszcze jedna rzecz bo wcześniej ustaliliśmy że jeśli mamy ten przykład:
+gas  = [3, 2, 1, 4, 5]
+cost = [1, 1, 5, 2, 1]
+i ruszamy ze stacji 0 to kiedy utkniemy na stacji 2 to nie ma sensu sprawdzać startu ze stacji 1 bo tylko pozbawiamy się możliwości zarobku ze stacji 0. A nie mogło by być tak w innym przykładzie że skipując którąś stacje na sprawdzanym odcinku pozbawimy się możliwości straty więc wyjdziemy na tym lepiej więc może nie warto zawsze pomijać startu ze stacji pośrednich?
+
+
+gas  = [1,2,3,4,5]
+cost = [3,4,5,1,2]
+
+gas   = [ 6,  2,  3,  1]
+cost  = [ 1,  5,  2,  5]
+
+gas  = [ 1,  2,  3,  4,  5]
+cost = [ 3,  4,  5,  1,  2]
+
+
+
+
+
+
+
+
+
+
+
+dziecko z najmniejszym rating musi dostać conajmniej 1 cukierek
+
+1,0,2
+
+odp: 5
+
+ale jak to dziecko o indkeskie 0 mając rating 1 dostaje tyle samo cukierków co te o indkeskie 2 z 2 rating, kiedy polecenie mówi że dzieci z większym rating dostają więcej cukierków?
+Tak jeśli mają większy rating to muszą dostać więcej cukierków ale tylko względem ich sąsiadów
+
+1,0,2
+
+dajmy na to że każdy dostaje minimum jakie każdy musi dostać czyli po 1
+wtedy dochodzi do naruszenia przepisów bo sąsiedzi o ratingu kolejno 1 i 0 dostają tyle samo a sąsiad z większym ratingiem musi dostać więcej cukierków niż sąsiad z mniejszym ratingiem
+kolejnym naruszeniem tego samego przepisu było by rozdanie tej samej liczby cukierków sąsiadom o ratingu kolejno 0 i 2
+
+no to załóżmy że rozdajemy w ten sposób:
+2,1,1 
+teraz nie dochodzi do naruszenia przepisu pomiędzy pierwszymi dwoma sąsiadami
+ale zostaje naruszenie pomiędzy dwoma ostatnimi sąsiadami
+
+zatem próbujemy rozwiązać naruszenie pomiędzy dwoma ostatnimi sąsiadami
+2,2,1
+
+teraz nie dochodzi do naurszenia przepisu pomiędzy dwoma ostatnimi sąsiadami
+ale dochodzi do naruszenia znowu pomiędzy dwoma pierwszymymi
+
+czyli próbowaliśmy rozwiązać problem naruszenia przepisów pomiędzy dwoma ostatnim sąsiadami i faktycznie rozwiązaliśmy ale kosztem zepsucia dopszczalnej dystrubucji pomiędzy dwoma pierwszymi
+
+więc czy to oznacza że nie mogliśmy dać środkowemu o 1 więcej?
+chyba tak bo może dało by się dobrać inne liczby żeby przepisy się zgadzały ale w ten sposób nie osiągneli byśmy minimum rozdanych cukierków, takie rozwiązanie było by bardziej kosztowne, wymagało by większej ilości cukierków
+
+próbujemy rozwiązywać problemy spowodowane przez bezmyślne rozdanie każdemu po 1 cukierku w celu spełnienia pierwszego przepisu mówiącego że każdy ma dostać conajmniej 1 cukierek
+
+1,1,1 
+
+pojawia sie problem pomiędzy pierwszymi dwoma sąsiadami 
+dajemy zatem pierwszemu o 1 więcej
+
+2,1,1
+
+problem rozwiązany i nic nie zepsuliśmy (bo nie było czego psuć też fakt)
+
+to lecimy dalej i napotykamy problem pomiędzy dwoma ostatnimi
+jeśli damy 1 więcej środkowemu to zepsujemy wtedy podział pomiędzy dwoma pierwszymi
+
+to próbujemy dać 1 więcej ostatniemu i wtedy wszystko się zgadza, wszystkie przepisy dochowane
+
+ratings = 1,2,2
+
+dajemy każdemu po 1 
+
+1,1,1
+
+problem pomiędzy pierwszymi dwoma
+dajemy drugiemu 1 więcej bo drugi ma większy rating
+
+1,2,1
+
+czy jest problem pomiędzy dwoma ostatnimi?
+jest powiedziane tylko że sąsiad mający większy rating musi dostać więcej cuekirkow
+ale nie jest powiedziane że jak mają ten sam rating to muszą dostać tyle samo cukierków
+
+ratings = 1,0,2
+
+na start distributedCandies to 1,1,1
+
+tym sposobem spełniamy wymaganie o tym że każde dziecko musi dostać conajmniej 1 cukierek
+
+więc dla ratings = 1,1,1
+distributedCandies = 1,1,1 było by prawidłowym rozwiązaniem
+
+i rozwiązujemy problemy naruszeń drugiego wymagania o ratings sąsiadów (jeśli takie są)
+
+for czy while?
+
+chyba while bo jedno przejście chyba nie wystarczy
+
+a co będziemy robić w pętli?
+
+sprawdzać czy ilości rozdanych cukierków między sąsiadami zgadzają się z ratings
+
+czyli interesują nas sąsiedzi
+
+a spróbujmy najpierw for i zobaczymy jakie ograniczenia nam stawia for
+
+current zawsze jest natomiast prev i next może nie być
+
+to nie jest tak że ratings muszą sie zgadzać tylko pomiędzy prev current i next
+bo jak przesuniemy te okienko to prev będzie musiał się zgadzać i z current  i z...
+
+ratings = 1,0,2
+
+1,1,1
+
+jak jest next to jest i nextRating
+
+jak najlepiej sprawdzić jaka jest zależność pomiędzy dwoma sąsiadami?
+który jest mniejszy który większy a może równe?
+
+jeśli mamy const current = distributedCandies[i];
+to jeśli zinkrementujemy current (kiedy bedzie mial let) to zinkrementujemy też w tablicy?
+nie bo primitives są przekazywane po values a nie references
+
+ratings = 1,0,2
+
+1,1,1
+
+2,1,2
+
+czyli prawidłowy wynik by wyszedł
+
+ratings = 1,2,2
+
+1,1,1
+
+1,2,1
+
+też by wyszedł prawidłowy wynik
+
+ratings = 1,2,87,87,87,2,1
+
+1,2,1,1,1,1,1
+
+1,2,3,1,1,1,1
+
+to że current i next nie są równe to nie znaczy że nie trzeba nic z nimi robić
+
+jeśli np. currentRating < nextRating to chcemy żeby next było większe od current to może niech next to będzie current++ 
+
+zobaczmy co z tego może wyniknąć
+
+ratings = 1,0,2
+
+2,1,2
+
+prawidłowy wynik
+
+ratings = 1,2,2
+
+1,2,1
+
+prawidłowy wynik
+
+ratings = 1,2,87,87,87,2,1
+
+1,2,3,1,2,2,1
+
+kończymy z takim wynikiem i jest to wynik błędny bo na końcu mamy ratings 87,2
+a są to kolejno 2,2 a nie mogą mieć po równo tylko pierwszy musi mieć więcej
+w zasadzie to gdyby tylko ten pierwszy miał 3 to wynik by chyba był poprawny
+
+1. next to niekoniecznie jest finalna wartość jaka tam będzie
+
+2. prev można traktować jako finalną wartość?
+
+czyli jedno przejście od lewej do prawej traktując prev za zaufaną wartość
+i drugie przejście od prawej do lewej traktując też prev za zaufaną wartość?
+
+
+ratings = 1,2,87,87,87,2,1
+
+1,2,3,1,2,2,1
+
+no chyba wszystkie są poprawne z wyjątkiem indeksu 4
+
+1,2,3,1,3,2,1
+
+przejście od końca zrobiło by prawidłowy wynik
+
+może chodzi o to żeby wykonywać te instrukcje w ifach tylko wtedy kiedy jest to potrzebne
+
+
+
+jeśli ma mieć więcej a ma mniej lub tyle samo
+
+if (currentRating > prevRating && 
+distributedCandies[i] <= distributedCandies[i - 1]) {
+  distributedCandies[i] = distributedCandies[i - 1] + 1;
+}
+
+distributedCandies[i] = Math.max(distributedCandies[i], distributedCandies[i - 1] + 1);
+
+jeśli ma mieć więcej a ma mniej to nie wystarczy tylko zamienić się wartościami? po co jeszcze dodawać 1?
+
+R -> L zostawia to co działa a naprawia uchybienia L => R
+
+
+
+
+
+
+w jaki sposób możemy stwierdzić że gdzieś się może zmieścić blok wody?
+
+1,0,2
+
+tu się może zmieścić jeden blok wody
+dlaczego?
+po lewej stronie potencjalnego bloku mamy ściankę wysoką na 1 jednostkę
+po prawej stronie mamy ściankę wysoką na 2 jednostki
+gdyby dwie takie ścianki stały by przy sobie czyli było by 1,2
+to żaden blok by sie tam nie zmieścił bo pomiędzy nimi nie było by miejsca na nic
+ale dzięki temu że pomiędzy nimi jest 0 razem 1 i 2 tworzą ścianki zbiornika
+zauważmy że pomimo tego że prawa ścianka jest wyższa od lewej 
+to maksymalna wysokość bloku wody pomiędzy nimi wynosi 1 - zgodnie z niższą ścianką
+
+0 nie jest wymogiem tego że gdzieś może być miejsce na blok wody
+
+a teraz ciekawszy przykład
+2,1,0,1,3
+tutaj powinny zmieścic się 4 bloki wody
+same 2,1,0 nie mają żadnej mocy uwięzienia wody
+
+dlaczego?
+
+bo nic nie przytrzymuje wody która na nie spadnie
+mamy potencjalną lewą ścianę zbiornika ale potrzebna jest również prawa ściana
+
+2,1,0,1 zdołały by uwięzić 1 jednostkę wody
+
+tutaj pojawia się minimum potrzebne do bycia prawą ścianą 
+i dzięki tej prawej ścianie możemy uwięzić 1 jednostkę wody
+
+2,1,0,1,3 mają moc uchwycenia 4 jednostek wody
+
+1,0,2
+
+tutaj gdyby zamiast 0 było 1 to nie było by możliwe uwięzienie jakiejkolwiek ilości wody
+
+aby mieć zbiornik potrzebna jest lewa ściana, przestrzeń, i prawa ściana
+
+pamiętajmy że 0 nie jest wymogiem potrzebnym do zaistnienia przestrzeni
+
+mogło by być tak
+2,1,2
+
+kluczowe pytanie to czym jest "przestrzeń" w zbiorniku
+
+maksymalna wysokość głębokości zbiornika to height mniejszej ścianki
+
+rozpoznać kluczową różnicę pomiędzy tymi dwoma zbiornikami
+z tym że to drugie nie jest zbiornikiem!
+
+1,0,2
+
+1,1,2
+
+w drugim nie ma głębokości. 3 elementowy array to minimalny rozmiar array w którym może zaistnieć głębokość. Tutaj najniższa ścianka ma wysokość 1 a wszystko pomiędzy obiema ściankami ma najmniejszą wartość równą 1 zatem tyle co najniższa ścianka.
+
+może iterować się i wykrywać potencjał na zbiornik i dopiero przyklepać ten zbiornik kiedy pojawi się prawa ścianka?
+
+1,0,2
+
+żeby powstał potencjał na zbiornik to potrzebujemy spotkać jakąś dodatnią wartość a następnie wartość mniejszą od tej wcześniej napotkanej wartości
+a żeby domknąć zbiornik potrzebujemy wartości o wysokości conajmniej tej pierwszej wartości
+
+2,1,0,1,3
+
+zauważmy że tutaj druga 1 nie domyka potencjalnego zbiornika
+zależy którego bo domyka zbiornik 1,0,1 ale otwarty był rownież drugi zbiornik 2
+czyli potencjalnych otwartych zbiorników może być więcej niż 1
+
+1,0,2
+
+1,0,0,2
+
+w pierwszym przykładzie miesci sie 1 jednostka wody a w drugim 2 jednostki wody a głębokość mamy taką samą więc to gdzie stoją ścianki również jest istotne
+
+
+może w jednym przejściu policzyć zakresy kontenerów z informacją o ich wysokości
+
+a w drugim przejściu policzyć ile wody znajduje się nad daną komórką
+bo będziemy wiedzieć czy komórka znajduje się w kontenerze oraz jaką głębokość ma ten kontnener
+
+zatem policzmy najpierw zakresy kontenerów z informacją o ich wysokości
+
+0,1,0,2
+
+czyli musimy wiedzieć w jakim indeksie zaczyna się kontener, w jakim kończy i jaką ma głębokość
+
+0,1,0,2
+
+pierwsza potencjalna lewa ściana to pierwsza liczba > 0
+
+czyli 1 
+
+i teraz pytanie czy jest możliwe aby to nie była tak na prawdę ściana?
+
+jeśli nie spotkali byśmy już żadnej liczby > 0
+i jeśli kolejna dodatnia liczba była by już w kolejnym indeksie
+
+więc jeśli mielibyśmy 0,1,1,2
+
+to pierwsza 1 nie jest ścianą
+ani nie znajduje się w żadnym kontenerze
+
+więc na początku iterując się możemy założyć że pierwsza liczba > 0 
+jest potencjalną ścianą ale jeśli tuż za nią jest kolejna jakakolwiek dodatania liczba
+to zmieniamy potencjalną lewą ścianę na tę kolejną liczbę itd.
+
+hipoteza:
+jeśli po tej liczbie pojawi się liczba mniejsza od niej 
+to mamy gwarancje że ta wcześniejsza liczba jest ścianą
+a jeśli dalej pojawi się liczba która jest większa 
+
+0,3,2,1,2
+
+tutaj 2 jest mniejsze ale to nie sprawia że 3 jest ścianą
+
+0,1,0,2
+
+leftMax[3] = 2
+rightMax[0] = 2
+
+
+height = [0,1,0,2,1,0,1,3,2,1,2,1]
+leftMax = [0,1,1,2,2,2,2,3,3,3,3,3]
+rightMax = [1]
+
+kiedy używać MAp a kiedy object
+
+
+Sugerując się tymi zasadami najpierw należy sprawdzić jaką największą value można odjąć od inputu o ile input nie zaczyna się od 4 lub 9
+
+3749
+
+czyli można odjąć największą value czyli 1000 czyli M
+
+dołączamy M do result
+
+result = M
+
+zostaje nam 2749 i znowu sprawdzamy jaką max value można odjąć
+
+1000 czyli M
+
+result = MM
+
+zostaje nam 1749
+
+result = MMM
+
+zostaje 749
+
+result = MMMD
+
+zostaje 249
+
+result = MMMDC
+
+zostaje 149
+
+result = MMMDCC
+
+zostaje 49
+
+jeśli value zaczyna się na 4 lub 9 to trzeba użyć odpowiedniej subtractive form
+w tym przypadku należy użyć XL
+możliwości w przypadku value zaczynającej się na 4 to 4, 40, 400
+można wybrać odpowiednią subtractive form na podstawie ilości znaków w value
+49 ma 2 znaki zatem 40 czyli XL analogicznie postąpić z 9
+
+zacznijmy od sprawdzenia jaką największą value z puli dostepnych można odjąć od inputu
+
+może pomocnicza funckja?
+
+49
+
+v4c2
+
+4
+
+input = 3749
+
+result = M
+
+input = 2749
+
+result = MM
+
+input = 1749
+
+result = MMM
+
+input = 749
+
+result = MMMD
+
+input = 249
+
+result = MMMDC
+
+input = 149
+
+result = MMMDCC
+
+input = 49
+
+result = MMMDCCXL
+
+input = 9
+
+result = MMMDCCXLIX
+
+
+
+czy powinniśmy modyfikować num czy powinniśmy zrobić kopie i dlaczego
+
+num = 3749
+
+result = M
+
+num = 2749
+
+result = MM
+
+num = 1749
+
+result = MMM
+
+num = 749
+
+result = MMMD
+
+num = 249
+
+result = MMMDC
+
+num = 149
+
+result = MMMDCC
+
+num = 49
+
+result = MMMDCCXL
+
+num = 9
+
+result = MMMDCCXLIX
+
+num = 0
+
+
+"  hello world  "
+
+"hello  world"
+
+the sky => sky the
+
+the sky
+
+yks eht
+
+yks eht
+
+sky the
+
+
+"  yks eht  "
+
+
+"  the  sky  "
+
+"the sky     "
+
+"     yks eth"
+
+
+"the  sky  "
+
+"  the  sky  "
+
+litera interesuje nas zawsze
+
+
+"the sky   "
+
+
+"  the  sky  "
+
+
+"the sky ky  "
+
+
+"  the  "
+
+"the e  "
+
+"  the"
+
+"thehe"
+
+"  the "
+
+"the e "
+
+" s"
+
+"ss"
+
+"s"
+
+There is at least one word in s.
+
+write po space pętli mógłby być 0 tylko jeśli nie dokononali byśmy żadnego zapisu
+a powyższy constraint gwarantuje że przynajmniej 1 zapis będzie
+
+"s "
+
+"s "
+
+" s "
+
+"s  "
+
+"the sky "
+
+
+
+
+
+
+
+
+
+dostajemy string oraz ilość rzędów
+w zależności od podanej ilości rzędów wynikowy string będzie inny
+
+s = PAYPALISHIRING numRows = 2
+
+P Y A I H R N 
+A P L S I I G
+
+oryginalny przeskakujemy od pierwszego znaku co 2
+drugi rząd tworzymy zaczynając przeskakiwanie od drugiego znaku
+i to wszystko
+
+result = "PYAIHRNAPLSIIG"
+
+s = PAYPALISHIRING numRows = 3
+
+P   A   H   N
+A P L S I I G
+Y   I   R
+
+chcąc stworzyć ciąg znaków pierwszego rzędu 
+zaczynamy od pierwszego znaku i skaczemy co 4 ile się da
+chcąc stworzyć ciąg znaków drugiego rzędu
+zaczynamy od drugiego znaku i skaczemy co 2 ile się da
+chcąc stworzyć ciąg znaków trzeciego rzędu
+zaczynamy od trzeciego znaku i skaczemy co 4 ile się da
+
+result = "PAHNAPLSIIGYIR"
+
+minimalna długość s to jest 1
+minimalna ilość rzędów to 1
+
+s = PAYPALISHIRING numRows = 4
+
+P     I    N
+A   L S  I G
+Y A   H R
+P     I
+
+chcąc stworzyć ciąg znaków pierwszego rzędu 
+zaczynamy od pierwszego znaku i skaczemy co 6 ile się da
+
+chcąc stworzyć ciąg znaków drugiego rzędu
+nie mamy już takiej prostej zasady że zawsze co 2/3/4
+bo zaczynamy od drugiego znaku i pierwszy przeskok wynosi 4
+kolejny przeskok wynosi 2
+kolejny przeskok wynosi 4
+kolejny przeskok wynosi 2
+
+result = PINALSIGYAHRPI
+
+coś czuję że decydowanie o ilościach i długościach przeskoków to będzie za dużo księgowości
+
+
+
+s = PAYPALISHIRING numRows = 4
+
+P     I    N
+A   L S  I G
+Y A   H R
+P     I
+
+4 rzędy więc stworzylibyśmy docelowo array z 4 slotami
+a potem byśmy te 4 stringi połączyli w jeden wynikowy
+
+pierwsza kolumna to pierwsze litery każdego takiego stringu
+
+liczby oznaczają tutaj indkesy stringów do których dołączamy kolejne litery
+
+0,1,2,3,2,1,0,1,2,3,2,1,0,1
+
+
+s = PAYPALISHIRING numRows = 3
+
+P   A   H   N
+A P L S I I G
+Y   I   R
+
+0,1,2,1,0,1,2,1,0,1,2,1,0,1
+
+będzie potrzebny wskaźnik obecnie modyfikowanego stringa
+
+pętla for która przeiteruje się po s
+
+modulo?
+
+wyliczanie pointera za pomocą indeksu obecnie iterowanej litery s
+
+pointer ma wskazywać na indeks obecnie iterowanego stringa
+
+w pętli pointer ma rosąć i spadać od 0 do numRows - 1
+
+numRows = 3
+
+modulo by sprawiło ciągłe rośnięcie od 0 do numRows - 1
+czyli po numRows - 1 było by 0 a my chcemy po numRows - 1 1
+
+skąd mamy wiedzieć że w danej iteracji pętli pointer rośnie czy spada?
+może flaga?
+
+jeśli pointer osiągnie numRows - 1 to wtedy zawsze chcemy aby isPointerGrowing = false
+
+
+P   A   H   N
+A P L S I I G
+Y   I   R
+
+
+0 = P   A
+1 = A P
+2 = Y
+
+s = AB
+numRows = 1
+
+jeżeli mamy numRows = 1 to chcemy wszystko zapisywać do jednego stringa
+
+0 = A
+
+numRows = 2
+
+s = A
+
+
+
+
+
+
+
+
+
+
+haystack = abcdef
+needle = def
+
+
+"abcabd"
+
+m = 6
+
+lps = 0 0 0 1 2 0
+
+
+haystack="a a a a a a a b"
+
+needle="a a a b"
+
+lps = 0 1 2 0
+
+kiedy mamy mismatch po dopasowaniu j znaków needle do haystack
+to wiemy że dopasowany fragment czyli needle[0..j-1] leży w haystack
+
+
+haystack = "abaababab"
+
+needle = "ababab"
+
+lps = 0 0 1 2 3 4
+
+końcówki: b, ab, bab, abab, babab
+
+początki: a, ab, aba, abab, ababa
+
+
+haystack = "a b a a b a b a b"
+
+needle =   "a b a b a b"
+
+                  x
+haystack = "a b a a b a b a b"
+
+needle =       "a b a b a b"
+
+
+
+
+
+
+haystack="a a a a a a a b"
+
+needle="a a a a b"
+
+lps = 0 1 2 3 0
+
+
+
+haystack = "a a a a a a a b"
+
+needle=    "a a a a b"
+
+
+mismatch na i = 4 j = 4. Dopasowano j znaków
+j = lps[j - 1] = 3
+
+
+haystack = "a a a a a a a b"
+
+needle=      "a a a a b"
+
+j = lps[j - 1] = 3
+
+haystack = "a a a a a a a b"
+
+needle=        "a a a a b"
+
+j = lps[j - 1] = 3
+
+haystack = "a a a a a a a b"
+
+needle=          "a a a a b"
+
+
+
+haystack = "a b c a b c a b d"
+
+needle = "a b c a b d"
+
+lps = 0 0 0 1 2 0
+
+haystack = "a b c a b c a b d"
+
+needle =   "a b c a b d"
+
+wiem że to co właśnie dopasowaliśmy jest prefiksem needle
+
+mismatch na i = 5 j = 5. Dopasowano j znaków
+
+j = lps[j - 1] = 2
+
+haystack = "a b c a b c a b d"
+
+needle =         "a b c a b d"
+
+
+ile możemy maksymalnie przesunąć needle żeby nie zgubić potencjalnego matcha?
+
+haystack = "a a b a c a a b a a"
+needle =   "a a b a a"
+lps = 0 1 0 1 2
+
+haystack = "a a b a c a a b a a"
+needle =         "a a b a a"
+
+
+haystack = "a a b a c a a b a a"
+needle =           "a a b a a"
+
+haystack = "a a b a c a a b a a"
+needle =             "a a b a a"
+
+lps wskazuje na najdłuższą końcówkę która jest początkiem
+
+
+haystack = "a a a b" 
+needle =   "a a b"
+lps = 0 1 0
+
+haystack = "a a a b" 
+needle =       "a a b"
+
+
+haystack = "a a a b" 
+needle =     "a a b"
+
+
+
+
+
+
+haystack = "a b a a b a b a b"
+needle = "a b a b a b"
+
+lps = 0 0 1 2 3 4
+
+
+haystack = "a b a a b a b a b"
+needle =   "a b a b a b"
+
+mismatch i = 3 j = 3
+
+wiemy że mamy dopasowane 3 znaki
+
+j = lps[j - 1] = 1
+
+haystack = "a b a a b a b a b"
+needle =       "a b a b a b"
+
+mismatch i = 3 j = 1
+
+wiemy że mamy dopasowany 1 znak
+
+j = lps[j - 1] = 0
+
+haystack = "a b a a b a b a b"
+needle =         "a b a b a b"
+
+
+1. "Po dopasowaniu j znaków fragment haystacka, przez który przeszedłem, jest identyczny z needle[0..j-1]" - To jest jasne w 100%
+"dlatego każde pytanie o ten fragment haystacka mogę zamienić na pytanie o sam needle, bez patrzenia w haystack." - to nie jest jasne 
+
+2. a
+
+3. chyba a
+
+4. b
+
+5. c
+
+6. a
+
+
+
+
+
+
+
+haystack = a b c a b c x
+needle =   a b c x
+
+lps = 0 0 0 0
+
+haystack = a b c a b c x
+needle =         a b c x
+
+haystack = a b c a b c x x
+needle =   a b c a b c d
+
+lps = 0 0 0 1 2 3 0
+
+haystack = a b c a b c x x
+needle =         a b c a b c d
+
+
+haystack = a a a a a a b
+needle =   a a a a b
+
+lps = 0 1 2 3 0
+
+haystack = a a a a a a b
+needle =     a a a a b
+
+haystack = a a a a a a b
+needle =       a a a a b
+
+
+haystack = a b c x x
+needle =   a b c d
+
+haystack = a b c x x
+needle =         a b c d
+
+
+
+start=1 (k=3):  n[1]==='a'?  'b'≠'a'  ->  MARTWY (dowód: podstawienie)
+
+fakt żeby przeżyły 3 znaki to n[1] musial by byc "a" żeby zgadzał się z haystackiem ale dlaczego zaczynasz od n[1]? Po pierwsze to n[0] musiało by być b a jest a.
+
+haystack = a b a b x
+needle =   a b a b c
+
+haystack = a b a b x
+needle =       a b a b c
+
+
+
+
+haystack = a a c a x
+needle =   a a c a a
+
+k = 3
+
+surowy =           h[1] === n[0]  h[2] === n[1]  h[3] === n[2]
+
+po podstawieniu =  n[1] === n[0]  n[2] === n[1]  n[3] === n[2]
+
+wyrok =            żywy           martwy
+
+k = 2
+
+surowy =           h[2] === n[0]  h[3] === n[1]
+
+po podstawieniu =  n[2] === n[0]  n[3] === n[1]
+
+wyrok =            martwy
+
+k = 1
+
+surowy =           h[3] === n[0]  
+
+po podstawieniu =  n[3] === n[0]
+
+wyrok =            żywy
+
+haystack = a a c a x
+needle =   a a c a a
+
+Ogniwo 4: w Twoim rozwiązaniu dla k=1 porównałeś n[3] z n[0]. Dokończ zdanie: „n[3] to ostatni znak fragmentu "aaca", czyli jego sufix długości 1, a n[0] to prefix needle długości 1"
+
+Ogniwo 5: gdyby algorytm po mismatchu skoczył od razu do k=0 (pomijając Twoje żywe k=1) — co konkretnie by ryzykował, jednym zdaniem? - ryzykował by pominięciem potencjalnych matchy
+
+haystack = a a c d x
+needle =   a a c d a
+
+haystack = a a z d x
+needle =   a a c d a
+
+
+haystack = c a c a x
+needle =   c a c a a
+
+
+
+needle = c a c a a
+
+lps =    0 0 1 2 0
+
+Śledząc działanie buildLPS dla needle = c a c a a
+jasne jest dla mnie że lps[0] musi być 0 więc zajmujemy się od razu 
+komórką z indeksem 1. Jasne jest dla mnie sprawdzenie czy needle[1] === needle[0] bo jeśli tak to len dla indeksu wynosił by 1 ale tak nie jest zatem wynosi 0. Kolejny sprawdzany indeks to 2. Nie mamy zbudowanej dotychczas żadnej len więc sprawdzamy czy needle[2] === needle[0] i jest traf inkrementujemy len i wpisujemy go do lps[2] = 1. Następnie sprawdzamy czy kolejny znak w needle czyli ten pod indeksem 3 jest równy temu pod indeksem 1 (bo len jest obecnie 1) i owszem mamy kolejny traf więc znowu inkrementujemy len do 2 i wpisujemy do lps[3] = 2. Następnie sprawdzamy już ostatni indeks 4 no i żeby len było nowu zwiększone to needle[4] musiało by być równe needle[len czyli 2] ale nie jest i teraz sie dzieje coś czego nie rozumiem dlaczego tak sie dzieje. Bo owszem kolejnego trafu nie ma więc tracimy ciągłość ale to nie znaczy że możemy tępo wstawić w lps[4] = 0. Musimy zresetować len do 0 owszem ale tuż po tym sprawdzić czy przypadkiem nie zaczyna się nowe samopodobieństwo i tak by było gdyby needle[4] === needle[0] ale tak nie jest bo needle[4] = a, needle[0] = c. Czyli moje pytanie jest jasne dlaczego przy tym ostatnim indeksie nie zrobiliśmy po prostu resetu len = 0 tylko len = lps[len - 1]? Dokładnie tego nie rozumiem.
+
+
+needle = a a b a a a
+
+interesuje nas p[0..4]
+
+lps = 0 1 0 1 2 2
+
+to dlaczego nie po prostu len--
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+funkcja przyjmuje array stringów words oraz number maxWidth
+każda lina ma mieć dokładnie maxWitdh characters
+
+należy umieścić w każdej lini tyle słów ile się da
+jeżeli jakaś linia miała by mieć mniej niż maxWidth characters to 
+korzystamy z " " 
+
+extra spaces pomiędzy words powinny być rozłożone jak najbardziej równo
+a jeśli nie da się ich rozłożyć po równo to left może przyjąć więcej spaces niż right 
+ale left całej linii czy left word?
+
+
+"This    is    an",
+"example  of text",
+"justification.  "
+
+w drugiej lini potrzebujemy użyć 3 spacji a musimy je rozłożyć na 2 strony
+a 3 jest niepodzielne przez 2 zatem na left "of" idą 2 spacje a na right "of" idzie jedna spacja
+
+każda linia to jeden string w tablicy wynikowej result
+
+od czego zależy ilość lini?
+każda linia musi mieć dokładnie maxWidth characters
+
+words = ["This", "is", "an", "example", "of", "text", "justification."], maxWidth = 16
+
+na początek załóżmy że mamy jedną linię a jak będzie to potrzebne to sie dorobi kolejne
+
+jeśli chcieli byśmy wpakować do pierwszej lini words od 0 do 4 to potrzebowali byśmy na to 18 characters licząc minimalne spacje pomiędzy words
+
+więc maks ilosć words jakie możemy wpakować do pierwszej lini to 3 pierwsze
+a to daje 10 characters (licząc minimalne spacje)
+zatem pomiędzy te 3 words musimy dołożyć spacje tak aby linia miała długość 16 chars
+
+czyli do pierwszej lini musimy dołożyć 6 spacji
+musimy je rozłożyć jak najbardziej równo pomiędzy words
+więc w tym przypadku możemy włożyć 3 spacje przed "is" oraz 3 spacje po "is"
+
+"This    is    an"
+
+jeżli chodzi o rozkład spacji to ostatnia linia ma mieć wszystkie extra spaces po prawej stronie wszystkich words które są w niej
+
+
+najpierw stwórzmy linie bez extra spaces
+
+"aa ", "aa ", "aa "
+
+mamy włącznie z minimalnymi spacjami 8 znaków 
+a załóżmy że maxWidth to 13 
+możemy iterować po words i dokładać spacje do ich końca
+
+
+żeby wiedzieć ile trzeba dołożyć spacji musimy znac ilość chars w lini + minimalne spacje
+wtedy maxWidth - countWithMinSpaces = ilość spacji do dołożenia
+
+nie do końca rozumiem co powinniśmy zrobić kiedy mamy ilość spacji której nie da się rozłożyć po równo pomiędzy words
+
+"aa ", "aa ", "aa "
+
+jeśli mamy taką sytuacje i musimy dołożyć jeszcze 2 spacje
+to mamy je dołożyć po 1 do do words[0] i words[1]? czy "on the left" oznacza że tylko do po words[0]?
+
+powiedzmy że wciskamy takie do po words[0] 
+najwyżej zobaczy się jakie test case'y nie przeszły
+
+załóżmy że mamy
+
+"aa", "aa", "aa"
+
+mamy włącznie z minimalnymi spacjami 8 znaków 
+maxWidth = 13
+trzeba dołożyć jeszcze 5
+
+7 % 2 = 1 czyli po równym rozłożeniu zostaną nam jeszcze 2 spacje do rozłożenia
+
+ale skoro mamy 3 words to znaczy że slotów na spacje jest words - 1
+
+"aa", "aa", "aa", "aa"
+
+5 % 3 = 2
+
+["aa", "aa", "aa", "aa"]
+
+maxWidth = 2
+
+["aa"]
+
+maxWidth = 5
+
+["aa", "aa"]
+
+
+words = ["This", "is", "an", "example", "of", "text", "justification."]
+
+maxWidth = 16
+
+problem w kodzie jest związany z błędnym rozumieniem tego fragmentu polecenia:
+Extra spaces between words should be distributed as evenly as possible. If the number of spaces on a line does not divide evenly between words, the empty slots on the left will be assigned more spaces than the slots on the right.
+
+najwyrazniej nie chodzi o to aby kiedy mamy 3 sloty i 2 spacje do dystrybucji
+włożyć te 2 spacje po pierwszym word w pierwszy slot
+
+
+
+
+
+
+
+
+
+
+
+
+
+words = ["This", "is", "an", "example", "of", "text", "justification."]
+
+maxWidth = 16
+
+
+["This", "is", "an"]
+
+gaps = 2
+total = 16 - 8 = 8
+base = 8 / 2 = 4
+extra = 8 % 4 = 0
+
+out = "This    "
+
+
+
+
+
+
+
+pushujemy line i ją resetujemy tylko wtedy kiedy jakiś word jest niepushnięty
+więc mamy gwarancje że po każdym push line i jej resecie 
+zostanie nam line z tym jednym word
+
+Each word's length is guaranteed to be greater than 0 and not exceed maxWidth.
+
+więc nawet jak mamy words = "this" to mamy gwarancje że to jedno słowo zmieści się do lini a zatem skoro nie było sytuacji że potencjalny word miałby nie zmieścic się do line to dostajemy line z tym jednym słowem
+
+u mnie flush był robiony jeśli dane słowo miało by się nie zmieścić do obecnej line. 
+
+
+words = "this" maxWidth = 4
+
+mieści się więc dodajemy word do obecnej lini
+
+no i brakuje pusha bo pusha robimy tylko jak word miałby się nie zmieścić
+
+znaleźć sytuacje że w moim rozwiązaniu po pętli while linia będzie pusta
+bo to odróżnia mój algorytm od kanonicznego w którym zawsze zostaje line z czymś
+
+
+
+
+
+
+
+
+
+
+
+po pierwsze przed rozwiązaniem z two pointers musimy usunąć ze stringa wszystko co nie jest literą lub cyfrą i zrobić na całości toLowerCase
+
+jak usunąć ze stringa wszystko co nie jest alphanumeric character?
+
+const clean = str.replace(/[^a-zA-Z0-9]/g, '');
+
+w ten sposób
+
+Pytanie czy regex to jest jedyny sposób na rozwiązanie tego zadania bez znajomości jakichś numerków ASCII czy coś
+
+jak dobrze nazwać dwa wskaźniki?
+
+start end?
+
+Nie bo nie bedzie to ani start ani end
+
+front, back już bardziej
+
+head, tail też brzmi sensownie
+
+
+
+
+
+
+
+
+
+
+iterujemy się przez t mamy licznik wskazujący obecnie sprawdzany indeks s
+i jak ten licznik przekroczy s.length - 1 to zwracamy true w przeciwnym razie false
+
+
+
+
+
+
+
+
+
+follow up: Jak zmienić swój kod aby przyjmował wiele przychodzących s1,..., sk gdzie k >= 10^9. Chcemy sprawdzić każdy s po kolei czy t zawiera jego subsequence.
+
+
+czy dało by się zoptymalizować complexity?
+
+obecnie w najgorszym wypadku iterowali byśmy się po wszystkich literach t dla każdego s
+
+w sumie t jest jedno może by sie dało przeiterować po nim jeden raz?
+
+a może by policzyć wszystkie możliwe subsequences t i wtedy każde s sprawdzać w jakimś map?
+
+t = ahbgdc
+
+problem jest w tym że dla każdego s musielibyśmy się ponownie iterować przez t
+bo gdyby dla każdego s wykonywać jedną operacje sprawdzenia to complexity było by O(n)
+
+t = ahbgdc
+s = abc
+
+
+
+
+
+
+
+można na podstawie t zrobic mapę gdzie będzie litera, indeks
+
+t = ahbgdc
+s = abc
+
+tMap = {
+	a: 0,
+	h: 1,
+	b: 2,
+	g: 3,
+	d: 4,
+	c: 5
+}
+
+co jeśli b występuje kilka razy w t?
+
+t = bahbgdc
+s = abc
+
+s = abca
+
+tMap = {
+	b:  [0,3]
+	a: [1],
+	h: [2],
+	g: [4],
+	d: [5],
+	c: [6]
+}
+
+values to muszą być arraye bo litery mogą występować kilka razy w różnych indkesach t
+
+s = abc
+
+najpierw sprawdzamy a, otzymujemy 0
+następnie sprawdzamy b i nie bierzemy 0 tylko 3
+
+interesuje nas najmniejszy możliwy indeks jaki spełni naszą potrzebę zachowania odpowiedniej kolejności liter
+
+skoro wzięliśmy a na indeksie 1 to teraz sięgając po b interesują nas indeksy tylko większe od indkesu 1
+
+QUESTION
+jeśli będzie przychodziło wiele s do funckji i bedziemy wywoływać te funkcje dla każdego s to jak to zrobić żeby mapowaniem t zająć się tylko raz?
+
+może warunek że jesli nie jest jeszcze zmapowany to zmapuj
+
+jeżeli będziemy wywoływać tę funkcję ponownie no to za każdym razem nie bedzie w niej tCharsMap
+
+
+t = bahbgdc
+s = abc
+
+s = abca
+
+tMap = {
+	b:  [0,3]
+	a: [1],
+	h: [2],
+	g: [4],
+	d: [5],
+	c: [6]
+}
+
+musimy znaleźć najmniejszy indeks jaki jest większy od pos
+
+a co jeśli nie znajdziemy takiego indkesu?
+
+nie szukamy równości bo szukamy pierwszego najmniejszego indeksu który jest większy od pos
+
+skąd mamy wiedzieć czy istnieje kandydat większy od target ale mniejszy od arr[mid]
+
+
+co to no-op
+
+wyjaśnij
+lo + Math.floor((hi - lo) / 2)
+
+
+
+
+
+
+
+należy znaleźć dwie liczby które sumują się do target
+
+numbers = [2,7,11,15], target = 9
+
+jeśli jesteśmy na 2 to wiemy że potrzebujemy 7
+
+istnieje tylko jedno rozwiązanie
+
+zrobić hashmap gdzie key to będzie number z arraya a value to będzie indeks
+
+może binary search?
+
+array jest posortowany, iterując się po zewnętrznej petli wiemy jakiej liczby szukamy
+
+numbers[i]: -5, wanted: 10, numbers[mid]: 2, lo: 1, hi: 6
+numbers[i]: -5, wanted: 10, numbers[mid]: 6, lo: 4, hi: 6
+numbers[i]: -5, wanted: 10, numbers[mid]: 4, lo: 4, hi: 4
+numbers[i]: -3, wanted: 8, numbers[mid]: 4, lo: 2, hi: 6
+numbers[i]: -3, wanted: 8, numbers[mid]: 6, lo: 5, hi: 6
+numbers[i]: 0, wanted: 5, numbers[mid]: 4, lo: 3, hi: 6
+numbers[i]: 0, wanted: 5, numbers[mid]: 6, lo: 5, hi: 6
+numbers[i]: 2, wanted: 3, numbers[mid]: 6, lo: 4, hi: 6
+numbers[i]: 2, wanted: 3, numbers[mid]: 4, lo: 4, hi: 4
+numbers[i]: 4, wanted: 1, numbers[mid]: 6, lo: 5, hi: 6
+numbers[i]: 6, wanted: -1, numbers[mid]: 8, lo: 6, hi: 6
+
+
+numbers[i]: -5, wanted: 10, numbers[mid]: 2, lo: 1, hi: 6
+new lo: 4, new hi: 6
+numbers[i]: -5, wanted: 10, numbers[mid]: 6, lo: 4, hi: 6
+numbers[i]: -5, wanted: 10, numbers[mid]: 4, lo: 4, hi: 4
+new lo: 5, new hi: 4
+numbers[i]: -3, wanted: 8, numbers[mid]: 4, lo: 2, hi: 6
+new lo: 5, new hi: 6
+numbers[i]: -3, wanted: 8, numbers[mid]: 6, lo: 5, hi: 6
+numbers[i]: 0, wanted: 5, numbers[mid]: 4, lo: 3, hi: 6
+new lo: 5, new hi: 6
+numbers[i]: 0, wanted: 5, numbers[mid]: 6, lo: 5, hi: 6
+numbers[i]: 2, wanted: 3, numbers[mid]: 6, lo: 4, hi: 6
+numbers[i]: 2, wanted: 3, numbers[mid]: 4, lo: 4, hi: 4
+new lo: 5, new hi: 4
+numbers[i]: 4, wanted: 1, numbers[mid]: 6, lo: 5, hi: 6
+numbers[i]: 6, wanted: -1, numbers[mid]: 8, lo: 6, hi: 6
+
+
+2,7,11,15
+
+2 + 15 = 17
+
+jeżeli 15 + 2 jest za duże no to 15 plus cokolwiek bardziej na prawo od 2 tym bardziej będzie za duże 
+
+
+
+const numbers = [-5, -3, 0, 2, 4, 6, 8];
+const target = 5;
+
+-5 + 8 = 3 czyli za mało
+
+
+
+
+
+
+
+znaleźć 3 liczby w różnych indeksach takie że po ich zsumowaniu otrzymujemy 0
+
+możemy wziąć pod uwagę 2 dowolne liczby i wtedy naszym celem będzie 
+znalezienie kolejnej liczby która po dodaniu do tych 2 liczb da wynik 0
+
+jeżeli weźmiemy liczbę -1 to potrzebujemy znaleźć dwie liczby które się sumują do 1
+
+jeżeli liczbę 6 to potrzebujemy dwóch które sie sumują do -6
+
+czyli jeśli weźmiemy jakąś liczbę to potrzebujemy znaleźć jeszcze dwie liczby które się sumują do przeciwieństwa tej liczby
+
+czyli jeśli znajdziemy x to potrzebujemy znaleźć dwie które się zsumują do -x
+
+
+to może zapisać wyniki wszystkich par?
+
+może mapy gdzie kluczem będzie suma tych dwóch indeksów a wartością będą te dwa indkesy
+
+wtedy iterując się po wszystkich liczbach można by było wyszukiwać odpowiadającyh im sum i sprawdzac w znalezionych setach czy nie ma tam 
+
+ale to nie jest tak że do jakiejś sumy sumują się tylko te dwie liczby
+
+
+czy to jest możliwe że w moim rozwiązaniu two sum może dojść do tego że nadpiszemy coś w numsIndexes?
+
+2,7,11,15  target = 9
+
+11,15,11,2,7
+
+może dojść do nadpisania ale ten fakt nam nie przeszkadza
+
+hipoteza:
+dlatego że istnieje dokładnie jedno rozwiązanie
+
+11,15,11,2,2,7
+
+jeżeli jest nam potrzebny indeks liczby 2 w wyniku 
+to znaczy że np. dla liczby 7 liczba 2 utworzy z nią valid parę
+jesli mielibysmy dwie liczby 2 w arrayu to mielibysmy 2 rozwiązania
+
+a jeżeli mielibysmy i tak nie potrzebować 11 to jej duplkat w nums i jej nadpisanie w numsIndexes nic nie zmieni
+
+
+
+nums = -1,0,1,2,-1,-4
+
+czy w moim rozwiązaniu 3sum na pewno potrzebujemy Map, jeśli tylko sprawdzamy czy mapa zwiera entry gdzie key to wanted i nie interesuje nas to co pod tym key lezy
+
+czy Set by wystarczył?
+
+tylko że moje rozwiązanie nie jest rozwiązaniem poprawnym
+może Mapa faktycznie jest potrzebna w rozwiązaniu
+ale wiem że u siebie nie korzystam z tego co jest w value interesuje mnie tylko key
+
+
+nums = -1,0,1,2,-1,-4
+
+nums[i] = 2
+
+target = -2
+target oznacza że chcemy znaleźć 2 liczby które razem zsumują się do -2
+bo wtedy jeśli zsumujemy te 2 liczby z nums[i] to otrzymamy 0
+
+nums[j] = -1
+
+wanted = -2 - (-1) = -1
+wanted to jest trzecia liczba jakiej potrzebujemy 
+wanted czyli taka która po zsumowaniu z nums[i] i nums[j] da nam 0
+
+
+2,-4,2
+
+2 po zsumowaniu z -4 daje -2
+więc żeby wyzerować potrzebujemy znaleźć liczbę 2 do kompletu
+
+The distinct triplets are [-1,0,1] and [-1,-1,2].
+
+mój wynik:
+[ [ -1, 1, 0 ], [ -1, -1, 2 ], [ 0, -1, 1 ] ]
+
+jak to jest z tym kiedy jakieś liczby mogą się powtarzać w triplets?
+
+Input: nums = [-1,0,1,2,-1,-4]
+Output: [[-1,-1,2],[-1,0,1]]
+
+wygląda na to że to nie jest tak że liczba nie może się powtórzyć pomiędzy triplets
+
+[ [ -1, 1, 0 ], [ -1, -1, 2 ], [ 0, -1, 1 ] ]
+
+czy w moim rozwiązaniu jest tak że ten jeden triplet zawiera liczby dokładnie takie same jak wcześniejszy triplet?
+
+myślę że mogą się powtarzać ale po prostu nie może byc dwóch triplets z takimi samymi liczbami
+
+nums = [-1,0,1,-1,0,1]
+
+czyli tutaj jest tylko jeden triplet bo jeśli są dwa to z takimi samymi liczbami 
+
+nums = [-1,0,1,2,-1,-4]
+[[-1,-1,2],[-1,0,1]]
+
+jak to jest z tym kiedy jakieś liczby mogą się powtarzać w triplets?
+wygląda na to że to nie jest tak że liczba nie może się powtórzyć pomiędzy triplets
+
+bo w tym pokazowym przykładzie 
+nums = [-1,0,1,2,-1,-4]
+[[-1,-1,2],[-1,0,1]]
+
+w drugim triplet jest -1 a w nums są tylko 2x -1 więc to jeden z tych co jest w pierwszym triplet
+
+a moje rozwiązanie z tych samych nums daje [ [ -1, 1, 0 ], [ -1, -1, 2 ], [ 0, -1, 1 ] ]
+
+więc na pierwszy rzut oka wydaje sie że pierwszy i trzeci triplet zawierają te same elementy nums a to nieprawda bo w pierwszym wykorzystujemy nums elementy o indeksach 0,1,2 a w trzecim 1,2,4. Więc jak to ma być z tą powtrzalnością po prostu jeśli jeden triplet zawiera jakies liczby to nie może być drugiego któy zawiera niby te same liczby ale nie te same elementy nums?
+
+nums = [-1,0,1,2,-1,-4]
+
+posortowane nums = [-4,-1,-1,0,1,2]
+
+nums[i] = -1
+
+target = 1
+
+nums[j] = -1
+wanted = 2
+
+posortowanie nums pozwoli na znajdowanie duplikatów triplets ale te duplikaty będą miały liczby w tej samej kolejności
+
+
+dlaczego jest tak że aby dodać liczbę do numsIndexes musimy ją najpierw minąć?
+bo w przeciwnym razie mogli byśmy wykorzytsać ten sam element jako dwie liczby
+
+target = 4
+
+[2,1]
+
+nums[i] = 2
+wanted = 4 - 2 = 2
+
+i zwracamy [0,0] indeksy w two sum
+
+
+nums = [-1,0,1,2,-1,-4]
+
+posortowane nums = [-4,-1,-1,0,1,2]
+
+1 - (-1) = 2
+
+-1,1,0
+-1,2,-1
+-1,1,0
+
+nie jestem pewny czy dobrze zrozumiałem jak powinna wyglądać funkcja sortująca dla porządku rosnącego vs malejącego
+
+
+nums = [-1, 0, 1, -1, 0, 1]
+
+-1,-1,0,0,1,1
+
+nums = [-1,0,1,2,-1,-4]
+
+-4,-1,-1,0,1,2
+
+
+
+
+
+
+
+
+
+
+
+zacząc od najmniejszego okna czyli dlugosci 1 i przeiterowac się po wszystkich elementach
+w następnych krokach zwiększać rozmiar okno i znowu po wszystkich elementach
+itd. aż do największego rozmiaru okna czyli do okna obejmującego wszystkie elementy w array
+
+
+target = 200
+
+2,100,1,2,4,100
+
+a jeslibysmy posortowali to te dwie 100 były by obok siebie a nie powinny byc
+
+
+najpierw policzyć sume w oknie
+a następnie co iteracje od sumy w oknie odejmować element z lewej i dodawać kolejny z prawej
+
+
+
+1,2
+
+windowSum += nums[right + 1]; chcemy to wykonać tylko wtedy kiedy mamy pewność że indeks right + 1 istnieje
+
+
+
+
+
+target = 11
+nums = [1,2,3,4,5]
+
+output = 0
+expected = 3
+
+
+1. Jeżeli mamy sumę okna rozmiaru 5 to aby dowiedzieć się jaka jest suma okna rozmiaru 6 wystarczy dodać kolejną value po prawej.
+Pytanie jest o całą wiedzę zdobytą po iteracji z danym rozmiarem okna i chodzi o to że po zwiększeniu rozmiaru okna i przejściu do dolejnej iteracji zewnętrznej pętli porzucamy całą wiedzę jaką mogliśmy zdobyć dla okna mniejszego o 1. 
+Nie marnować wiedzy.
+
+ale to że zaczynamy od okna rozmiaru 1 chyba jest okej bo chodzi nam o znalezienie najmniejszego okna spełniającego warunek
+
+więc jak można zachować informacje zdobyte przez iterację okna rozmiaru 1,2 itd?
+
+
+2. Zastanów się: mam ustalony lewy koniec okna i przesuwam prawy w prawo. Jak zachowuje się suma? - musi się zwiększyć
+
+A jeśli mam ustalony prawy i przesuwam lewy w prawo? - musi się zmniejszyć
+
+Czy suma może „skakać" w obie strony, czy jest monotoniczna? -
+może skakać, wypada mniejsza liczba, wpada mniejsza itd.
+
+
+Spróbuj zapytać inaczej: „dla prawego końca stojącego na indeksie right — jak daleko w prawo mogę dosunąć lewy koniec, wciąż mając sumę ≥ target?"
+
+Co Ci to daje, jeśli zadasz to pytanie dla każdego right po kolei?
+
+[2,3,1,2,4,3]
+
+no daje to w sumie wszystkie możliwości, tym sposobem możemy wszystko sprawdzic
+
+i czy to jest sposob bardziej optymalny?
+chyba nadal O(n2)
+
+
+4. Konsekwencja punktu 2. Jeśli okno ma być zmiennego rozmiaru — kiedy je rozszerzasz (right++), a kiedy kurczysz (left++)? Sformułuj to jako dwie reguły warunkowe.
+
+rozszerzam kiedy sum < target
+a zmniejszam kiedy sum >= target
+
+
+5. Nie wiem
+
+6. nie wiem
+
+
+
+1. Pętla zewnętrzna to right idący od 0 do n-1
+
+
+[2,3,1,2,4,3]
+
+
+To jest cała siła założenia „liczby dodatnie". Pytanie: skoro przy ustalonym right suma maleje monotonicznie wraz z left++, to gdy kurczysz okno i suma spadnie poniżej target — czy ma sens kurczyć dalej w nadziei, że wróci powyżej?
+
+będzie mogło tylko dalej spadać także jeśli suma okna spadnie poniżej target przez zwiększanie left to można dla tego right zaniechać dalszego left++ i sprawdzania sumy
+
+3.
+
+jeżeli w kroku 4. po prostu zwiększymy right++ to możemy się spodziewać że suma wzrośnie a i tak już wiemy że jest za duża
+więc jeśli chcemy zmniejszyć sumę musimy zrobić left++
+
+Sformułuj to zdanie: „każdy element tablicy wchodzi do okna dokładnie 1 raz i wychodzi z okna co najwyżej 1 raz". Ile operacji łącznie?
+
+nums = [2,3,1,2,4,3], target = 7
+
+najważniejsze clue zadania to:
+Sprawdzamy minimalny rozmiar okna spełniający warunek sum >= target dla każdego right
+
+
+
+
+
+
+Longest substring without repeating characters
+
+chodzi o to aby znalezc najdluzszy substring w ktorym nie powtarza się żadna litera, czyl kazda litera wystepuje tylko raz
+
+s = "abcabcbb"
+
+result = 3
+
+bo w abc litery sie nie powtarzaja a w abca juz są 2 razy a
+
+no to znowu moze analiza amortyzowana ?
+i do tego set
+
+[abca]bcbb
+
+i jak wyrzycimy skrajnie lewy element to 
+
+a[bca]bcbb
+
+juz nie bedzie powtorki ale to nie moze dzialac tak że będziemy wyzucac skrajnie lewy element i uwazac ze w obecnym oknie powtorki juz nie ma
+
+no a jakby wyrzucac elementy zaczynając od lewej tak dlugo az pozbedziemy sie powtorek?
+
+abcabcbb
+
+no ale po prostu zwiększamy right do momentu pojawienia się powtorki
+
+[abcb]bcbb
+
+element o indkesie 1 jest tym który się powtorzył w momencie pierwszej powtorki
+ma sens wyrzucanie elementow od lewej az powtorka zniknie?
+
+czyli dla kazdego indeksu sprawdzalibysmy dlugosc najdluzszego substringa
+
+ab[cb]bcbb
+
+pamiętajmy że w poprzednim zadaniu celem było znalezc nie najdłuższy ale najkrótszy fragment spełniający warunek
+
+pytanie czy usuwając elementy od lewej aż usuniemy powtarzający się element
+możemy coś stracić? na przykład potencjalny indeks który byłby startowym indeksem
+proper szukanego substringa?
+
+pwwkew
+
+chyba analiza amortyzowana by styknęła
+
+
+abcabcbb
+
+skonczone na poczytac czat
+
+
+
+Substring with concatenation of all words
+
+mamy string s oraz string array words
+i chodzi o to aby w s znaleźć indeksy w których zaczyna się jakakolwiek permutacja wszystkich words czyli wszystkich words w jakiejkolwiek kolejności
+
+s = "barfoothefoobarman", words = ["foo","bar"]
+
+result = 0,9
+
+bo w indkesie 0 zaczyna się permutacja wszystkich words oraz w 9 zaczyna się permutacja wszystkich words
+
+może wykorzystać do tego String.prototype.indexOf()?
+
+s.indexOf(permutation) daje nam pierwsze wystąpienie stringa permutation w s 
+
+no to może by zrobić stringi ze wszystkich możliwych kombinacji words
+a następnie próbować wyszukać każdy string kombinacji w stringu s
+
+ok to jak stworzyć z words stringi które będą wszystkimi permutacjami wszystkich words?
+
+words = ["a","b","c"]
+
+no to możliwości tutaj są (indeksy stringow)
+[0,1,2], [0,2,1], [1,0,2], [1,2,0], [2,0,1], [2,1,0]
+
+złożoność będzie rosła w jakim tempie? wykładniczym?
+
+
+każde znalezione słowo z words iterując się przez s, jest potencjalnym startem kolejnej permutacji
+
+czyli może iterować się przez s i składać z napotkanych chars, words
+ale każda litera jest potencjalnym startem dowolnego word i idąc dalej dowolnej permutacji wszystkich words
+
+czyli mogą być litery śmieci z których będziemy coś sklecać i nagle wyłoni się faktyczny word, wtedy należy porzucić te śmieci które skleciliśmy ponieważ nie pasują one do jakiegokolwiek word
+
+może iterować się i sklecać i sprawdzać czy to co skleciliśmy jest word?
+
+a czy jest powiedziane że words są unikalne? czy words w words mogą się powtarzać? bo jeśli były by unikalne to można by było skorzystac z Set
+
+przegapiłem potencjalnie bardzo ważną rzecz z polecenia
+mianowicie wszystkie stringi w words są tej samej długości
+
+możemy łatwo policzyć ile chars ma każda permutacja 
+ale to moglismy zrobić mniej więcej równie łatwo jeszcze przed info o words same length
+
+ale skoro są tej samej length to iterując się po s to jeśli sklecimy coś z przemierzanych chars co będzie długości word z words to możemy sprawdzić czy to coś sklecone jest jednym z words a jeśli nie będzie to możemy to porzucić
+
+może iterować się i co words[i].length sprawdzać czy to co skleciliśmy jest jednym z words i tak odhaczać wszystkie words?
+
+jeśli sklecimy jakiś śmieć długości words[i].length to od kolejnego char zaczynamy sklecać od nowa i porzucamy dotychczasową liste odhaczanych words i zaczynamy odhaczanie od początku
+
+ale dajmy na to mamy 
+words = ["foo","bar"]
+
+oraz s = "afoobar"
+
+dlugość word z words to 3 i jeśli zaczniemy iteracje od 0 to skonczymy na 2 i uznamy "afo" za śmieć i zaczniemy sklecanie od indeksu 3 i tym samym przegapimy start word i permutacji na indeksie 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
