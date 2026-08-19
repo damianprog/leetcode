@@ -3892,6 +3892,17 @@ skonczone na poczytac czat
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 Substring with concatenation of all words
 
 mamy string s oraz string array words
@@ -3922,7 +3933,7 @@ złożoność będzie rosła w jakim tempie? wykładniczym?
 
 każde znalezione słowo z words iterując się przez s, jest potencjalnym startem kolejnej permutacji
 
-czyli może iterować się przez s i składać z napotkanych chars, words
+czyli może iterować się przez s i składać z napotkanych chars words
 ale każda litera jest potencjalnym startem dowolnego word i idąc dalej dowolnej permutacji wszystkich words
 
 czyli mogą być litery śmieci z których będziemy coś sklecać i nagle wyłoni się faktyczny word, wtedy należy porzucić te śmieci które skleciliśmy ponieważ nie pasują one do jakiegokolwiek word
@@ -3950,24 +3961,59 @@ oraz s = "afoobar"
 
 dlugość word z words to 3 i jeśli zaczniemy iteracje od 0 to skonczymy na 2 i uznamy "afo" za śmieć i zaczniemy sklecanie od indeksu 3 i tym samym przegapimy start word i permutacji na indeksie 1.
 
+ale wiemy jakiej długości jest każda permutacja
+i każda permutacja ma taką samą długość
+
+to może iterować się po s, odcinać z s fragment długości permutacji
+następnie iteracja po words i sprawdzanie 
+permutation.includes(currentWord)
+i jeśli permutation posiada wszystkie word to mamy traf
+
+ale takie podejście by oznaczało że dla każdej litery s iterujemy sie po wszystkich words o ile w pozostałej długości s może jeszcze zmieścić się permutacja
+
+spróbujmy a może wpadniemy na coś lepszego
+
+a może odcinanie fragmentu do sprawdzenia nie co literę
+tylko iteracja po s
+
+tylko że kojarzy mi sie coś że hmm... jedno słowo zawiera się w drugim słowie??
+to jest możliwe dajmy na to
+s = missisipi
+i words = ["missi","issi"]
+no to metodą includes znajdziemy w s oba a to nie oznacza że występuje w s permutacja wszystkich words bo po wystąpieniu w s "missi" nie będzie już dostępnego "issi" bo ten został zużyty na potrzebę "missi" a kolejnego "issi" po wykluczeniu z s "missi" już nie będzie
+
+no właśnie to w takim razie po znalezieniu we fragmencie s word
+wycinać znalezione word z fragmentu
+
+tylko nadal pozostaje problem że fragment z s byśmy wycinali co literę w s
+
+a może coś że window size o długości words[i].length
+i że zwiększać size tego window o words[i].length?
+
+i pewnie należy pamiętać że przeanalizowana część w której nie znaleźliśmy permutacji daje nam jakąś wiedzę której nie powinniśmy porzucać
 
 
 
 
+Praca z Claude w trybie sokratejskim:
+
+Czy words = ["foo","foo","bar"] to legalne wejście?
+Tak
+
+Jeśli tak, to ile razy "foo" musi wystąpić w oknie, żeby był traf?
+2 razy
+
+A czy s = "foobarbaz" z words = ["foo","bar"] i s = "foofoobar" z words = ["foo","foo","bar"] wymagają tej samej struktury danych do sprawdzania?
+Nie rozumiem pytania
 
 
+Przypadek 2
 
+words = ["foo","foo","bar"], s = "foofoobar"
 
+zatem Set startowy to {"foo","bar"}
 
-
-
-
-
-
-
-
-
-
+lecimy po s skacząc po words[i].length i napotykamy "foo"
 
 
 
