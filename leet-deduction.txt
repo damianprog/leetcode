@@ -4016,36 +4016,52 @@ zatem Set startowy to {"foo","bar"}
 lecimy po s skacząc po words[i].length i napotykamy "foo"
 
 
+nie "czy foo jest potrzebne", tylko ""... momencik w pytaniu "czy foo jest potrzebne" foo to jest ciąg znaków znaleziony w oknie?
+
+Jaką konkretnie liczbę chcesz dostać w odpowiedzi na kawałek "foo"? I co z nią robisz zaraz po tym, jak ją dostaniesz?
+
+Map gdzie kluczem jest word a value jest liczbą oznaczającą ilość jego wystąpień w words. Czyli okno będzie valid wtedy kiedy wszystkie values będą 0
 
 
+można budować mapę od nowa w każdej iteracji pętli co będzie tym droższym rozwiązaniem
+
+ale można zbudować ją jeden raz i kopiować?
+
+StackOverflow:
+var newMap = new Map(existingMap)
+
+wiadomo u mnie const 
+
+Kiedy odrzucasz okno?
+
+klucza w ogóle nie ma w mapie - odrzucamy okno
+klucz jest, wartość > 0 - dekrementujemy wartość
+klucz jest, ale wartość już wynosi 0 - odrzucamy okno
+
+words = ["foo","bar"]
+s = "foofoo"
+
+foo - 0
+bar - 1
+
+Warunek trafu — czy naprawdę musisz sprawdzać wszystkie values?
+
+Ile kawałków w ogóle mieści się w oknie?
+
+w valid oknie kawałków jest tyle ile words
+
+Jeśli przeszedłeś przez całe okno
+
+no jak przeszliśmy przez całe valid okno to w takim razie zaczynamy szukać kolejnego valid okna
 
 
+pętla po indeksach startowych w s (krok 1 — offsety zostawiamy na później)
 
+w naiwnej wersji startowe indeksy są co 1 char
 
+nie ma sensu sprawdzać czy permutacja wystąpi kiedy chars w s będzie mniej niż potrzebnych jest chars na permutacje 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+a chars na permutacje jest potrzebnych words[0].length * words.length
 
 
 
