@@ -4063,6 +4063,76 @@ nie ma sensu sprawdzać czy permutacja wystąpi kiedy chars w s będzie mniej ni
 
 a chars na permutacje jest potrzebnych words[0].length * words.length
 
+ostatni valid char od którego może się zacząć permutacja
+
+s="foobar" ["foo","bar"]
+
+
+w pętli zewnętrznej iteracja co char bo co char może się zacząć valid permutacja
+
+chyba trzeba zrobić pętle wewnętrzną która będzie odcinać kawałki s
+jeden kawałek s ma długość words[i].length
+
+jeśli odcięty kawałek jest w wordsQuantitites to dekremetujemy jego value
+
+jeśli value przed dekrementacją wynosi 0 to znaczy że nie ma już dostępnego takiego słowa i kawałek można uznać za śmieć
+i tym samym przerwać wewnętrzną pętle i kontynuować z zewnętrzną
+
+a jesli odciętego kawałka nie ma w wordsQuantitites
+to odcięty kawałek uznajemy za śmieć i przerywamy wewnetrzną pętle
+
+jak powinna wyglądać wewnętrzna pętla odcinająca kawałki?
+
+jedna mozliwość to iteracja co char startując od i
+o długośći permutationLength z wewnętrznym licznikiem zerującym się co words[i].length. 
+
+przypomnijmy że celem zadania jest zwrócenie indeksów w których zaczyna się permutatcja
+
+a skąd będziemy wiedzieć że znaleźliśmy permutacje?
+po tym że wewnętrzna pętla przeleci nieprzerwanie do końca
+
+s = "barfoothefoobarman", words = ["foo","bar"]
+
+ostatni i czyli ostatni potencjalny start permutacji powinien być w indeksie 12
+
+i to się w kodzie zgadza
+
+problem jest w tym że nie kopiujemy mapy na nowo dla każdego potencjalnego startu permutacji
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

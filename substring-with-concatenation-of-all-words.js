@@ -11,7 +11,36 @@ const findSubstring = function (s, words) {
     wordsQuantities.set(word, wordQty ? wordQty + 1 : 1);
   });
 
-  const allWordsCharsQty = words[0].length * words.length;
+  const permutationLength = words[0].length * words.length;
 
-  for (let i = 0; i < s.length; i++) {}
+  const result = [];
+
+  for (let i = 0; i <= s.length - permutationLength; i++) {
+    let frag = "";
+    const wordsQuantitiesCopy = new Map(wordsQuantities);
+    for (let j = 0; j < permutationLength; j++) {
+      frag += s[i + j];
+
+      if (frag.length === words[0].length) {
+        const wordQuantity = wordsQuantitiesCopy.get(frag);
+        if (wordQuantity) {
+          wordsQuantitiesCopy.set(frag, wordQuantity - 1);
+        } else {
+          break;
+        }
+        frag = "";
+      }
+
+      if (j === permutationLength - 1) {
+        result.push(i);
+      }
+    }
+  }
+
+  return result;
 };
+
+const s = "barfoothefoobarman";
+const words = ["foo", "bar"];
+
+console.log(findSubstring(s, words));
