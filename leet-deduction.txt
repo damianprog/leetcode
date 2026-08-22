@@ -4099,30 +4099,85 @@ i to się w kodzie zgadza
 
 problem jest w tym że nie kopiujemy mapy na nowo dla każdego potencjalnego startu permutacji
 
+Skoczone na 3. Policz złożoność
+
+dajmy na to dla takiego wejścia:
+
+const s = "barfoothefoobarman";
+const words = ["foo", "bar"];
+
+Ile razy wykonuje się pętla zewnętrzna?
+12 razy
+
+Ile razy pętla wewnętrzna, w najgorszym przypadku?
+
+6 razy
+
+Ile kosztuje new Map(wordsQuantities)?
+Zakładam że to jest O(n)?
+Czyli skoro są 2 words to 2?
+
+Ile kosztuje frag += s[i + j] — czy to naprawdę operacja O(1)?
+podobno V8 to optymalizuje 
+
+Zatem 12 * 6
+
+tworzymy kopie mapy co obrót zewnętrznej pętli 
+więc 12 * 2 = 24
+
+12 * 6 + 24 = 72 + 24 = 96
+
+Ile wartości przyjmuje i? Wypisz pierwszą i ostatnią. Klasyczna pułapka: przy <= liczba iteracji to nie wartość graniczna.
+
+pierwsza 0, ostatnia 12
+
+No tak czyli 13
+
+13 * 6 + 13 * 2 = 78 + 26 = 104
+
+13 * (6 + 2) = 104
 
 
+n = 13
+k = 6
+L = 2
 
+Kopia mapy jest wewnątrz zewnętrznej pętli
 
+pętla wewnętrzna jest zagnieżdżona w pętli zewnętrznej
 
+gdyby kopia mapy była wewnątrz wewnętrznej pętli wtedy można by było policzyć operacje jako 13 * 6 * 2
+a jeśli jest wewnątrz zewnętrznej pętli i nie wewnątrz wewnętrznej pętli to 
+13 * (6 + 2) = 104 czyli n * (k + L) jest poprawnym wzorem na policzenie operacji
+łapie się to w ramy O(n2)
 
+jaką funkcją danych wejściowych jest każda z tych trzech liczb
 
+wejście to:
+n = s.length = 18
+k = words.length = 2
+L = words[0].length = 3
 
+iteracje pętli zewnętrznej
+wartość dla tego wejścia to 13
+wyrażenie przez n, k, L to będzie = n - (k * L)
 
+18 - (2 * 3) = 18 - 6 = 12
 
+n - (k * L) + 1 bo <=
 
+n - (k * L) + 1 także to funkcja opisująca złożoność zewnętrznej pętli na podstawie rozmiaru wejścia?
 
+for (let j = 0; j < permutationLength; j++)   // ile iteracji?
 
+k * L
 
+const wordsQuantitiesCopy = new Map(wordsQuantities);   // ile wpisów kopiujesz?
+k
 
+(n - k*L + 1) * (k*L + k)
 
-
-
-
-
-
-
-
-
+skonczone tutaj
 
 
 

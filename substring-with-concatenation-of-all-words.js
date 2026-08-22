@@ -8,7 +8,7 @@ const findSubstring = function (s, words) {
 
   words.forEach((word) => {
     const wordQty = wordsQuantities.get(word);
-    wordsQuantities.set(word, wordQty ? wordQty + 1 : 1);
+    wordsQuantities.set(word, (wordQty ?? 0) + 1);
   });
 
   const permutationLength = words[0].length * words.length;
