@@ -4177,7 +4177,77 @@ k
 
 (n - k*L + 1) * (k*L + k)
 
-skonczone tutaj
+Teraz upraszczanie pod O()
+
+Krok 1
+k + k*L wyłączyć k przed nawias
+
+k * (1 + L)
+
+Krok 2 — lewy czynnik. n - k·L + 1 nigdy nie przekracza n (odejmujesz coś nieujemnego). Pod O() zostaje więc…? W najgorszym razie n bo z constraints wynika że jest conajmniej jedno słowo i ma ono długość conajmniej 1 i jak do tego dodać pozostałe we wzorze + 1 to otrzymujemy n.
+
+O(n * k * (1 + L))
+
+Ile najwięcej może wynosić 1 + L w stosunku do samego L
+no kurde L + 1, nie wiem o co ci chodzi
+
+
+L	L + 1	ile razy więcej niż L?
+1	2		2×
+2	3		1,5×
+3	4		1,33×
+10	11		1,1×
+100	101		1,01×
+
+No teraz jasne więc odpowiedz na pytanie "Ile najwięcej może wynosić 1 + L w stosunku do samego L" to oczywiście 2
+
+Wzór O()
+O(n * k * L)
+
+Dokładny wzór: 
+(n - k*L + 1) * (k*L + k)
+
+podstawiamy do constraints:
+n = 10 000, k = 5 000, L = 2
+
+(n - k*L + 1) = 10 000 - 5 000 * 2 + 1 = 10 000 - 10 000 + 1 = 1
+Dziwne
+
+k·L = 10 000 to długość okna, a s ma 10 000 znaków. Okno wypełnia cały string. Jest dokładnie jedno możliwe położenie: start w zerze.
+
+Czyli maksymalne k i maksymalne n naraz dają zadanie trywialne. To typowa pułapka przy szacowaniu — bierzemy wszystkie constraints na maksa i wychodzi liczba, która nigdy nie występuje, bo parametry są ze sobą powiązane.
+
+Logiczny i bardzo ciekawy przypadek
+
+Znajdź prawdziwy worst case
+
+dla przypomnienia
+Dokładny wzór: 
+(n - k*L + 1) * (k*L + k)
+
+Zostaw n = 10 000 i pobaw się długością okna m = k·L. Wypełnij:
+
+m = 10
+
+n - m + 1 to ilość potencjalnych miejsc startów permutacji 
+
+n - m + 1 = 9 991
+
+iloczyn: 
+(10 000 - 10 + 1) * (10 + )
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
