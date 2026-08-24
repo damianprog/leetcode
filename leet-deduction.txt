@@ -4233,16 +4233,125 @@ n - m + 1 to ilość potencjalnych miejsc startów permutacji
 
 n - m + 1 = 9 991
 
+wejście to:
+n = s.length 
+k = words.length 
+L = words[0].length 
+
+(n - m + 1) · (m + k)
+
+cel liczenia tego iloczynu dla różnych m:
+zastanów się, przy jakim m iloczyn (n - m + 1) · (m + k) jest największy.
+
+m to długość permutacji
+
+m = 10
+
 iloczyn: 
-(10 000 - 10 + 1) * (10 + )
+(10 000 - 10 + 1) * (10 + k)
+
+m = k * L
+
+ustalmy że L = 1 czyli słowa są jednoznakowe
+
+wtedy ilość słów jest równa długości permutacji
+
+(n - m + 1) · (m + m) = (n - m + 1) · 2m
+
+1.
+
+n = 10 000
+
+m = 10
+
+(10 000 - 10 + 1) * 20 = 9 991 * 20 = 199 820
+
+przy stringu s długości 10 000 i permutacji o długości 10
+wykonamy 199 820 operacji.
+
+2.
+
+m = 1 000
+
+n - m + 1 = 9 001
+
+2m = 2000
+
+9 001 * 2000 = 18 002 000
+
+3.
+
+m = 5 000
+
+n - m + 1 = 5 001
+
+2m = 10 000
+
+5 001 * 10 000 = 50,010,000 - Szczyt
+
+Kiedy długość permutacji jest w połowie tak długa jak długość stringa s
+wtedy wykonujemy najwięcej operacji
+
+4.
+
+m = 9 000
+
+n - m + 1 = 1 001
+
+2m = 18 000
+
+1 001 * 18 000 = 18 018 000
+
+Czyli już widać że przy stringu s o stałej długości w miare zwiększania się długości permutacji, liczba permutacji najpierw rośnie, osiąga szczyt a następnie spada
+
+5.
+
+m = 10 000
+
+n - m + 1 = 1
+
+2m = 20 000
+
+1 * 20 000 = 20 000
 
 
+Back to claude:
 
+To jest wzorzec wart zapamiętania, bo wraca: zawsze gdy koszt ma postać „ile pozycji × ile pracy na pozycję", a te dwa czynniki są ze sobą sprzężone przez sumę stałą — maksimum wypada po środku, nie na krańcach.
 
+Dlaczego przeszło
 
+~50 mln operacji, silnik JS robi rząd 10⁸ prostych operacji na sekundę → ułamek sekundy. Mieści się w limicie LeetCode z zapasem.
 
+Czyli twoja wczorajsza intuicja O(n²) była trafna, tylko potrzebowała uzasadnienia: k·L ≤ n, więc górne ograniczenie O(n·k·L) w praktyce zwija się do ~n²/4.
 
+Optymalizacja:
 
+n = s.length 
+k = words.length 
+L = words[0].length 
+
+s = 12
+n = 12
+k = 3
+L = 3
+
+długość permutacji to 9
+m = 9
+
+indeks:  0  1  2 | 3  4  5 | 6  7  8 | 9 10 11
+okno A:  [-------------------------]
+okno B:            [-------------------------]
+
+Okno A ma 3 kawałki
+Okno B ma 3 kawałki
+
+2 kawałki znajdują się w obu oknach
+
+Czyli przy przejściu z A do B 
+2 kawałki mamy już sprawdzone 
+
+Skonczone tutaj
 
 
 
