@@ -1581,4 +1581,4 @@ Fix: separator albo `[a,b,c].sort((x,y)=>x-y).join(",")` -> injektywny z definic
 - Two Sum (LC 1) — hashmap, tablica nieposortowana, zwraca indeksy.
 - Two Sum II – Input Array Is Sorted (LC 167) — czysty two-pointers, baza dla 3Sum.
 - 3Sum Closest (LC 16) — ten sam szkielet, minimalizujesz `|sum - target|`.
-- 4Sum (LC 18) — dwie zewnętrzne pętle + two-pointers; krok w stronę kSum.
+- 4Sum (LC 18) — dwie zewnętrzne pętle + two-pointers; krok w stronę kSum./
