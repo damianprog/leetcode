@@ -4351,13 +4351,31 @@ Okno B ma 3 kawałki
 Czyli przy przejściu z A do B 
 2 kawałki mamy już sprawdzone 
 
-Skonczone tutaj
 
+czyli zrobić mapę liczącą ile już mamy zebranych potrzebnych kawałków
 
+skoro mamy już te dwa kawałki sprawdzone to nie ma sensu się po nich iterować
+i na nowo próbówać sklecać słowa, skoro wiemy że to na pewno są słowa
 
+ale to ma sens tylko wtedy kiedy te fragmenty to są słowa
 
+ale załóżmy na razie że to są słowa
 
+zatem przy pełnym oknie, szukając kolejnego valid okna
 
+możemy wyrzucić word / frag z lewej 
+zakładamy że mamy mapę liczącą ile już mamy poszczególnych words
+także wyrzucić to znaczy zmodyfikować mapę dekrementując value 
+pod wyrzucanym word
+
+czyli budując pierwszą mapę przed pętlami for
+ta mapa będzie nam służyć jako informacja ile potrzebujemy zebrać wszystkich words aby skompletować permutacje
+
+jak mają wyglądać te pętle?
+
+mamy skakać co words[0].length?
+
+chodzi o to aby wywalić slowo z lewej a dodać te co dojdzie do okna z prawej
 
 
 
