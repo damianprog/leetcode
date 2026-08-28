@@ -49,7 +49,30 @@ const findSubstring = function (s, words) {
     wordsQuantities.set(word, (wordQty ?? 0) + 1);
   });
 
-  for (let offset = 0; offset < words[0].length; offset++) {}
+  for (let offset = 0; offset < words[0].length; offset++) {
+    let left = offset;
+    let seen = new Map();
+    let count = 0;
+
+    for (
+      let right = offset;
+      right + words[0].length <= n;
+      right += words[0].length
+    ) {
+      const chunk = s.slice(right, right + L);
+
+      const wordQty = wordsQuantities.get(chunk);
+
+      if (!wordQty) {
+        left = right + L;
+        seen = new Map();
+        count = 0;
+      } else if (!seen.has(chunk) || seen.get(chunk) + 1 <= wordQty) {
+        seen.set(chunk, (seen.get(chunk) ?? 0) + 1);
+      } else {
+      }
+    }
+  }
 };
 
 const s = "barfoothefoobarman";

@@ -4378,6 +4378,48 @@ mamy skakać co words[0].length?
 chodzi o to aby wywalić slowo z lewej a dodać te co dojdzie do okna z prawej
 
 
+"foo"
+
+aaaafoo
+
+nie jest dla mnie do konca jasne czemu starty od 0 do L - 1, pokryją wszystkie możliwe starty
+
+
+aaaafoo
+
+right = 0
+right + L = 3
+chunk = "aaa"
+
+afoaafo
+
+A) chunk w ogóle nie występuje w mapie wzorcowej (śmieć)
+
+Czy jakakolwiek część obecnego okna może jeszcze być początkiem trafienia? Gdzie w takim razie ląduje left, a co z seen i count?
+
+
+words = ["foo", "bar"]   
+s = "foozzzbar"
+
+1. Poprawne okno nie może zawierać "zzz"
+2. W tym przypadku żadne okno nie może się zacząć od 0
+3. W tym przypadku skok na 6 ma sens bo wtedy pominiemy "zzz"
+4. seen jest ustawiana z powrotem na pustą mapę i count na 0
+
+
+
+words = ["foo", "bar"]
+s = "foofoobar"
+
+1. foo to valid word więc jakieś okno może go zawierać
+2. W tym przypadku należy wyrzucić pierwsze "foo" z s. Więc chars od 0 (włącznie) do 3 (wyłącznie)
+
+
+
+
+
+
+
 
 
 
