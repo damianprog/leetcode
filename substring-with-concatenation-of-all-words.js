@@ -70,6 +70,13 @@ const findSubstring = function (s, words) {
       } else if (!seen.has(chunk) || seen.get(chunk) + 1 <= wordQty) {
         seen.set(chunk, (seen.get(chunk) ?? 0) + 1);
       } else {
+        let isPrevChunkRemoved = false;
+
+        while (isPrevChunkRemoved) {
+          const currentChunk = s.slice(left, left + words[0].length);
+
+          seen.set(currentChunk, seen.get(currentChunk) - 1); // także w seen może być 0
+        }
       }
     }
   }

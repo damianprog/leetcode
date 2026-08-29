@@ -4412,24 +4412,46 @@ words = ["foo", "bar"]
 s = "foofoobar"
 
 1. foo to valid word więc jakieś okno może go zawierać
-2. W tym przypadku należy wyrzucić pierwsze "foo" z s. Więc chars od 0 (włącznie) do 3 (wyłącznie)
+2. W tym przypadku należy wyrzucić pierwsze "foo" z s. Więc chars od 0 (włącznie) do 3 (wyłącznie).
+3. s.slice(left, left + words[0].length)
 
+pętla while odcinająca kawałki od lewej strony
 
+ale po co while skoro trafiliśmy na tylko jeden kawałek z prawej strony
 
+bo jego powtórka niekoniecznie musi leżeć z wierzchu po lewej stronie
 
+może być w środku, więc trzeba będzie odciąć od lewej strony wszystko aż do środka z powtórką włącznie
 
+czyli pętla while odcinająca kawałki od lewej tak długo aż odetnie powtórkę
 
+words = ["foo", "bar"]
 
+s = "foofoobar"
 
+ale nie można na raz odciąć wszystkiego od lewej do powtórki wyłącznie?
+wyłącznie czyli zostawić powtórkę a wywalić wszystko co było przed nią
 
+words = ["foo", "bar"]
 
+s = "foofoobar"
 
+chunk to znowu jest foo no to wywalamy foo z lewej, a przez wywalamy mam na myśli przestawienie left
 
+odcinamy od lewej strony tak długo aż natrafimy na wcześniejszy odpowiednik chunk
+i go odetniemy
 
+ale nie jest tak że zawsze chcemy odciąć wszystko i zostawić tylko to słowo które się powtórzyło?
 
+absolutnie nie
 
+s = "abcad"
 
+tutaj należy odciąć tylko a z lewej strony
 
+s = "bacad"
+
+tutaj chcemy odciąć z lewej strony b oraz a
 
 
 
