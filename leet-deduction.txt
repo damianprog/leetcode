@@ -4454,6 +4454,169 @@ s = "bacad"
 tutaj chcemy odciąć z lewej strony b oraz a
 
 
+jeśli nie chcemy sytuacji że w seen niektóre wartości mogły by być 0
+to można w while dać warunek że jeśli mamy zamiar zdekrementować wartość 
+i ona by miała wynieść 0 to zamiast dekrementacji usunąć ją z tablicy
+
+w którym miejscu wartość 0 miała by przeszkadzac?
+
+nie widzę póki co miejsca gdzie 0 w seen mialo by przeszkadzac
+
+może pamiętać o tym na koncu że porównanie ilośći kluczy w mapie to nie jest dobry pomysł
+
+
+jaki warunek dla while wewnątrz której odcinamy kawałki aż odetniemy ten który się powtarza?
+
+question
+czy to co odetniemy może się jeszcze kiedykolwiek przydać?
+
+words = ["a", "b", "c", "d"] 
+
+abcad
+
+a kiedy następuje moment że znaleziono pełną permutacje?
+
+jak count osiągnie odpowiednią wartość?
+
+można taki warunek umieścić po trafieniu 
+
+
+abcadddcba
+
+
+s = "barfoothefoobarman";
+
+words = ["foo", "bar"];
+
+[ 0, 9, 9, 9 ]
+
+oznacza że łącznie 4 razy wchodzimy do warunku count === words.length
+
+if (count === words.length) {
+          result.push(left);
+          break;
+}
+
+po tym break przerywamy wykonywanie pętli wewnętrznej
+
+zaczynamy kolejny obrót pętli zewnętrznej
+
+inkrementujemy offset 
+
+i left ustawiamy na ten zinkrementowany offset
+
+więc skoro wcześniej left był 9 to jak po zinkrementowaniu offset
+i przypisaniu go do left znowu może być 9?
+
+co można by wydrukować aby dowiedzieć się w czym leży błąd?
+
+
+s = "thefoobarman";
+
+[ 3, 3 ]
+
+
+s = "thefoobar";
+
+[ 3, 3 ]
+
+seen:  Map(2) { 'foo' => 1, 'bar' => 1 }
+seen:  Map(2) { 'foo' => 1, 'bar' => 1 }
+[ 3, 3 ]
+
+
+
+s = "barfoothefoobarman";
+
+words = ["foo", "bar"];
+
+
+for (let offset = 0; offset <= s.length - permutationLength; offset++)
+
+Ile przebiegów to daje dla s.length = 18, permutationLength = 6?
+
+18 - 6 = 12 
+12 + 1 = 13
+
+
+Teraz wypisz, jakie indeksy odwiedza pętla wewnętrzna przy offset = 0 (skacze co 3).
+
+0,3,6,9,12,15
+
+A jakie przy offset = 3? A przy offset = 6?
+
+offset = 3
+
+3,6,9,12,15
+
+offset = 6
+
+6,9,12,15
+
+
+
+s = "barfoothefoobarman";
+
+offset = 3
+
+foo, the <-- śmieć
+
+wiec przy offsecie 3 left ustawiamy na za śmieciem czyli na 9
+
+foo, bar i zapisujemy do result 9
+
+później dla offsetu 9
+
+ponownie napotakmy foo, bar left to offset 9 zatem znowu dodajemy 9 do result
+
+zamiast:
+offset <= s.length - permutationLength
+
+to: 
+offset <= words[0].length
+
+jakie teraz indkesy będziemy odwiedzac pętlą wewnętrzną?
+
+offset = 0
+
+0,3,6,9,12,15
+
+nie osiągniemy offsetu 3 a to w trakcie offsetu 3 dochodziło do pierwszej zbieżności
+
+
+s = "barfoofoobarthefoobarman", words = ["bar","foo","the"]
+
+powinno być: [6, 9, 12]
+
+a jest zwracane: [6]
+
+
+jeden przebieg znajduje tylko jedno trafienie
+
+tu wszystkie wyniki powinny być znalezione przy offset = 0
+
+czyli problem jest w break w tym warunku
+if (count === words.length) {
+          result.push(left);
+          break;
+        }
+
+jeśli przy offsecie 0 znajdziemy permutacje to nie znaczy że przy tym offsecie nie można znaleźć ich więcej
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
