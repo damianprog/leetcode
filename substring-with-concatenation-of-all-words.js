@@ -40,7 +40,7 @@ const findSubstring = function (s, words) {
   // return result;
 
   // =====================================================================================
-  // Wersja bardziej optymalna [tu wstawić jej big O]
+  // Wersja bardziej optymalna O(n * L)
 
   const wordsQuantities = new Map();
 
