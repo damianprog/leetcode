@@ -4603,6 +4603,64 @@ if (count === words.length) {
 
 jeśli przy offsecie 0 znajdziemy permutacje to nie znaczy że przy tym offsecie nie można znaleźć ich więcej
 
+n = s.length
+k = words.length
+L = words[0].length
+
+Nowa złożoność:
+
+Ile jest przebiegów pętli zewnętrznej?
+
+L
+
+Ile obrotów robi pętla wewnętrzna w jednym przebiegu?
+
+n / L
+
+Ile kosztuje s.slice(...)?
+
+O(L), czyli liniowo względem długości wycinka. Trzeba przepisać L znaków.
+
+L * (n/L * L)
+
+n = 12
+L = 3
+
+n/L * L = (12 / 3) * 3 = 4 * 3 = 12
+
+n = 12 Zgadza się
+
+(n / L) * L po skróceniu daje n
+
+n * L
+
+Wypisz wszystkie wartości, jakie left może kolejno przyjąć: 0, 3, ...
+
+0,3,6,9
+
+Kiedy musi przestać? (Podpowiedź: s ma 12 znaków)
+
+9
+
+Ile zatem maksymalnie razy w całym przebiegu może się wykonać left += 3?
+
+4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

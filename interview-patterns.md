@@ -1581,4 +1581,151 @@ Fix: separator albo `[a,b,c].sort((x,y)=>x-y).join(",")` -> injektywny z definic
 - Two Sum (LC 1) — hashmap, tablica nieposortowana, zwraca indeksy.
 - Two Sum II – Input Array Is Sorted (LC 167) — czysty two-pointers, baza dla 3Sum.
 - 3Sum Closest (LC 16) — ten sam szkielet, minimalizujesz `|sum - target|`.
-- 4Sum (LC 18) — dwie zewnętrzne pętle + two-pointers; krok w stronę kSum./
+- 4Sum (LC 18) — dwie zewnętrzne pętle + two-pointers; krok w stronę kSum.
+
+## 7. Sliding window na multizbiorze (LeetCode 30 — Substring with Concatenation of All Words)
+
+> Rozwiązane 29–31.08.2026, tryb sokratejski. Wersja naiwna → wersja zoptymalizowana, obie przeszły; zoptymalizowana przefuzzowana 20 000 losowych przypadków przeciwko brute force, zero rozbieżności.
+
+**Kiedy się pojawia:** LeetCode 30, 76 (Minimum Window Substring), 438 (Find All Anagrams), 567 (Permutation in String), 3 (Longest Substring Without Repeating Characters). Cała rodzina „znajdź okno spełniające warunek na wielozbiorze".
+
+### 7.1 Rozpoznanie problemu
+
+Sygnał, po którym poznajesz ten wzorzec: **szukasz podciągu, którego zawartość ma pasować do wielozbioru wzorcowego, a kolejność nie ma znaczenia.**
+
+Trzy obserwacje otwierające to zadanie:
+
+1. **Wszystkie słowa mają tę samą długość `L`** → długość okna jest stała i wynosi `k·L`. To jest klucz do wszystkiego.
+2. **Słowa mogą się powtarzać** → `Set` nie wystarczy, potrzebny `Map<string, number>` (multizbiór).
+3. **Generowanie permutacji to ślepa uliczka** — `k!` permutacji, przy `k` do 5000 martwe. Nie liczba wykładnicza, tylko **silnia**.
+
+### 7.2 Dlaczego `includes()` jest złym narzędziem
+
+`fragment.includes(word)` pozwala słowu zacząć się w dowolnym miejscu fragmentu, a potrzebny jest podział na równe kawałki **od granicy do granicy**. Kontrprzykład: `words = ["ab","ba"]`, `fragment = "abab"` — oba `includes` dają `true`, ale podział to `"ab"+"ab"`, nie permutacja.
+
+Wniosek: fragment długości `k·L` ma **dokładnie jeden** dopuszczalny podział na kawałki. Operacja to `slice`, nie `includes`.
+
+### 7.3 Wersja naiwna (poprawna, `O(n·k·L)`)
+
+- mapa liczników zbudowana raz z `words`
+- pętla po indeksach startowych, krok **1**
+- `new Map(wzorcowa)` jako kopia robocza na każde okno
+- pętla wewnętrzna po `k` kawałkach, `break` przy pierwszym niepasującym
+- traf = pętla wewnętrzna doszła do końca **bez** `break` (nie trzeba skanować mapy na końcu!)
+
+Jedno miejsce warte zapamiętania: `if (map.get(chunk))` załatwia oba przypadki odrzucenia naraz — `undefined` (nie ma takiego słowa) i `0` (wyczerpany limit) są jednakowo falsy.
+
+### 7.4 Wersja zoptymalizowana — dwa pomysły
+
+**Pomysł A: `L` niezależnych przebiegów zamiast jednego.**
+
+Krok `L` zamiast 1, ale wtedy jeden przebieg widzi tylko jedną „siatkę" podziału. Siatek jest `L` (offsety `0 … L-1`). Łączna liczba odwiedzonych startów jest **ta sama** co przy kroku 1 — zysk nie bierze się stąd.
+
+**Pomysł B: nie budować stanu od zera dla każdego okna.**
+
+Dwa sąsiednie okna w tej samej siatce mają `k-1` wspólnych kawałków. Zamiast kopiować mapę (`O(k)`) i sprawdzać wszystko od nowa — trzymaj **jeden stan** i koryguj go przyrostowo. To jest właściwy zysk.
+
+**Stan:** `left` (początek okna), `seen` (ile czego jest **w oknie**), `count` (ile kawałków w oknie). Mapa wzorcowa nietknięta, służy tylko do odpytywania o limit.
+
+**Trzy przypadki przy wczytaniu kawałka z pozycji `right`:**
+
+| przypadek          | warunek                           | reakcja                                                                                       |
+| ------------------ | --------------------------------- | --------------------------------------------------------------------------------------------- |
+| **A — śmieć**      | kawałka nie ma w mapie wzorcowej  | żadne okno zawierające go nie przeżyje → `left = right + L`, `seen` wyczyszczone, `count = 0` |
+| **B — mieści się** | `seen[chunk] < wzorcowa[chunk]`   | `seen[chunk]++`, `count++`                                                                    |
+| **C — nadmiar**    | `seen[chunk] === wzorcowa[chunk]` | **nie** reset! wypychaj kawałki z lewej dopóki nadmiar nie zniknie, potem dodaj jak w B       |
+
+**Traf:** `count === k` → zapisz `left`, po czym wypchnij najbardziej lewy kawałek i przesuń `left` o `L` (okno przesuwa się dalej, nie zeruje).
+
+**Dlaczego C nie jest resetem** — kontrprzykład, który to rozstrzyga:
+
+```
+words = ["a","b","c","d"],  s = "abcad"
+```
+
+Przy `right = 3` (`chunk = "a"`) okno to `[a,b,c]`. Wystarczy wyrzucić samo `a` z pozycji 0 — `b` i `c` **zostają** i okazują się potrzebne do trafienia na indeksie 1. Odcięcie wszystkiego zgubiłoby wynik.
+
+**Dlaczego `while`, a nie skok na raz** — powtórka może leżeć głęboko w oknie, a każdy wypychany kawałek trzeba **odwiedzić**, żeby zdjąć jego licznik. `while` _jest_ tym skokiem, tylko z księgowością.
+
+### 7.5 Dwa niezmienniki — najlepsze narzędzie diagnostyczne w tym zadaniu
+
+Oba bugi w wersji zoptymalizowanej zostały znalezione przez asercję niezmiennika, nie przez drukowanie stanu.
+
+```js
+// 1. count opisuje geometrię okna (oba końce włącznie!)
+const expected = (right - left) / L + 1;
+if (count !== expected)
+  console.log("INVARIANT BROKEN", {
+    right,
+    left,
+    count,
+    expected,
+    chunk,
+    seen,
+  });
+
+// 2. seen opisuje zawartość tego samego okna
+const seenSum = [...seen.values()].reduce((a, b) => a + b, 0);
+if (seenSum !== count)
+  console.log("SEEN SUM BROKEN", { right, left, count, seenSum, chunk, seen });
+```
+
+**Reguła ogólna:** przy bugach w algorytmach ze stanem nie drukuj wszystkiego — **asertuj regułę, która ma zawsze zachodzić**. To wskazuje _pierwszy_ moment rozjazdu, a nie dziesiąty objaw. Wartość **ujemna** w mapie liczników to zawsze sygnał: „dekrementujesz coś, czego nie zainkrementowałeś".
+
+### 7.6 Anty-wzorce, w które wpadłem
+
+- **Pętla po offsetach z zakresem `offset <= n - k·L`** zamiast `offset < L`. Przebieg z offsetu 3 chodzi po **podzbiorze** siatki przebiegu z offsetu 0 → te same trafienia zgłaszane po kilka razy. Wynik `[0,9,9,9]` zamiast `[0,9]`. Siatek jest `L`, nie `n`.
+- **`break` po trafieniu** → jeden przebieg zgłaszał najwyżej jedno trafienie. Po trafie okno ma się **przesunąć** (wypchnąć lewy kawałek), nie zakończyć.
+- **Po pętli `while` w przypadku C nie dodano bieżącego kawałka do okna.** Kawałek został wczytany i przepadł. Niezmiennik 1 to złapał: `left = 6, right = 6, count = 0` przy `expected = 1`.
+- **Poprawka połowiczna: dodano `count++`, ale nie `seen[chunk]++`.** Testy nadal przechodziły, bo warunek trafu opiera się o `count` — a `seen` po cichu się rozjeżdżało do wartości ujemnych i wpuszczało do okna słowa ponad limit. Demaskator: `s = "abaac", words = ["a","b","c"]` → oczekiwane `[]`.
+- **Źródło dwóch ostatnich bugów: duplikacja.** Gałąź B i gałąź C kończą się tym samym (dołożenie kawałka do okna), napisanym dwa razy — i jedna kopia wyszła niekompletna. Kształt bez duplikacji: `while` robiący miejsce **przed** bezwarunkowym dodaniem, jedna gałąź zamiast dwóch. Patrz sekcja 3: duplikacja niezmiennika jest droga.
+- **Definicja niezmiennika myląca „między" z „włącznie".** `left = 0, right = 3, count = 2` — oba końce się liczą. Przy `left === right` okno ma **jeden** kawałek, nie zero.
+
+### 7.7 Złożoność — porównanie i zdanie na rozmowę
+
+| wersja         | złożoność      | worst case przy `n = 10⁴` |
+| -------------- | -------------- | ------------------------- |
+| naiwna         | `O(n · k · L)` | ~5·10⁷                    |
+| sliding window | `O(n · L)`     | ~2·10⁴                    |
+
+Zniknęło `k` — liczba słów przestała mieć znaczenie.
+
+**Wyprowadzenie `O(n·L)`:** `L` przebiegów × (`n/L` kawałków × `O(L)` na kawałek). `(n/L)·L = n`, czyli jeden przebieg dotyka każdego znaku raz → `L · n`.
+
+**Obrona przed „to nie jest kwadratowe?" (analiza zamortyzowana):**
+
+> „Wygląda na pętlę w pętli, ale `left` nigdy się nie cofa i w jednym przebiegu przechodzi przez co najwyżej `n/L` pozycji — tyle samo co `right`. Każdy kawałek może wejść do okna raz i wyjść raz. Więc `while` dokłada koszt liniowy, nie mnoży."
+
+**Koszt `s.slice(start, start+L)`:** `O(L)`. V8 potrafi zrobić _SlicedString_ (referencja + offset, `O(1)`), ale użycie wyniku jako **klucza Mapy** wymaga zhashowania, czyli przejścia po `L` znakach. Tak czy inaczej `O(L)`.
+
+---
+
+## 8. Analiza złożoności — lekcje warsztatowe
+
+> Wyodrębnione z pracy nad LeetCode 30 (29–31.08.2026). To są potknięcia, które wracają w **każdym** zadaniu, nie tylko w tym.
+
+**1. Liczby to nie złożoność.** Policzenie „~100 operacji dla tego wejścia" to sanity check, nie odpowiedź. Złożoność jest **funkcją rozmiaru wejścia** — każdą liczbę trzeba zamienić na wyrażenie w `n`, `k`, `L`. Nadanie nazw `n`, `k`, `L` trzem liczbom, które wyszły w rachunku, to przemianowanie wyników, nie analiza.
+
+**2. Fencepost error.** Warunek `i <= n - m` daje `n - m + 1` iteracji, nie `n - m`. Ciąg `0, 1, …, M` ma `M + 1` elementów. Płot o długości 10 m ze słupkami co metr ma 11 słupków. Wraca dosłownie wszędzie i wraca też po dniu przerwy.
+
+**3. Struktura przed liczbami.** Zapisz najpierw kształt:
+
+```
+(iteracje zewnętrznej) · ( (koszt stały na obrót) + (iteracje wewnętrznej) )
+```
+
+Reguła: co jest **zagnieżdżone**, to mnożysz; co jest **obok**, to dodajesz. Dopiero potem wstawiasz wyrażenia. Ten sam zapis służy potem do uproszczenia pod `O()`.
+
+**4. Upraszczanie pod `O()`.** Znikają: stałe składniki (`n - m + 1` → `n`), stałe mnożniki (`L + 1 ≤ 2L` → `L`), składniki zdominowane (`k + k·L` → `k·L`). Sprawdzian dla `L+1` vs `L`: dla `L=1` to 2×, dla `L=100` to 1,01× — zawsze w granicach stałej.
+
+**5. Parametry bywają sprzężone — nie podstawiaj wszystkich constraints na maksa.** Przy `n = 10⁴, k = 5000, L = 2` wychodzi `n - k·L + 1 = 1`: okno wypełnia cały string, jest **jedno** położenie. Maksymalne wartości naraz dały zadanie trywialne, a nie najgorszy przypadek.
+
+**6. Kształt `(n - m + 1) · m` to parabola.** Gdy koszt ma postać „ile pozycji × ile pracy na pozycję", a czynniki są sprzężone przez stałą sumę, maksimum wypada **po środku** (`m = n/2`), nie na krańcach. Dla `n = 10⁴` szczyt to ~5·10⁷ — stąd naiwne rozwiązanie przeszło mimo pesymistycznego `O(n·k·L)`.
+
+**7. `O(n²)` jako odpowiedź bywa prawdziwe, ale słabe.** Jest poprawnym górnym ograniczeniem (bo `k·L ≤ n`), ale traci informację i nie podpowiada, co optymalizować. Lepiej: „`O(n·k·L)`, przy czym `k·L ≤ n`, więc realnie zachowuje się jak `n²/4`".
+
+**8. Analiza zamortyzowana.** Pętla w pętli ≠ mnożenie kosztów. Jeśli wskaźnik wewnętrzny **nigdy się nie cofa** i ma ograniczony zasięg, to suma jego ruchów przez cały przebieg jest liniowa, choć pojedyncze wykonanie może być drogie. To standardowe pytanie kontrolne rekrutera przy każdym sliding window i two-pointers.
+
+**9. Precyzja słowa.** „Liczba permutacji rośnie" zamiast „liczba operacji rośnie" — rekruter usłyszy, że mylisz pojęcia. Warto pilnować nawet w luźnym myśleniu na głos.
+
+**Test pamięci (do zrobienia 02.09.2026):** napisz LeetCode 30 od zera, wersję sliding window, bez podglądania. Sprawdź na czterech kształtach: `"barfoothefoobarman"/["foo","bar"]` → `[0,9]`; `"barfoofoobarthefoobarman"/["bar","foo","the"]` → `[6,9,12]` (wiele trafień w jednym przebiegu); `"foofoobar"/["foo","bar"]` → `[3]` (przypadek C); `"abaac"/["a","b","c"]` → `[]` (rozjazd `seen`). Osobno: wypowiedz na głos wyprowadzenie `O(n·L)` wraz z argumentem zamortyzowanym.

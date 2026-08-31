@@ -51,6 +51,9 @@ const findSubstring = function (s, words) {
 
   const result = [];
 
+  // Two invariants: count which is the number of chunks in window
+  // sum of values in seen === count
+
   for (let offset = 0; offset < words[0].length; offset++) {
     let left = offset;
     let seen = new Map();
