@@ -4646,6 +4646,81 @@ Ile zatem maksymalnie razy w całym przebiegu może się wykonać left += 3?
 
 4
 
+Learning Complexity analisis 
+
+Ile jest liczb całkowitych od 0 do 9 włącznie?
+
+10
+
+Ile od 3 do 7 włącznie?
+
+5
+
+Ile od 0 do M włącznie?
+
+M + 1
+
+Ile od a do b włącznie?
+
+b - a + 1
+
+Ile elementów ma 0, 2, 4, 6, 8, 10?
+
+6
+
+Ile elementów ma ciąg 0, 2, 4, …, X (krok 2, X parzyste)? A ile 0, k, 2k, … aż do wartości < n?
+
+dajmy na to X = 6
+
+0,2,4,6
+
+czyli X / 2 + 1
+
+Drugie pytanie to to samo, tylko krok nazywa się k zamiast 2, a koniec jest dany warunkiem „mniejsze niż n", a nie ostatnim elementem.
+
+Konkretnie, k = 3, n = 10 — wypisz wszystkie wielokrotności trójki zaczynając od zera, dopóki są mniejsze od 10:
+
+0,3,6,9
+
+jest ich 4
+
+k = 3, n = 12
+
+0,3,6,9
+
+jest ich 4
+
+k = 5, n = 10
+
+0,5
+
+jest ich 2
+
+
+
+
+dla n = 5
+
+0,1,2,3,4,5
+
+ostatnia to n
+
+5 - 0 + 1 = 6
+
+n - 0 + 1 = n + 1
+
+bo wykonujemy pętle włącznie dla i = n a nie tylko dla i < n
+
+
+A3
+
+n = 5
+
+1,2,3,4
+
+ostatnia = n - 1
+
+(n - 1) - 1 + 1 = n - 1
 
 
 
@@ -4653,20 +4728,81 @@ Ile zatem maksymalnie razy w całym przebiegu może się wykonać left += 3?
 
 
 
+A4
+
+n = 10, m = 3
+
+n - m = 7
+
+więc dopóki i <= 7
+
+0,1,2,3,4,5,6,7
+
+ostatnia to n - m
+
+(n - m) - 0 + 1 = n - m + 1
 
 
 
 
 
 
+A5
+
+n = 10, k = 3
+
+0,3,6,9 i po 9 jest 12 więc juz nie wykonujemy
+
+Math.ceil(10 / 3) = 4
+
+n = 12, k = 3
+
+0,3,6,9, i dla 12 juz nie wykonujemy
+
+Math.ceil(12 / 3) = 4. ceil nic nie robi
 
 
 
 
+B1
 
+n * m
 
+B2
 
+n + m
 
+B3
+
+n * k
+
+B4
+
+n = 4
+i = 0
+
+0,1,2,3 to 4 obroty
+
+n = 4
+i = 1
+
+1,2,3 to 3 obroty
+
+n = 4
+i = 2
+
+2,3 to 2 obroty
+
+n = 4
+i = 3
+
+3 to 1 obrót
+
+4 + 3 + 2 + 1 = 10
+
+są 2 pary:
+4 + 1 = 5
+3 + 2 = 5
 
 
 
