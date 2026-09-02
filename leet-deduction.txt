@@ -4805,6 +4805,59 @@ są 2 pary:
 3 + 2 = 5
 
 
+1. n + 1
+2. n - (n/2)
+
+n - (n/2)
+
+n - n / 2 
+
+n minus połowa n to (1/2)n
+
+(n kwadrat + n) / 2
+
+n = 4
+
+(16 + 4) / 2 = 20 / 2 = 10
+
+question:
+zagnieżdżone niezależne	n · m
+
+wewnętrzna o stałej długości n · k
+
+czym się różnią?
+
+Jako liczba obrotów — niczym, oba to iloczyn. Różnica pojawia się dopiero w O() i dotyczy tego, czym jest drugi czynnik.
+
+m w B1 to rozmiar wejścia (np. druga tablica). Rośnie razem z danymi. Zostaje w O(n·m).
+k w B3 to stała ustalona w kodzie — 3, 16, długość alfabetu. Nie zależy od tego, jak duże dane wrzucisz. Pod O() znika: O(n·k) = O(n).
+
+Kryterium jest jedno: czy ta wielkość może urosnąć, gdy dostaniesz większe wejście? Jeśli tak — jest parametrem i zostaje. Jeśli nie — jest stałą i wypada.
+
+question
+(n² + n) / 2
+
+przypomnij mi jak ten wzor został wyprowadzony
+
+
+(n² + n) / 2
+
+n = 100
+
+(10 000 + 100) / 2 = 10 100 / 2 = 5050
+
+n = 200
+
+(40 000 + 200) / 2 = 40 200 / 2 = 20 100
+
+Czyli dla dwa razy większego wejścia, prawie czterokrotnie więcej obrotów
+
+(n/2) · (n+1) = (n² + n) / 2
+
+
+
+
+
 
 
 
