@@ -4854,6 +4854,146 @@ Czyli dla dwa razy większego wejścia, prawie czterokrotnie więcej obrotów
 
 (n/2) · (n+1) = (n² + n) / 2
 
+skonczone na handoff w chat complexity analysis fundamentals
+
+
+n = 100, n = 100
+n + 100 = 200
+2x większe
+
+n = 1 000
+n + 100 = 1 100
+1.1x większe
+
+n = 1 000 000 
+n + 100 = 1 000 100
+1.0001x większe
+
+W raz ze wzrostem n, wartości w kolumnie 3 maleją.
+
+Wartości w kolumnie 3 zmierzają do 1.00 ale nigdy go nie osiągną. +100 po prostu ma co raz mniejsze znaczenie dla wartości n.
+
+jak mam uprościć n + 5?
+
+
+n - m + 1
+
+n = 1000
+
+m = 3
+1000 - 3 + 1 = 998
+
+m = n /2
+m = 500
+1000 - 500 + 1 = 501
+
+m = 1000
+1000 - 1000 + 1 = 1
+
+Przy n = 1000 i dowolnym m ≥ 0 — jaka jest największa wartość, jaką n - m + 1 może przyjąć?
+m = 0
+1001
+czyli worst case to O(n)
+
+n^2 + 1000
+O(n^2)
+Przy dużych n, 1000 ma co raz mniejsze znaczenie. 1000 to jest stała i nie rośnie wraz z inputem.
+
+n = 1 000
+
+n * m + n^2
+m = 2
+
+n * m = 1000 * 2 = 2000
+n^2 = 1000 * 1000 = 1 000 000
+n * m + n^2 = 2 000 + 1 000 000 = 1 002 000
+
+W tym przypadku n^2 jest większy od n*m
+
+m = n^2
+m = 1 000 000
+n * m = 1 000 000 
+n * m = 1 000 000 000
+
+W tym przypadku n^2 jest mniejszy od m * n.
+
+Więc myślę że n * m + n^2 nie powinno być uproszczone do O(n^2)
+
+Trafnie — i to jest sedno R3: składnik skreślasz tylko wtedy, gdy wiesz, że drugi go dominuje. Przy dwóch niezależnych parametrach nie wiesz, więc zostaje O(n·m + n²).
+
+Jedno dopowiedzenie na później: w prawdziwym zadaniu constraints często wiążą parametry. Jeśli z treści wynika m ≤ n, to n·m ≤ n² i wtedy wolno uprościć do O(n²). Bez takiego założenia — nie wolno.
+
+
+R2 - Stałe mnożniki
+
+n
+n = 100
+n = 200
+
+n urosło 2x.
+
+3n
+n = 100
+3n = 3 * 100 = 300
+
+3n
+n = 200
+3n = 3 * 200 = 600
+
+n urosło 2x.
+
+n / 2
+n = 100
+n / 2 = 100 / 2 = 50
+
+n / 2
+n = 200
+n / 2 = 100
+
+n urosło 2x.
+
+Wniosek: Przy stałym mnożniku dwa razy większe n daje dwa razy większy wynik.
+
+Dokładnie tak — i to jest R2 sformułowane: stały mnożnik nie zmienia tempa wzrostu, tylko przeskalowuje cały wykres. Podwojenie n daje 2× więcej pracy zarówno przy n, jak i przy 3n, jak i przy n/2. Więc mnożnik skreślasz:
+
+3n   → O(n)
+n/2  → O(n)
+
+
+5n = skreślam stały mnożnik więc O(n)
+
+n/4 = O(n)
+
+2n^2 = O(n^2)
+
+n * L + n * L = 2·n·L = O(n·L)
+
+100 = O(1) zawsze 100 niezależnie od wejscia
+
+R3 - Składniki zdominowane
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
