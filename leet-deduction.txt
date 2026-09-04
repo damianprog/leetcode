@@ -4989,6 +4989,69 @@ R3 - Składniki zdominowane
 
 
 
+Valid Sudoku
+
+Chodzi o sprawdzenie czy plansza jak do tej pory jest wypełniona poprawnie
+
+Także inputem jest array zawierające arrays czyli 2d array
+w wewnętrznych arrays znajdują się dane w postaci stringów o length === 1
+string z number oznacza że w danym polu jest ten number
+string z kropką oznacza że to pole nie jest wypełnione
+
+zasady sudoku:
+w jednej lini nie może być powtórek, 
+tj. w jednej lini mogą się znaleźć liczby od 1 do 9. 
+Linia ma 9 pól. Zatem liczby w jednej lini nie mogą się powtarzać
+
+array z linią poziomą wygląda np. tak:
+["5","3",".",".","7",".",".",".","."]
+
+więc z wyjątkiem kropek, chcemy mieć w tym arrayu same unikaty
+nie będzie innych inputów niż 1-9 i kropki
+
+linie pionowe trzeba będzie odpowiednio skonstruować
+
+czyli może zewnętrzna pętla od 0 do 8 włącznie
+
+0 by oznaczało że sprawdzamy pionową linię w kolumnie 0
+
+for i 0 to 8
+	for j 0 to 8
+		czyli sprawdzamy indeks i = 0 w każdym z 8 arrays
+
+następny obrót zewnętznej pętli czyli teraz sprawdzamy index 1
+chodzi nam o same unikaty a kropki pomijamy
+więc można do tego wykorzystać set
+
+teraz zostaje sprawdzenie unikalności w kwadratach 3x3
+
+pętla zewnętrzna od i 0 do 2 jako informacja o paddingu?
+
+najpierw padding = 0 x 3 = 0
+
+czyli zaczynamy od indeksu padding + 0 
+
+może wewnętrzna pętla licząca padding na drugiej osi?
+
+zewnętrzna pętla powie nam od którego indeksu zacząć sprawdzanie
+czyli i od 0 do 2 mnożone razy 3 będzie oznaczało indeks od którego sprawdzamy
+wewnętrzna pętla iterująca się od 0 do 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
