@@ -5037,26 +5037,61 @@ zewnętrzna pętla powie nam od którego indeksu zacząć sprawdzanie
 czyli i od 0 do 2 mnożone razy 3 będzie oznaczało indeks od którego sprawdzamy
 wewnętrzna pętla iterująca się od 0 do 2
 
+0 * 3 = 0
+1 * 3 = 3
+2 * 3 = 6
 
 
 
+Ransom Note
+
+Mamy dwa stringi ransomNote oraz magazine i celem jest sprawdzenie
+czy ransomNote może być złożony poprzez użycie liter z magazine
+
+map i w niej klucze to litery
+
+wystarczy złożyć mape z magazine
+następnie iterować się po literach ransomNote
+sprawdzac czy są w mapie z magazine, w ogóle jest obecnie iterowana litera
+jeśli nie ma to zwracamy false a jeśli jest to sprawdzamy czy value pod nią jest większe od 0, jeśli jest 0 to zwracamy false a jeśli jest więcej niz 0 to dekrementujemy
 
 
 
+Isomorphic Strings
+
+mając dwa stringi s oraz t musimy sprawdzić czy są "isomorphic"
+
+wszystkie wystąpienia danej litery muszą być zamienione na inną literę
+zachowując kolejność
+
+dwie litery nie mogą mapować do tej samej litery
 
 
+s = "egg" 
+t = "add"
+
+e podmieniamy na a
+g podmieniamy na d
+g już zostało podmienione na d
+
+s = "egf"
+t = "add"
+
+e podmieniamy na a
+g podmieniamy na d
+f podmieniamy na... nie ma już pozostałych możliwości zmapowania
+nie możemy podmienić f na d bo d już jest zmapowane na g
 
 
+s = "paper"
+t = "title"
 
-
-
-
-
-
-
-
-
-
+p podmieniamy na t
+a podmieniamy na i
+p potrzebujemy podmienić p na t, p już zostało podmienione na t
+sprawdzamy za każdym razem czy dana litera już jest zmapowana na inną literę
+jeśli już jest zmapowana to sprawdzamy na jaką litere jest zmapowana
+i jeśli jest zmapowana na tę literę na którą chcielibyśmy ją zmapować to jest git
 
 
 
