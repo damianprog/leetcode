@@ -5093,6 +5093,90 @@ sprawdzamy za każdym razem czy dana litera już jest zmapowana na inną literę
 jeśli już jest zmapowana to sprawdzamy na jaką litere jest zmapowana
 i jeśli jest zmapowana na tę literę na którą chcielibyśmy ją zmapować to jest git
 
+s = "paper"
+t = "title"
+
+p mappedTo t
+a mappedTo i
+p already mappedTo t
+
+
+
+
+
+
+Valid Sudoku Refactor
+
+potrzebujemy trzech setów rows, cols i boxes
+
+bo jeśli do jakiegoś row, col czy box będziemy chcieli dodać element który juz w nim jest to zwracamy false
+
+
+każda liczba powinna znajdowac się w 3 setach na raz 
+bo znajduje się w jakimś row, jakiejś kolumnie i jakimś boksie
+
+for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      rows.add(board[i][j]);
+    }
+  }
+
+w ten sposob dodamy wszystkie liczby do jednego set row
+potrzebujemy osobnego setu dla każdego row
+
+
+for (let i = 0; i < 9; i++) {
+    rowsSets.push(new Set());
+    colsSets.push(new Set());
+    for (let j = 0; j < 9; j++) {
+      if (board[i][j] !== ".") {
+        if (rowsSets[i].has(board[i][j])) {
+          return false;
+        }
+        rowsSets[i].add(board[i][j]);
+      }
+
+      if (board[j][i] !== ".") {
+        if (colsSets[i].has(board[j][i])) {
+          return false;
+        }
+        colsSets[i].add(board[j][i]);
+      }
+    }
+  }
+
+
+Chodzi o to że kiedy odwiedzamy element board[i][j] to chcemy go dodać do odpowiedniego setu rows, cols i boxes 
+a w powyższym kodzie podobnie jak w pierwszym rozwiązaniu odwiedzamy każdą komórkę 3 razy.
+
+Łącznie potrzebujemy: 
+9 setów dla tablicy rowsSets
+9 setów dla tablicy colsSets
+9 setów dla tablicy boxesSets
+
+Teraz musimy dowiedzieć się (obliczyć) do którego boksu ma trafić dana cell
+
+board[0][0] ma trafić do boksu o indeksie 0
+board[0][1] ma trafić do boksu o indeksie 0
+board[0][3] ma trafić do boksu o indkesie 1
+board[0][6] ma trafić do boksu o indkesie 2
+
+board[1][0] ma trafic do boksu o indeksie 0
+
+board[2][0] ma trafić do boksu o indeksie 0
+
+board[3][0] ma trafić do boksu o indeksie 3
+
+
+
+
+
+
+
+
+
+
+
 
 
 
