@@ -1729,3 +1729,34 @@ Reguła: co jest **zagnieżdżone**, to mnożysz; co jest **obok**, to dodajesz.
 **9. Precyzja słowa.** „Liczba permutacji rośnie" zamiast „liczba operacji rośnie" — rekruter usłyszy, że mylisz pojęcia. Warto pilnować nawet w luźnym myśleniu na głos.
 
 **Test pamięci (do zrobienia 02.09.2026):** napisz LeetCode 30 od zera, wersję sliding window, bez podglądania. Sprawdź na czterech kształtach: `"barfoothefoobarman"/["foo","bar"]` → `[0,9]`; `"barfoofoobarthefoobarman"/["bar","foo","the"]` → `[6,9,12]` (wiele trafień w jednym przebiegu); `"foofoobar"/["foo","bar"]` → `[3]` (przypadek C); `"abaac"/["a","b","c"]` → `[]` (rozjazd `seen`). Osobno: wypowiedz na głos wyprowadzenie `O(n·L)` wraz z argumentem zamortyzowanym.
+
+## Valid Sudoku — walidacja wielu ograniczeń w jednym przebiegu
+
+**Pattern:** hashset per constraint. Gdy element musi spełniać kilka niezależnych
+ograniczeń unikalności, nie rób osobnego przebiegu na każde — trzymaj tablicę
+struktur (po jednej na ograniczenie) i aktualizuj wszystkie podczas jednej wizyty.
+
+**Klucz — mapowanie 2D → indeks pudełka:**
+
+```js
+const box = Math.floor(i / 3) * 3 + Math.floor(j / 3);
+```
+
+`Math.floor(i / 3)` zwija 0–8 do 0–2 (pas), `* 3 + kolumna` to standardowe
+spłaszczenie 2D→1D (`row * width + col`). Ten sam wzór wraca przy każdej
+siatce reprezentowanej płasko.
+
+**Pułapka:** `new Array(9).fill(new Set())` tworzy dziewięć referencji do
+JEDNEGO Setu. Poprawnie: `Array.from({ length: 9 }, () => new Set())`.
+
+**Styl:**
+
+- `if (warunek) continue;` zamiast owijania całego ciała pętli w `if`
+- `else` po `return` jest zawsze zbędne
+- powtarzające się bloki has/add → jeden `if (a.has(x) || b.has(x) || c.has(x)) return false;`
+
+**Złożoność:** O(1) — plansza ma stały rozmiar. Jeśli uogólnić do n×n: O(n²)
+czasu i pamięci. Warto to powiedzieć na głos, zamiast mówić "O(1)" bez komentarza.
+
+**Wariant zaawansowany:** maska bitowa zamiast Setów (`rows[i] & (1 << d)`) —
+brak alokacji, szybsze, mniej czytelne. Wspomnieć, nie implementować.
