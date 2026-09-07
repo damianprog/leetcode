@@ -66,25 +66,47 @@ const isValidSudoku = function (board) {
 
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
+      // const cell = board[i][j];
+      // if (cell !== ".") {
+      //   if (rowsSets[i].has(cell)) {
+      //     return false;
+      //   }
+      //   rowsSets[i].add(cell);
+
+      //   if (colsSets[j].has(cell)) {
+      //     return false;
+      //   }
+      //   colsSets[j].add(cell);
+
+      //   const boxIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3);
+
+      //   if (boxesSets[boxIndex].has(cell)) {
+      //     return false;
+      //   }
+      //   boxesSets[boxIndex].add(cell);
+      // }
+
+      // jeśli cell to kropka to continue
+      // liczymy który box dla cell
+      // 3 warunki które zwracają false w jednym if
+      // 3 razy dodanie do odpowiednich setów
+
       const cell = board[i][j];
-      if (cell !== ".") {
-        if (rowsSets[i].has(cell)) {
-          return false;
-        }
-        rowsSets[i].add(cell);
+      if (cell === ".") continue;
 
-        if (colsSets[j].has(cell)) {
-          return false;
-        }
-        colsSets[j].add(cell);
+      const boxIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3);
 
-        const boxIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3);
-
-        if (boxesSets[boxIndex].has(cell)) {
-          return false;
-        }
-        boxesSets[boxIndex].add(cell);
+      if (
+        rowsSets[i].has(cell) ||
+        colsSets[j].has(cell) ||
+        boxesSets[boxIndex].has(cell)
+      ) {
+        return false;
       }
+
+      rowsSets[i].add(cell);
+      colsSets[j].add(cell);
+      boxesSets[boxIndex].add(cell);
     }
   }
 
