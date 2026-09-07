@@ -5168,6 +5168,110 @@ board[2][0] ma trafić do boksu o indeksie 0
 board[3][0] ma trafić do boksu o indeksie 3
 
 
+jak sprawdzić do którego boxu należy dana cell = board[i][j]
+
+może jakoś z wykorzystaniem modulo?
+
+obliczanie i sumowanie?
+
+dajmy na to board[0][6]
+
+i % 3 = 0
+j % 3 = 2
+
+0 + 2 = 2 Prawidłowo
+
+board[1][0]
+
+i % 3 = 1
+j % 3 = 0
+
+1 + 0 = 1 Nie tego oczekiwaliśmy
+
+to może nie modulo ale mnożenie i floor?
+
+board[1][0]
+
+floor(i / 3) = 0
+floor(j / 3) = 0
+
+0 + 0 = 0 Prawidłowo
+
+
+A może wynik który otrzymamy z dodania tych dzieleń powinniśmy pomnożyć razy 3?
+
+board[3][0]
+
+floor(i / 3) = 1
+floor(0 / 0) = undefined czyli powiedzmy 0
+
+1 + 0 = 1
+1 * 3 = 3 to by się zgadzało
+
+board[0][6] ma trafić do boksu o indkesie 2
+
+floor(i / 3) = 0
+floor(j / 3) = 6 / 3 = 2
+
+0 + 2 = 2
+2 * 3 = 6 czyli nie
+
+
+
+
+
+
+board[4][4]
+
+floor(4 / 3) = 1 i floor(4 / 3) = 1
+
+jeżeli stoimy w boksie 1,1 to wiemy że rząd nad nami są 3 boxy 
+i w rzędzie przed nami jest 1 box
+3 + 1 = 4 Prawidłowo, jest to box o indkesie 4
+
+to może floor(j / 3) razy 3 czyli 1 * 3
+plus floor(i / 3) bez mnożenia razy 3 czyli 1
+
+i to by dało łącznie 3 + 1 = 4 czyli prawidłowo
+
+
+
+
+
+
+
+board[0][6]
+
+i * 3 = 0
+j / 3 = 2
+
+0 + 2 = 2 Prawidłowo
+
+
+Math.floor(i / 3) = 0
+
+inaczej, najpierw floor(i / 3) * 3 + floor(j / 3)
+
+board[4][4]
+czyli box 4
+
+floor(4 / 3) * 3 = 1 * 3 = 3 czyli wiemy ile boksów jest nad nami
+a teraz ile boksów jest w rzędzie przed nami 
+floor(4 / 3) = 1  razem 3 + 1 = 4
+
+board[0][6]
+floor(0 / 3) = 0 * 3 = 0
+floor(6 / 3) = 2  0 + 2 = 2
+
+czyli mnożenie pasa i dodanie kolumny
+
+
+
+
+
+
+
+
 
 
 
