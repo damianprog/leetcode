@@ -5269,20 +5269,111 @@ czyli mnożenie pasa i dodanie kolumny
 
 
 
+Minimum Window Substring
+
+Mając dwa stringi s oraz t o długościach kolejno m oraz n
+Należy zwrócić Minimum Window Substring, 
+czyli substring z s w którym każdy char w t włączając w to duplikaty
+jest zawarty w window
+
+czyli po prostu substring z s w którym są wszystkie litery które są w t
+
+
+s = "ADOBECODEBANC", t = "ABC"
+"BANC"
+
+litery w substringu mogą być w dowolnej kolejności, byle były wszystkie które są w t
+
+s = "a", t = "a"
+"a"
+
+
+s = "a", t = "aa"
+""
+
+potrzebujemy znaleźć taki substring w s który posiada 2 razy "a" 
+a takiego nie ma
 
 
 
 
+s = "ADOBECODEBANC", t = "ABC"
+
+potrzebujemy znaleźć substring o długości conajmniej t
+a maksymalnej długości takiej że są w tym substring wszystkie litery z t
+czyli jeśli znajdziemy substring w którym są wszystkie litery z t
+i niepotrzebnie powiększymy ten substring o 1 element więcej to popełnimy błąd
+
+w t jest jedno "a" ale w substringu mogą być np 2x "a" JEŚLI TO KONIECZNE
+a "konieczne" oznacza że nie ma innego substringa ze wszystkimi literami z t
+który byłby krótszy od tego z 2x "a"
+
+załóżmy że iterujemy się od początku stringa s do końca
+po drodze sklecając substringa
+
+Mapa z ilościami wystąpień danych liter w t, zapewne będzie przydatna
+bo substring może być valid tylko wtedy jeśli każda litera z t się w nim znajduje
+
+więc counter odhaczający spotkane litery w s, które są w t
+
+chodziło by o to aby wszystkie values z mapy roboczej miały wartośc 0
+bo to by oznaczało że w danym substringu wystąpiły wszystkie litery jakie są w t
+
+ale zamiast sprawdzać czy wszystkie values w mapie roboczej są 0
+lepiej jest zrobić counter, który będzie inkrementowany przy każdym odhaczeniu
+
+nie inkrementować contera za każdym razem kiedy w substringu wystąpi litera która jest w s, bo mając dajmy na to
+s = "AAADOBECODEBANC", t = "ABC"
+to przy substringu "AAA" counter juz by mial t.length - 1
 
 
+s = "XXXXXXXXXXXXXXXADOBECODEBANC", t = "ABC" 
+ 
+to że w substringu wystąpi jakaś litera której nie ma w t, może być akceptowalne
 
+ale czy ma sens uznawać za początek substringu, literę której nie ma w t?
+Nie miało by to sensu
+ 
+ 
+s = "ADOBECODEBANC", t = "ABC"
+ 
+pierwszym potencjalnym kandydatem na minimum window substring jest
+"ADOBEC" bo są w nim wszystkie litery z t
 
-
-
-
-
-
-
+pytanie gdzie się zaczyna kolejny potencjalny kandydat?
+ 
+nie ma sensu żeby sprawdzać kolejny ciąg od D bo D nie ma w t
+litera której nie ma w t może być w substringu 
+ale nie może jej być na początku substringa
+ 
+nie ma sensu też uznawać substringa który przekracza length poprzednio znalezionego substringa
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
 
 
