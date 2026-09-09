@@ -5338,7 +5338,7 @@ Nie miało by to sensu
 s = "ADOBECODEBANC", t = "ABC"
  
 pierwszym potencjalnym kandydatem na minimum window substring jest
-"ADOBEC" bo są w nim wszystkie litery z t
+"ADOBEC" bo są w nim wszystkie litery z t jego length to 6
 
 pytanie gdzie się zaczyna kolejny potencjalny kandydat?
  
@@ -5348,22 +5348,37 @@ ale nie może jej być na początku substringa
  
 nie ma sensu też uznawać substringa który przekracza length poprzednio znalezionego substringa
  
+kolejny potencjalny kandydat musi się zaczynać od B czyli s[3]
+
  
+zaczynając od s[3] skleciliśmy BECOD czy ma sens pozwalać aby ten substring osiągnął length 6 valid kandydata?
+
+wiemy że w s jeżeli jest result to jest on unikalny
+czyli jeżeli min substring to 6 to nie znajdziemy kolejnego substringa o length 6
+
+ale ogólnie będzie możliwym znalezienie dwóch valid kandydatów o tej samej długości ale jeśli tak by się stało to zgodnie z zasadą unikalności, żaden z nich nie może być result
+
+więc czy ma sens aby substring osiągnął długość poprzedniego valid kandydata?
+nie miało by to żadnego sensu
+
+więc jeśli skleciliśmy BECOD w ktorym nie ma wszystkich liter z t
+to możemy szukać kolejnego potencjalnego kandydata o długości "BECOD".length - 1
  
+zatem kolejny potencjalny kandydat zaczyna się od s[5]
  
+właściwie to chyba nie potrzebujemy mapy, wystarczy Set
+bo tCharsCounter powie nam czy... 
  
+s = "AAADOBECODEBANC", t = "ABC"
+
+ale to może nie tCharsCounter tylko tUniqueCharsCounter
+z setem do ktorego będziemy wrzucać to co jest w oryginalnym secie
+
+ale to czy potrzebujemy tUniqueCharsCounter czy wystarczy nam ten drugi set do ktorego będziemy wrzucać napotkane unikaty i sugerować się jego length
  
+chcemy pozwalać na doklecenie kolejnego char do currentSubstring tylko wtedy kiedy set roboczy z unikatami z substringa ma size mniejszy od oryginalnego setu unikatow
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+teraz pora na przestawiene lewego wskaźnika po ustawieniu result lub po przekroczeniu limitu długości
  
  
  
