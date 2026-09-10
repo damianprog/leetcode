@@ -5380,15 +5380,85 @@ chcemy pozwalać na doklecenie kolejnego char do currentSubstring tylko wtedy ki
  
 teraz pora na przestawiene lewego wskaźnika po ustawieniu result lub po przekroczeniu limitu długości
  
+pamiętajmy że
+s = "a", t = "aa"
+
+Nie ma rozwiązania 
  
+
+substringUniqueCharsFromT.size < tUniqueChars.size &&
+
+jeśli nie spełni się powyższy warunek 
+i chcemy taki scenariusz rozważyć w else
+to w tym else skorzystamy z warunku
+
+substringUniqueCharsFromT.size === tUniqueChars.size
+
+więc
+
+co jeśli będziemy mieć 
+s = "ba" t = "baa" 
  
+
+w takim razie przy substringu "ba" 
+uznamy ten substring za result a to będzie błąd
  
- 
- 
- 
- 
- 
- 
+a co jeśli zostawimy te warunki i skorzystamy do tego z tCharsCounter
+
+wtedy sety posłużą nam do sprawdzenia czy w substingu są wszystkie litery z t
+
+więc czy jeśli będziemy mieć roboczy set równy oryginalnemu setowi
+i za razem tCharsCounter będzie długości t
+to czy to na pewno będzie valid result?
+
+na pewno mieli byśmy wtedy:
+w substringu wszystkie unikalne litery jakie są w t
+
+
+s = "aabc", t = "abbc"
+
+są wszystkie unikalne z t w s?
+tak
+oraz długość substringa czyli tutaj całego s jest równa długości tCharsCounter
+
+a rozwiązania nie ma
+
+czyli jednak potrzebna jest mapa
+
+tCharsCounter może zostać jako wskaźnik czy mamy już komplet porzebnych chars w substringu. Ale musi on być dekrementowany w odpowiednim miejscu
+czyli jeśli się uda zdekrementować value w mapie
+
+s = "ADOBECODEBANC", t = "ABC"
+
+result = "ADOBEC"
+
+do pierwszego ifa wchodzimy tylko wtedy kiedy nie mamy wszystkich liter z t w s
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
