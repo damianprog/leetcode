@@ -5432,33 +5432,102 @@ s = "ADOBECODEBANC", t = "ABC"
 
 result = "ADOBEC"
 
-do pierwszego ifa wchodzimy tylko wtedy kiedy nie mamy wszystkich liter z t w s
+do pierwszego ifa wchodzimy tylko wtedy 
+kiedy nie mamy wszystkich liter z t w oknie
+
+czyli do else wchodzimy kiedy mamy wszystkie litery z t w oknie
+czy musimy mieć wszystkie litery z t w oknie aby wejść do else?
+
+jeśli mieli byśmy wejść do else z powodu tego warunku:
+(result.length === 0 || currentSubstring.length < result.length - 1)
+
+to result musiałby być większy od zera
+a currentSubstring musiałby byc równy długości result - 1
+
+więc "czy musimy mieć wszystkie litery z t w oknie aby wejść do else?"
+
+nie musimy mieć, wystarczy że currentSubstring osiągnie długość result - 1
+
+
+teraz przestawić left wskaźnik czyli lewą krawędź okną w strone prawej
+
+s = "ADOBECODEBANC", t = "ABC"
+
+result = "ADOBEC"
+
+od lewej wywalamy conajmniej jedną literę niezależnie od tego czy ona należy do t natomiast następne wywalane litery muszą nie należeć do t 
+
+zatem wywalamy pierwszą a następne tylko jeśli te nie należą do t
+więc kolejne okno zaczęło by się od substringa "BEC"
+
+przerwać pętle jeśli s[left] należy do keys tCharsQuantities 
+
+w currentSubstring skipujemy przedostatnią litere ale nie w pierwszym currentSubstring w else
+
+currentSubstring:  ADOBEC
+currentSubstring:  BECDE
+currentSubstring:  CODEA
+
+pierwszy spoko
+w drugim brakuje O do 
+w trzecim brakuje B
+Nie chyba nie przedostatnią
+
+s = "ADOBECODEBANC", t = "ABC"
+
+pierwszy powinien być ADOBEC a jest
+currentSubstring:  ADOBEC
+
+drugi powinien być BECOD a jest
+currentSubstring:  BECDE 
+
+czyli skipnięte "O", dlaczego?
+
+robimy currentSubstring += s[i]; tylko jeśli pierwszy if jest spełniony
+
+nie chodzi o to że zatrzymujemy się za wcześnie tylko że pomijamy
+
+
+jeżeli nie dodajemy O przy currentSubstring += s[i];
+to znaczy że albo:
+tCharsCounter === t.length
+
+albo 
+result.length !== 0 i za razem currentSubstring.length === result.length - 1
+
+pierwszy substring dla ktorego wchodzimy do else to ADOBEC
+zauważmy że O które później gubimy jest następną literą po ADOBEC w s
+
+kiedy jesteśmy pierwszy raz na O to nie pozwalamy na konkatenacje?
+
+sprawdźmy na czym stoi i kiedy wchodzimy pierwszy raz do else?
+
+stoi na O więc pomijamy jego konkatenacje wchodząc do else
+
+currentSubstring = s.slice(left, i);
+
+zmienić na currentSubstring = s.slice(left, i + 1);
+
+s = "ADOBECODEBANC"
+
+currentSubstring:  ADOBEC
+currentSubstring:  BECOD
+currentSubstring:  CODEB
+ADOBEC
+
+
+jaki currentSubstring w else powinien być po CODEB?
+
+powinien być ten który jest oczekiwanym poprawnym wynikiem czyli BANC
+
+pod koniec else dla CODEB currentSubstring powinien być "B"
+
+a co jeśli byśmy zawsze konkatenowali?
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+const s = "BANC";
+const t = "ABC";
 
 
 
