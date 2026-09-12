@@ -5662,16 +5662,22 @@ if (tCharsQuantities.has(s[left])) {
 
 czyli jeśli dana litera jest w nadmiarze to nie ruszamy 
 ani tCharsQuantities ani tCharsCounter
+ale dekrementujemy value w nadmiarowej tablicy
 
+s = "bba", t = "ab"
 
+substring = "bba"
 
+excessive map to będzie 
+b: 1
 
+po if (excessive && excessive !== 0) {
 
+b: 0
 
+inkrementujemy left
 
-
-
-
+s[left] === "b" (środkowe)
 
 
 

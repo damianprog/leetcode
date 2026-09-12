@@ -15,10 +15,19 @@ const minWindow = function (s, t) {
   let tCharsCounter = 0;
   let left = 0;
 
+  let substringExcessiveTChars = new Map();
+
   for (let i = 0; i < s.length; i++) {
     currentSubstring += s[i];
 
     const tCharQty = tCharsQuantities.get(s[i]);
+
+    if (tCharQty === 0) {
+      substringExcessiveTChars.set(
+        s[i],
+        (substringExcessiveTChars.get(s[i]) ?? 0) + 1,
+      );
+    }
 
     if (tCharQty && tCharQty !== 0) {
       tCharsQuantities.set(s[i], tCharQty - 1);
@@ -31,9 +40,14 @@ const minWindow = function (s, t) {
     ) {
       if (tCharsCounter === t.length) {
         result = currentSubstring;
+        console.log("result: ", result);
       }
 
-      if (tCharsQuantities.has(s[left])) {
+      const excessive = substringExcessiveTChars.get(s[left]);
+
+      if (excessive && excessive !== 0) {
+        substringExcessiveTChars.set(s[left], excessive - 1);
+      } else if (tCharsQuantities.has(s[left])) {
         const leftCharTQty = tCharsQuantities.get(s[left]);
         tCharsQuantities.set(s[left], leftCharTQty + 1);
         tCharsCounter--;
@@ -49,8 +63,8 @@ const minWindow = function (s, t) {
 
       if (tCharsCounter === t.length) {
         result = currentSubstring;
-        tCharsCounter--;
-        currentSubstring = "";
+        tCharsCounter = 0; // sure?
+        currentSubstring = ""; // sure?
       }
     }
   }
@@ -65,8 +79,8 @@ const minWindow = function (s, t) {
 // const s = "a";
 // const t = "a";
 
-const s = "bba";
-const t = "ab";
+// const s = "bba";
+// const t = "ab";
 
 // const s = "ab";
 // const t = "b";
@@ -76,5 +90,11 @@ const t = "ab";
 
 // const s = "abc";
 // const t = "b";
+
+// const s = "cabwefgewcwaefgcf";
+// const t = "cae";
+
+const s = "efgewcwae";
+const t = "cae";
 
 console.log(minWindow(s, t));
