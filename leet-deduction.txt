@@ -5679,6 +5679,41 @@ inkrementujemy left
 
 s[left] === "b" (środkowe)
 
+dla 
+const s = "efgewcwae";
+const t = "cae";
+
+wchodzimy do drugiego if (tCharsCounter === t.length) {
+a tam result ustawiamy na efgewcwa
+
+i przez to że robimy 
+tCharsCounter = 0; 
+currentSubstring = ""; 
+
+to kolejny substring zacznie się od ostatniej litery w s
+
+zatem gubimy sprawdzenie cwae
+
+po każdym ustawieniu result powinno dochodzić 
+do wyrzucania lewej krawędzi choćby 1 raz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

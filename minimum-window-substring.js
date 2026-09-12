@@ -40,7 +40,6 @@ const minWindow = function (s, t) {
     ) {
       if (tCharsCounter === t.length) {
         result = currentSubstring;
-        console.log("result: ", result);
       }
 
       const excessive = substringExcessiveTChars.get(s[left]);
@@ -63,8 +62,8 @@ const minWindow = function (s, t) {
 
       if (tCharsCounter === t.length) {
         result = currentSubstring;
-        tCharsCounter = 0; // sure?
-        currentSubstring = ""; // sure?
+        // tCharsCounter = 0;
+        // currentSubstring = "";
       }
     }
   }
@@ -94,7 +93,7 @@ const minWindow = function (s, t) {
 // const s = "cabwefgewcwaefgcf";
 // const t = "cae";
 
-const s = "efgewcwae";
-const t = "cae";
+// const s = "efgewcwae";
+// const t = "cae";
 
 console.log(minWindow(s, t));
