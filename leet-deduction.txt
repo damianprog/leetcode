@@ -5529,6 +5529,126 @@ a co jeśli byśmy zawsze konkatenowali?
 const s = "BANC";
 const t = "ABC";
 
+sprawdzić czy faktycznie w którymś momencie wykorzystujemy mape 
+
+wszystkie wystąpienia map
+
+const tCharsQuantities = new Map();
+
+tutaj jedynie budujemy mape
+tCharsQuantities.set(char, (tCharsQuantities.get(char) ?? 0) + 1);
+
+tutaj sprawdzamy tylko czy jakiś element s jest jako key w mapie
+nawet jeśli jego value to 0
+więc równie dobrze można było by wykorzystać set
+const tCharQty = tCharsQuantities.get(s[i]);
+
+if (tCharQty) {
+  tCharsQuantities.set(s[i], tCharQty - 1);
+  tCharsCounter++;
+}
+
+nigdzie nie budujemy roboczej mapy
+
+tutaj znowu sprawdzamy czy dany element z s po prostu jest mapie
+const leftCharTQty = tCharsQuantities.get(s[left]);
+      if (leftCharTQty || leftCharTQty === 0) {
+        tCharsQuantities.set(s[left], leftCharTQty + 1);
+        tCharsCounter--;
+      }
+
+i tutaj znowu tylko sprawdzamy czy dany element jest jako key w mapie
+while (left < i && !tCharsQuantities.has(s[left])) {
+        left++;
+      }
+
+więc jak to możliwe że przechodzi test
+s = "aabc", t = "abbc ?
+result = "" czyli słusznie
+
+
+TO jest miejsce gdzie faktycznie wykorzystujemy mape
+bo jeśli dany element jest key w mapie
+to jeśli jego value wynosi 0 to nie inkrementujemy tCharsCounter
+if (tCharQty) {
+      tCharsQuantities.set(s[i], tCharQty - 1);
+      tCharsCounter++;
+    }
+
+dlatego kod stwierdza ze w aabc nie ma wszystkich liter z abbc
+
+teraz
+
+s = "abc"
+t = "b"
+result powinien być "b" a jest "bc"
+
+pierwszym substringiem w którym są wszystkie litery z t jest "ab"
+
+kiedy wychodzimy z tego ifa
+if (
+      tCharsCounter === t.length ||
+      (result.length > 0 && currentSubstring.length === result.length - 1)
+    )
+
+currentSubstring jest "b" i zamiast sprawdzić go czy jest kandydatem to w następnym obrocie pętli konkatenujemy do niego kolejne s[i]
+
+czy dało by się konkatenacje umieścić po tym warunku?
+
+żeby uwzględnić rozpatrzenie ostatniego elementu należało by zmienić < na <=
+w głównej pętli
+
+ale wtedy przy konkatenacji ostatni s[i] był by undefined
+
+umieszczenie konkatenacji po warunku nie rozwiąże problemu
+bo chodzi o to aby sprawdzić ponownie warunek po tym warunku
+ponieważ w tym warunku dochodzi do modyfikacji currentSubstring
+i może być tak że po tej modyfikacji otrzymujemy kandydata
+
+
+s = "bba", t = "ab"
+result = "bba" a powinno być result = "ba"
+
+nie powinno być takiej możliwości żeby tCharsCounter mógł przekroczyc t.length
+
+if (tCharsQuantities.has(s[left])) {
+        const leftCharTQty = tCharsQuantities.get(s[left]);
+        tCharsQuantities.set(s[left], leftCharTQty + 1);
+        tCharsCounter--;
+      }
+
+============================================================================
+Wątpliwe:
+tu jest błąd bo żeby dekrementować tCharsCounter nie wystarczy sprawdzic tylko czy w mapie jest key
+trzeba jeszcze sprawdzić czy jej value !== 0
+============================================================================
+
+s = "bba", t = "ab"
+
+po ustawieniu result na "bba"
+
+wykonuje się ten warunek:
+if (tCharsQuantities.has(s[left])) {
+        const leftCharTQty = tCharsQuantities.get(s[left]);
+        tCharsQuantities.set(s[left], leftCharTQty + 1);
+        tCharsCounter--;
+      }
+
+tCharsCounter = 2
+
+i "b" jest elementem t więc po odcięciu pierwszego "b" dekrementujemy tCharsCounter. Teraz tCharsCounter ma kłamliwą wartość bo pokazuje 1 kiedy jesteśmy w substringu 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

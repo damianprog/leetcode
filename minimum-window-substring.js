@@ -15,12 +15,12 @@ const minWindow = function (s, t) {
   let tCharsCounter = 0;
   let left = 0;
 
-  for (let i = 0; i < s.length; i++) {
+  for (let i = 0; i <= s.length; i++) {
     currentSubstring += s[i];
 
     const tCharQty = tCharsQuantities.get(s[i]);
 
-    if (tCharQty) {
+    if (tCharQty && tCharQty !== 0) {
       tCharsQuantities.set(s[i], tCharQty - 1);
       tCharsCounter++;
     }
@@ -33,8 +33,8 @@ const minWindow = function (s, t) {
         result = currentSubstring;
       }
 
-      const leftCharTQty = tCharsQuantities.get(s[left]);
-      if (leftCharTQty || leftCharTQty === 0) {
+      if (tCharsQuantities.has(s[left])) {
+        const leftCharTQty = tCharsQuantities.get(s[left]);
         tCharsQuantities.set(s[left], leftCharTQty + 1);
         tCharsCounter--;
       }
@@ -46,6 +46,12 @@ const minWindow = function (s, t) {
       }
 
       currentSubstring = s.slice(left, i + 1);
+
+      if (tCharsCounter === t.length) {
+        result = currentSubstring;
+        tCharsCounter--;
+        currentSubstring = "";
+      }
     }
   }
 
@@ -59,8 +65,8 @@ const minWindow = function (s, t) {
 // const s = "a";
 // const t = "a";
 
-// const s = "a";
-// const t = "aa";
+const s = "a";
+const t = "aa";
 
 // const s = "ab";
 // const t = "b";
@@ -68,7 +74,7 @@ const minWindow = function (s, t) {
 // const s = "aabc";
 // const t = "abbc";
 
-const s = "abc";
-const t = "b";
+// const s = "abc";
+// const t = "b";
 
 console.log(minWindow(s, t));
