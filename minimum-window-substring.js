@@ -15,7 +15,7 @@ const minWindow = function (s, t) {
   let tCharsCounter = 0;
   let left = 0;
 
-  for (let i = 0; i <= s.length; i++) {
+  for (let i = 0; i < s.length; i++) {
     currentSubstring += s[i];
 
     const tCharQty = tCharsQuantities.get(s[i]);
@@ -65,8 +65,8 @@ const minWindow = function (s, t) {
 // const s = "a";
 // const t = "a";
 
-const s = "a";
-const t = "aa";
+const s = "bba";
+const t = "ab";
 
 // const s = "ab";
 // const t = "b";

@@ -5623,8 +5623,10 @@ tu jest błąd bo żeby dekrementować tCharsCounter nie wystarczy sprawdzic tyl
 trzeba jeszcze sprawdzić czy jej value !== 0
 ============================================================================
 
-s = "bba", t = "ab"
+question:
+czy warunek jest teraz dobry? for (let i = 0; i < s.length; i++) 
 
+s = "bba", t = "ab"
 po ustawieniu result na "bba"
 
 wykonuje się ten warunek:
@@ -5636,19 +5638,30 @@ if (tCharsQuantities.has(s[left])) {
 
 tCharsCounter = 2
 
-i "b" jest elementem t więc po odcięciu pierwszego "b" dekrementujemy tCharsCounter. Teraz tCharsCounter ma kłamliwą wartość bo pokazuje 1 kiedy jesteśmy w substringu 
+i "b" jest elementem t więc po odcięciu pierwszego "b" dekrementujemy tCharsCounter. Teraz tCharsCounter ma kłamliwą wartość bo pokazuje 1 kiedy jesteśmy w substringu (po inkrementacji left) "ba" 
+czyli ten substring ma wszystkie litery z t czyli dwie a tCharsCounter mówi 1
 
+to co jeśli mielibyśmy licznik liter z t który uwzględniałby powtórki?
 
+jeśli tym licznikiem miałby być tCharsCounter 
+i nadal byśmy go używali jako warunek wejścia do ifa tCharsCounter === t.length
+to przy substringu "aabc" oraz t = "abbc" wchodzili byśmy do tego warunku 
 
+przez to że w substringu mamy nadmiar liter z t czyli wszystkie litery z t 
+a nawet jeszcze więcej liter z t (powtórki)
+po wyrzuceniu z substringa litery która występuje w t
+nadal mamy w substringu wszystkie litery które występują w t
 
+może mapa nadmiarowych liter? 
 
+if (tCharsQuantities.has(s[left])) {
+	const leftCharTQty = tCharsQuantities.get(s[left]);
+	tCharsQuantities.set(s[left], leftCharTQty + 1);
+	tCharsCounter--;
+  }
 
-
-
-
-
-
-
+czyli jeśli dana litera jest w nadmiarze to nie ruszamy 
+ani tCharsQuantities ani tCharsCounter
 
 
 
