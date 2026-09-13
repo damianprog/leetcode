@@ -5697,6 +5697,48 @@ zatem gubimy sprawdzenie cwae
 po każdym ustawieniu result powinno dochodzić 
 do wyrzucania lewej krawędzi choćby 1 raz
 
+if (tCharsCounter === t.length) {
+        result = currentSubstring;
+        // tCharsCounter = 0;
+        // currentSubstring = "";
+      }
+
+const s = "abc"
+const t = "b"
+
+result jest bc a powinno być b
+
+pierwszym result jest "ab" a kolejnym jest "bc"
+
+
+jeśli result jest ustawiany na b to dlaczego w ogóle pozwalamy na rozpatrzenie kandydatury "bc" które jest dłuższe niż result?
+
+currentSubstring musi być krótszy od obecnego result aby stał się nowym result
+
+jeśli currentSubstring osiągnie długość result to chcemy zaniechać ten currentSubstring poprzez ustawienie
+
+
+jeśli currentSubstring nie ma wszystkich tChars ale osiągnął długość result - 1
+to chcemy go przestawić
+
+
+
+jeśli currentSubstring ma wszystkie tChars to chcemy ustawić nowy result
+
+ && currentSubstring.length < result.length
+
+co się powinno dziać kiedy ustawimy result na currentSubstring?
+
+currentSubstring powinien być dostosowany
+powinna wylecieć conajmniej jedna litera
+
+
+
+
+
+
+
+
 
 
 

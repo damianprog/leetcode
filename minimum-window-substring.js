@@ -38,7 +38,10 @@ const minWindow = function (s, t) {
       tCharsCounter === t.length ||
       (result.length > 0 && currentSubstring.length === result.length - 1)
     ) {
-      if (tCharsCounter === t.length) {
+      if (
+        tCharsCounter === t.length &&
+        (result.length === 0 || currentSubstring.length < result.length)
+      ) {
         result = currentSubstring;
       }
 
@@ -60,10 +63,11 @@ const minWindow = function (s, t) {
 
       currentSubstring = s.slice(left, i + 1);
 
-      if (tCharsCounter === t.length) {
+      if (
+        tCharsCounter === t.length &&
+        (result.length === 0 || currentSubstring.length < result.length)
+      ) {
         result = currentSubstring;
-        // tCharsCounter = 0;
-        // currentSubstring = "";
       }
     }
   }
@@ -95,5 +99,9 @@ const minWindow = function (s, t) {
 
 // const s = "efgewcwae";
 // const t = "cae";
+
+const s = "aaaaaaaaaaaabbbbbcdd";
+const t = "abcdd";
+//expected: "abbbbbcdd"
 
 console.log(minWindow(s, t));
