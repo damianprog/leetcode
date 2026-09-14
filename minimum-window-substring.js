@@ -15,23 +15,15 @@ const minWindow = function (s, t) {
   let tCharsCounter = 0;
   let left = 0;
 
-  let substringExcessiveTChars = new Map();
-
   for (let i = 0; i < s.length; i++) {
     currentSubstring += s[i];
 
-    const tCharQty = tCharsQuantities.get(s[i]);
-
-    if (tCharQty === 0) {
-      substringExcessiveTChars.set(
-        s[i],
-        (substringExcessiveTChars.get(s[i]) ?? 0) + 1,
-      );
-    }
-
-    if (tCharQty && tCharQty !== 0) {
+    if (tCharsQuantities.has(s[i])) {
+      const tCharQty = tCharsQuantities.get(s[i]);
       tCharsQuantities.set(s[i], tCharQty - 1);
-      tCharsCounter++;
+      if (tCharQty - 1 >= 0) {
+        tCharsCounter++;
+      }
     }
 
     if (
@@ -45,14 +37,12 @@ const minWindow = function (s, t) {
         result = currentSubstring;
       }
 
-      const excessive = substringExcessiveTChars.get(s[left]);
-
-      if (excessive && excessive !== 0) {
-        substringExcessiveTChars.set(s[left], excessive - 1);
-      } else if (tCharsQuantities.has(s[left])) {
+      if (tCharsQuantities.has(s[left])) {
         const leftCharTQty = tCharsQuantities.get(s[left]);
         tCharsQuantities.set(s[left], leftCharTQty + 1);
-        tCharsCounter--;
+        if (leftCharTQty + 1 > 0) {
+          tCharsCounter--;
+        }
       }
 
       left++;

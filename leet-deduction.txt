@@ -5733,19 +5733,25 @@ currentSubstring powinien być dostosowany
 powinna wylecieć conajmniej jedna litera
 
 
+wywalić excessive map, korzystać tylko z tCharsQuantities i nadmiar stwierdzać po tym czy value < 0
 
+Valid okno:
+"CODEBA"
 
+Po wyrzuceniu C nadal jest valid
+"ODEBA"
 
+zawsze wywalamy pierwszą od left i kontuyuujemy wywalanie jeśli left wskazuje na litere która nie należy do t, jeśli left wskazuje na litere należącą do t to nie chcemy jej wywalać
 
+s = "aaaaaaaaaaaabbbbbcdd", t = "abcdd"
 
+okno staje się valid kiedy i stoi na ostatnim char w s czyli na drugim d
 
+ustawiamy result na substring którym jest całe s
 
+obecnie kod wyrzuca zawsze 1 litere na którą wskazuje left 
 
-
-
-
-
-
+jeśli litera na którą wskazuje left należy do t 
 
 
 
