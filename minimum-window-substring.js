@@ -30,35 +30,43 @@ const minWindow = function (s, t) {
       tCharsCounter === t.length ||
       (result.length > 0 && currentSubstring.length === result.length - 1)
     ) {
-      if (
-        tCharsCounter === t.length &&
-        (result.length === 0 || currentSubstring.length < result.length)
+      // left++;
+
+      while (
+        left < i &&
+        (tCharsCounter === t.length ||
+          (result.length > 0 && currentSubstring.length === result.length - 1))
       ) {
-        result = currentSubstring;
-      }
-
-      if (tCharsQuantities.has(s[left])) {
-        const leftCharTQty = tCharsQuantities.get(s[left]);
-        tCharsQuantities.set(s[left], leftCharTQty + 1);
-        if (leftCharTQty + 1 > 0) {
-          tCharsCounter--;
+        if (
+          tCharsCounter === t.length &&
+          (result.length === 0 || currentSubstring.length < result.length)
+        ) {
+          currentSubstring = s.slice(left, i + 1);
+          result = currentSubstring;
+          console.log("result: ", result);
         }
-      }
 
-      left++;
+        if (tCharsQuantities.has(s[left])) {
+          const leftCharTQty = tCharsQuantities.get(s[left]);
+          tCharsQuantities.set(s[left], leftCharTQty + 1);
+          if (leftCharTQty + 1 > 0) {
+            tCharsCounter--;
+          }
+        }
 
-      while (left < i && !tCharsQuantities.has(s[left])) {
+        // currentSubstring = s.slice(left, i + 1);
+        // result = currentSubstring;
         left++;
       }
 
-      currentSubstring = s.slice(left, i + 1);
+      // currentSubstring = s.slice(left, i + 1);
 
-      if (
-        tCharsCounter === t.length &&
-        (result.length === 0 || currentSubstring.length < result.length)
-      ) {
-        result = currentSubstring;
-      }
+      // if (
+      //   tCharsCounter === t.length &&
+      //   (result.length === 0 || currentSubstring.length < result.length)
+      // ) {
+      //   result = currentSubstring;
+      // }
     }
   }
 
@@ -90,8 +98,12 @@ const minWindow = function (s, t) {
 // const s = "efgewcwae";
 // const t = "cae";
 
-const s = "aaaaaaaaaaaabbbbbcdd";
+// const s = "aaaaaaaaaaaabbbbbcdd";
+// const t = "abcdd";
+
+const s = "aabbbbbcdd";
 const t = "abcdd";
-//expected: "abbbbbcdd"
+
+// expected: "abbbbbcdd"
 
 console.log(minWindow(s, t));

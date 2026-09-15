@@ -5751,7 +5751,61 @@ ustawiamy result na substring którym jest całe s
 
 obecnie kod wyrzuca zawsze 1 litere na którą wskazuje left 
 
-jeśli litera na którą wskazuje left należy do t 
+i pętla jeśli litera na którą wskazuje left nie nalezy do t
+to inkrementujemy left
+
+czyli wywalamy pierwszą a następnie jeśli jest taka potrzeba 
+wywalamy kolejne jeśli te nie należą do t
+
+więc kiedy mamy 
+s = "aaaaaaaaaaaabbbbbcdd", t = "abcdd"
+
+i substringiem jest cały s
+to wywalamy tylko pierwszą litere "a" z brzegu
+
+i z racji że i jest już na ostatniej literze w s,
+kończymy algorytm
+
+należy wywalać (i aktualizować result?) tak długo jak okno zawiera cały komplet czyli wszystkie litery z t 
+
+!tCharsQuantities.has(s[left])
+
+wywalanie liter które nie należą do t nie psuje poprawności okna
+więc wystarczy tylko poza left < i, dać warunek że pętla ma się wykonywać tak długo jak okno jest valid
+
+
+tylko czy chcemy wyrzucać leftmost litere tylko wtedy kiedy 
+tCharsCounter === t.length ?
+
+
+
+if (
+      tCharsCounter === t.length ||
+      (result.length > 0 && currentSubstring.length === result.length - 1)
+    )
+
+Pamiętajmy że do tego warunku wchodzimy nie tylko wtedy kiedy mamy komplet liter
+ale również kiedy substring osiągnął długość poprzedniego result - 1 i może mieć komplet ale nie musi
+
+s = "aabbbbbcdd", t = "abcdd"
+
+expected "abbbbbcdd"
+
+Skonczone na:
+Dlaczego w obecnym kodzie result nie jest ustawiany na "abbbbbcdd"?
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
