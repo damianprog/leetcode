@@ -10,14 +10,12 @@ const minWindow = function (s, t) {
     tCharsQuantities.set(char, (tCharsQuantities.get(char) ?? 0) + 1);
   }
 
-  let currentSubstring = "";
-  let result = "";
   let tCharsCounter = 0;
   let left = 0;
+  let bestStart = 0;
+  let bestLen = 0;
 
   for (let i = 0; i < s.length; i++) {
-    currentSubstring += s[i];
-
     if (tCharsQuantities.has(s[i])) {
       const tCharQty = tCharsQuantities.get(s[i]);
       tCharsQuantities.set(s[i], tCharQty - 1);
@@ -28,18 +26,19 @@ const minWindow = function (s, t) {
 
     if (
       tCharsCounter === t.length ||
-      (result.length > 0 && currentSubstring.length === result.length - 1)
+      (bestLen > 0 && i - left + 1 === bestLen - 1)
     ) {
       while (
         left <= i &&
         (tCharsCounter === t.length ||
-          (result.length > 0 && currentSubstring.length === result.length - 1))
+          (bestLen > 0 && i - left + 1 === bestLen - 1))
       ) {
         if (
           tCharsCounter === t.length &&
-          (result.length === 0 || currentSubstring.length < result.length)
+          (bestLen === 0 || i - left + 1 < bestLen)
         ) {
-          result = currentSubstring;
+          bestStart = left;
+          bestLen = i - left + 1;
         }
 
         if (tCharsQuantities.has(s[left])) {
@@ -51,12 +50,11 @@ const minWindow = function (s, t) {
         }
 
         left++;
-        currentSubstring = s.slice(left, i + 1);
       }
     }
   }
 
-  return result;
+  return s.slice(bestStart, bestStart + bestLen);
 };
 
 // const s = "ADOBECODEBANC";

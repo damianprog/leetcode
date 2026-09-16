@@ -5803,9 +5803,11 @@ s = "a", t = "a"
 
 expected: "a" a jest ""
 
+rozważyć czy potrzebne jest currentSubstring += s[i]; co obrót zewnętrznej pętli
 
+s = "ADOBECODEBANC", t = "ABC"
 
-
+"BANC"
 
 
 
