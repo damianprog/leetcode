@@ -5794,14 +5794,14 @@ expected "abbbbbcdd"
 Skonczone na:
 Dlaczego w obecnym kodzie result nie jest ustawiany na "abbbbbcdd"?
 
+co powinno się stać po ustawieniu result na:
+aabbbbbcdd
 
+powinniśmy wyrzucić leftmost "a" i jeśli nadal substring ma komplet to powinniśmy go ustawić do result
 
+s = "a", t = "a"
 
-
-
-
-
-
+expected: "a" a jest ""
 
 
 

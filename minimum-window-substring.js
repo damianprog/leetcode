@@ -30,10 +30,8 @@ const minWindow = function (s, t) {
       tCharsCounter === t.length ||
       (result.length > 0 && currentSubstring.length === result.length - 1)
     ) {
-      // left++;
-
       while (
-        left < i &&
+        left <= i &&
         (tCharsCounter === t.length ||
           (result.length > 0 && currentSubstring.length === result.length - 1))
       ) {
@@ -41,9 +39,7 @@ const minWindow = function (s, t) {
           tCharsCounter === t.length &&
           (result.length === 0 || currentSubstring.length < result.length)
         ) {
-          currentSubstring = s.slice(left, i + 1);
           result = currentSubstring;
-          console.log("result: ", result);
         }
 
         if (tCharsQuantities.has(s[left])) {
@@ -54,19 +50,9 @@ const minWindow = function (s, t) {
           }
         }
 
-        // currentSubstring = s.slice(left, i + 1);
-        // result = currentSubstring;
         left++;
+        currentSubstring = s.slice(left, i + 1);
       }
-
-      // currentSubstring = s.slice(left, i + 1);
-
-      // if (
-      //   tCharsCounter === t.length &&
-      //   (result.length === 0 || currentSubstring.length < result.length)
-      // ) {
-      //   result = currentSubstring;
-      // }
     }
   }
 
