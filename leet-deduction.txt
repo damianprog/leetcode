@@ -5850,6 +5850,49 @@ bo pętla sie nie wykona kiedy ten nie będzie spełniony
 
 
 
+Spiral Matrix
+
+chodzi o to aby poruszać się spiralą / ślimakiem i przejść nią wszystkie elementy tego 2D arraya.
+
+Czyli jedziemy pierwszy rząd w prawo następnie schodzimy na maksa w dół
+na sam dół czyli po ostatnich elementach wszystkich arrays
+następnie będąc na samym dole czyli w ostatnim array, jedziemy na maksa w lewo
+następnie jedziemy w górę czyli po pierwszych elementach arrays z wyjątkiem pierwszego elementu w pierwszym arrayu
+Następnie jedziemy w prawo a wyjątkiem ostatniego elementu 
+
+jedziemy najpierw po wszystkich elementach w:
+pierwszym rzędzie
+ostatniej kolumnie 
+w ostatnim rzędzie ale od końca i tu się kończy dojeżdżanie do końca rzędów / kolumn
+kiedy ruszamy od pierwszego elementu ostatniego arraya kolumną w górę
+
+
+sprawdzać czy już dotknęliśmy elementu o danych współrzędnych 
+i w zależności od obecnego kierunku wybrać następny kierunek
+bo jeśli mamy kierunek w prawo to następny kierunek będzie w dół
+jeśli mamy kierunek w dół to następny będzie w lewo
+jeśli mamy kierunek w lewo to następny będzie w górę
+jeśli mamy kierunek w górę to następny będzie w prawo itd.
+
+jeśli w następnym kroku mielibyśmy dotknąć elementu o danych wspolrzędnych to należy zmienić kierunek, może Set do tego wykorzystac 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
