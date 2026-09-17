@@ -5810,6 +5810,48 @@ s = "ADOBECODEBANC", t = "ABC"
 "BANC"
 
 
+czy ten warunek jest potrzebny: 
+i - left + 1 === bestLen - 1
+
+ten warunek był wcześniej tym warunkiem:
+currentSubstring.length === result.length - 1
+
+i chodziło w nim o to że jeśli obecny substring osiągnął już długość poprzedniego result - 1 to niezależnie od tego czy mieliśmy komplet, chcieliśmy przyciąć 
+bo nie było sensu i możliwości aby currentSustring mógł zostać result mając długość taką samą jaką miał poprzedni result
+
+Bez tego warunku:
+
+const s = "ABCZZZZZZZZZZACB";
+const t = "ABC";
+// expected: "ABC"
+
+pierwszy result / bestStart, bestLen ustawiamy na bestStart = 0, bestLen = 3
+
+następnie pozwalamy aby długość potencjalnego stringa spuchła aż do 12
+i to nic bo w ifie wewnatrz ktorego mamy ustawianie result wchodzimy tylko kiedy mamy komplaet i za razem obecna długość substringa jest mniesza od poprzedniej
+czyli ten warunek zostaje w ifie ale może wylecieć z while
+
+while (left <= i && tCharsCounter === t.length) {
+      if (
+        tCharsCounter === t.length &&
+        (bestLen === 0 || i - left + 1 < bestLen)
+      ) {
+
+tCharsCounter === t.length && ten warunek w ifie teraz nie ma sensu
+bo pętla sie nie wykona kiedy ten nie będzie spełniony
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -15,42 +15,30 @@ const minWindow = function (s, t) {
   let bestStart = 0;
   let bestLen = 0;
 
-  for (let i = 0; i < s.length; i++) {
-    if (tCharsQuantities.has(s[i])) {
-      const tCharQty = tCharsQuantities.get(s[i]);
-      tCharsQuantities.set(s[i], tCharQty - 1);
+  for (let right = 0; right < s.length; right++) {
+    const tCharQty = tCharsQuantities.get(s[right]);
+    if (tCharQty !== undefined) {
+      tCharsQuantities.set(s[right], tCharQty - 1);
       if (tCharQty - 1 >= 0) {
         tCharsCounter++;
       }
     }
 
-    if (
-      tCharsCounter === t.length ||
-      (bestLen > 0 && i - left + 1 === bestLen - 1)
-    ) {
-      while (
-        left <= i &&
-        (tCharsCounter === t.length ||
-          (bestLen > 0 && i - left + 1 === bestLen - 1))
-      ) {
-        if (
-          tCharsCounter === t.length &&
-          (bestLen === 0 || i - left + 1 < bestLen)
-        ) {
-          bestStart = left;
-          bestLen = i - left + 1;
-        }
-
-        if (tCharsQuantities.has(s[left])) {
-          const leftCharTQty = tCharsQuantities.get(s[left]);
-          tCharsQuantities.set(s[left], leftCharTQty + 1);
-          if (leftCharTQty + 1 > 0) {
-            tCharsCounter--;
-          }
-        }
-
-        left++;
+    while (left <= right && tCharsCounter === t.length) {
+      if (bestLen === 0 || right - left + 1 < bestLen) {
+        bestStart = left;
+        bestLen = right - left + 1;
       }
+
+      const leftCharTQty = tCharsQuantities.get(s[left]);
+      if (leftCharTQty !== undefined) {
+        tCharsQuantities.set(s[left], leftCharTQty + 1);
+        if (leftCharTQty + 1 > 0) {
+          tCharsCounter--;
+        }
+      }
+
+      left++;
     }
   }
 
