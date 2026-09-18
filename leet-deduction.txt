@@ -5876,11 +5876,24 @@ jeśli mamy kierunek w górę to następny będzie w prawo itd.
 
 jeśli w następnym kroku mielibyśmy dotknąć elementu o danych wspolrzędnych to należy zmienić kierunek, może Set do tego wykorzystac 
 
+jeśli kolejny element jest undefined lub jego wspolrzedne znajdują się w visitedCoords, to wybrać kolejny kieriunek
 
 
+czym jest zmierzanie w danym kierunku?
 
+kierunek right to przemierzanie arraya do przodu
 
+kieruenk down to odwiedzanie elementów 2D arraya 
+odwiedzając element pod danym indeksem w arrays w kolejności rosnącej
 
+kieruenk down to odwiedzanie elementów 2D arraya 
+odwiedzając element pod danym indeksem w arrays w kolejności malejącej
+
+kierunek left to przemierzanie arraya od tyłu 
+
+czy jest kolumna o takim indeksie i czy takie wspolrzedne są w visitedCoords
+
+w currentDirection === DIRECTION.down currentCol będzie służyć jako indeks elementu odwiedzanego w arrays w kolejności rosnącej
 
 
 
