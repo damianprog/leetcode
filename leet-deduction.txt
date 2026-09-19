@@ -5895,9 +5895,19 @@ czy jest kolumna o takim indeksie i czy takie wspolrzedne są w visitedCoords
 
 w currentDirection === DIRECTION.down currentCol będzie służyć jako indeks elementu odwiedzanego w arrays w kolejności rosnącej
 
+if (matrix[currentRow]?.[currentCol] === undefined) {
+        console.log("matrix[currentRow]?.[currentCol] === undefined");
+        console.log("currentRow", currentRow);
+        console.log("currentCol", currentCol);
+      } else {
+        console.log("visitedCoords.has(`${currentRow},${currentCol}`)");
+      }
 
 
+Ten kod jest identyczny w każdej pętli while
 
+visitedCoords.add(`${currentRow},${currentCol}`);
+        result.push(matrix[currentRow][currentCol]);
 
 
 

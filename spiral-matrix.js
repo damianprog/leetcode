@@ -40,12 +40,11 @@ const spiralOrder = function (matrix) {
         result.push(matrix[currentRow][currentCol]);
 
         if (
-          matrix[currentRow][currentCol + 1] !== undefined &&
+          matrix[currentRow]?.[currentCol + 1] !== undefined &&
           !visitedCoords.has(`${currentRow},${currentCol + 1}`)
         ) {
           currentCol++;
         } else {
-          currentDirection = getNextDirection(currentDirection);
           currentRow++;
           break;
         }
@@ -56,19 +55,62 @@ const spiralOrder = function (matrix) {
         result.push(matrix[currentRow][currentCol]);
 
         if (
-          matrix[currentRow + 1][currentCol] !== undefined &&
+          matrix[currentRow + 1]?.[currentCol] !== undefined &&
           !visitedCoords.has(`${currentRow + 1},${currentCol}`)
         ) {
           currentRow++;
         } else {
-          currentDirection = getNextDirection(currentDirection);
           currentCol--;
           break;
         }
       }
     } else if (currentDirection === DIRECTION.left) {
+      while (true) {
+        visitedCoords.add(`${currentRow},${currentCol}`);
+        result.push(matrix[currentRow][currentCol]);
+
+        if (
+          matrix[currentRow]?.[currentCol - 1] !== undefined &&
+          !visitedCoords.has(`${currentRow},${currentCol - 1}`)
+        ) {
+          currentCol--;
+        } else {
+          currentRow--;
+          break;
+        }
+      }
+    } else if (currentDirection === DIRECTION.up) {
+      while (true) {
+        visitedCoords.add(`${currentRow},${currentCol}`);
+        result.push(matrix[currentRow][currentCol]);
+
+        if (
+          matrix[currentRow - 1]?.[currentCol] !== undefined &&
+          !visitedCoords.has(`${currentRow - 1},${currentCol}`)
+        ) {
+          currentRow--;
+        } else {
+          currentCol++;
+          break;
+        }
+      }
     }
 
-    if (matrix[currentRow][currentCol] === undefined) return result;
+    currentDirection = getNextDirection(currentDirection);
+
+    if (
+      matrix[currentRow]?.[currentCol] === undefined ||
+      visitedCoords.has(`${currentRow},${currentCol}`)
+    ) {
+      return result;
+    }
   }
 };
+
+const matrix = [
+  [1, 2, 3, 4],
+  [5, 6, 7, 8],
+  [9, 10, 11, 12],
+];
+
+console.log(spiralOrder(matrix));
