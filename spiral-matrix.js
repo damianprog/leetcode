@@ -33,12 +33,12 @@ const spiralOrder = function (matrix) {
   let currentRow = 0;
   let currentCol = 0;
 
-  while (currentDirection) {
-    if (currentDirection === DIRECTION.right) {
-      while (true) {
-        visitedCoords.add(`${currentRow},${currentCol}`);
-        result.push(matrix[currentRow][currentCol]);
+  while (true) {
+    while (true) {
+      visitedCoords.add(`${currentRow},${currentCol}`);
+      result.push(matrix[currentRow][currentCol]);
 
+      if (currentDirection === DIRECTION.right) {
         if (
           matrix[currentRow]?.[currentCol + 1] !== undefined &&
           !visitedCoords.has(`${currentRow},${currentCol + 1}`)
@@ -48,12 +48,7 @@ const spiralOrder = function (matrix) {
           currentRow++;
           break;
         }
-      }
-    } else if (currentDirection === DIRECTION.down) {
-      while (true) {
-        visitedCoords.add(`${currentRow},${currentCol}`);
-        result.push(matrix[currentRow][currentCol]);
-
+      } else if (currentDirection === DIRECTION.down) {
         if (
           matrix[currentRow + 1]?.[currentCol] !== undefined &&
           !visitedCoords.has(`${currentRow + 1},${currentCol}`)
@@ -63,12 +58,7 @@ const spiralOrder = function (matrix) {
           currentCol--;
           break;
         }
-      }
-    } else if (currentDirection === DIRECTION.left) {
-      while (true) {
-        visitedCoords.add(`${currentRow},${currentCol}`);
-        result.push(matrix[currentRow][currentCol]);
-
+      } else if (currentDirection === DIRECTION.left) {
         if (
           matrix[currentRow]?.[currentCol - 1] !== undefined &&
           !visitedCoords.has(`${currentRow},${currentCol - 1}`)
@@ -78,12 +68,7 @@ const spiralOrder = function (matrix) {
           currentRow--;
           break;
         }
-      }
-    } else if (currentDirection === DIRECTION.up) {
-      while (true) {
-        visitedCoords.add(`${currentRow},${currentCol}`);
-        result.push(matrix[currentRow][currentCol]);
-
+      } else if (currentDirection === DIRECTION.up) {
         if (
           matrix[currentRow - 1]?.[currentCol] !== undefined &&
           !visitedCoords.has(`${currentRow - 1},${currentCol}`)
