@@ -10,19 +10,6 @@ const DIRECTION = {
   up: "up",
 };
 
-const getNextDirection = function (currentDirection) {
-  switch (currentDirection) {
-    case DIRECTION.right:
-      return DIRECTION.down;
-    case DIRECTION.down:
-      return DIRECTION.left;
-    case DIRECTION.left:
-      return DIRECTION.up;
-    case DIRECTION.up:
-      return DIRECTION.right;
-  }
-};
-
 const spiralOrder = function (matrix) {
   const result = [];
 
@@ -40,6 +27,7 @@ const spiralOrder = function (matrix) {
           currentCol++;
         } else {
           currentRow++;
+          currentDirection = DIRECTION.down;
           break;
         }
       } else if (currentDirection === DIRECTION.down) {
@@ -47,6 +35,7 @@ const spiralOrder = function (matrix) {
           currentRow++;
         } else {
           currentCol--;
+          currentDirection = DIRECTION.left;
           break;
         }
       } else if (currentDirection === DIRECTION.left) {
@@ -54,6 +43,7 @@ const spiralOrder = function (matrix) {
           currentCol--;
         } else {
           currentRow--;
+          currentDirection = DIRECTION.up;
           break;
         }
       } else if (currentDirection === DIRECTION.up) {
@@ -61,16 +51,13 @@ const spiralOrder = function (matrix) {
           currentRow--;
         } else {
           currentCol++;
+          currentDirection = DIRECTION.right;
           break;
         }
       }
     }
 
-    const nextDirection = getNextDirection(currentDirection);
-
-    if (nextDirection === DIRECTION.right) currentLap++;
-
-    currentDirection = nextDirection;
+    if (currentDirection === DIRECTION.right) currentLap++;
 
     if (result.length === matrix[0].length * matrix.length) {
       return result;
