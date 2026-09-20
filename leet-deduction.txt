@@ -5909,14 +5909,24 @@ Ten kod jest identyczny w każdej pętli while
 visitedCoords.add(`${currentRow},${currentCol}`);
         result.push(matrix[currentRow][currentCol]);
 
+czy dało by się zrobić jedną pętle while?
+w której były by powyższe dwie linie niezależnie od warunku
+ale dalszy kod w tej pętli musiał by się już znajdować pod warunkiem
 
 
 
 
+w prawo w drugim okrążeniu zatrzymamy się na kolumnie o indeksie o 1 mniejszym niż zatrzymaliśmy się w pierwszym okrążeniu
+
+może liczyć okrążenia?
+w pierwszym okrążeniu odejmujemy od krawędzi czyli matrix[0].length - 1
+to będzie oznaczać krańcowy indeks
 
 
+w jaki sposób możemy obliczyć ile maksymalnie można zrbić okrążeń w danym matrix?
 
-
+nie trzeba liczyć ile jest okrążeń maksymalnie
+wystarczy policzyć ile jest wszystkich elementow łącznie we wszystkich arrays 
 
 
 

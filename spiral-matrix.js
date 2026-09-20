@@ -20,59 +20,44 @@ const getNextDirection = function (currentDirection) {
       return DIRECTION.up;
     case DIRECTION.up:
       return DIRECTION.right;
-    default:
-      return false;
   }
 };
 
 const spiralOrder = function (matrix) {
-  const visitedCoords = new Set();
   const result = [];
 
   let currentDirection = DIRECTION.right;
   let currentRow = 0;
   let currentCol = 0;
+  let currentLap = 0;
 
   while (true) {
     while (true) {
-      visitedCoords.add(`${currentRow},${currentCol}`);
       result.push(matrix[currentRow][currentCol]);
 
       if (currentDirection === DIRECTION.right) {
-        if (
-          matrix[currentRow]?.[currentCol + 1] !== undefined &&
-          !visitedCoords.has(`${currentRow},${currentCol + 1}`)
-        ) {
+        if (currentCol + 1 < matrix[0].length - currentLap) {
           currentCol++;
         } else {
           currentRow++;
           break;
         }
       } else if (currentDirection === DIRECTION.down) {
-        if (
-          matrix[currentRow + 1]?.[currentCol] !== undefined &&
-          !visitedCoords.has(`${currentRow + 1},${currentCol}`)
-        ) {
+        if (currentRow + 1 < matrix.length - currentLap) {
           currentRow++;
         } else {
           currentCol--;
           break;
         }
       } else if (currentDirection === DIRECTION.left) {
-        if (
-          matrix[currentRow]?.[currentCol - 1] !== undefined &&
-          !visitedCoords.has(`${currentRow},${currentCol - 1}`)
-        ) {
+        if (currentCol - 1 >= currentLap) {
           currentCol--;
         } else {
           currentRow--;
           break;
         }
       } else if (currentDirection === DIRECTION.up) {
-        if (
-          matrix[currentRow - 1]?.[currentCol] !== undefined &&
-          !visitedCoords.has(`${currentRow - 1},${currentCol}`)
-        ) {
+        if (currentRow - 1 > currentLap) {
           currentRow--;
         } else {
           currentCol++;
@@ -81,12 +66,13 @@ const spiralOrder = function (matrix) {
       }
     }
 
-    currentDirection = getNextDirection(currentDirection);
+    const nextDirection = getNextDirection(currentDirection);
 
-    if (
-      matrix[currentRow]?.[currentCol] === undefined ||
-      visitedCoords.has(`${currentRow},${currentCol}`)
-    ) {
+    if (nextDirection === DIRECTION.right) currentLap++;
+
+    currentDirection = nextDirection;
+
+    if (result.length === matrix[0].length * matrix.length) {
       return result;
     }
   }
