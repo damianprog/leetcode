@@ -5929,6 +5929,70 @@ nie trzeba liczyć ile jest okrążeń maksymalnie
 wystarczy policzyć ile jest wszystkich elementow łącznie we wszystkich arrays 
 
 
+matrix = [[1,2,3],[4,5,6],[7,8,9]]
+
+Granice:
+
+top = 0
+bottom = 2
+left = 0
+right = 2
+
+po zakończeniu iteracji, przesuwamy granice o 1
+
+[[1, 2, 3]]
+
+top = 0
+bottom = 0
+left = 0
+right = 2
+
+Skonczone na porównywaniu mojego rozwiązania z rozwiązaniem kanonicznym
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
