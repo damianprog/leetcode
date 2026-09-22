@@ -5950,21 +5950,26 @@ right = 2
 Skonczone na porównywaniu mojego rozwiązania z rozwiązaniem kanonicznym
 
 
+Rotate Image
+
+zewnętrzna pętla niech bedzie for bo wiemy ile trzeba wykonać wewnętrznych pętli przeniesień aby uznać zadanie za zakończone
+
+przeniesienia z pierwszego rzędu trafiają do ostatniej kolumny
+
+przeniesienia z ostatniej kolumny trafiają do ostatniego rzędu
+
+przeniesiena z ostatniego rzędu trafiają do pierwszej kolumny
 
 
+dla każdego i wykonamy 4 operacje (obroty pętli j)
 
+jeśli i === 0 to wiemy że mamy do czynienia z rogami
 
+jak przemierzyć wszystkie rogi?
 
+i wskazuje na index elementu w pierwszym rzędzie od którego chcemy zacząć kaskadę przeniesien
 
-
-
-
-
-
-
-
-
-
+wiemy że kaskada przeniesień to zawsze 4 
 
 
 
