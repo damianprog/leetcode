@@ -1760,3 +1760,98 @@ czasu i pamięci. Warto to powiedzieć na głos, zamiast mówić "O(1)" bez kome
 
 **Wariant zaawansowany:** maska bitowa zamiast Setów (`rows[i] & (1 << d)`) —
 brak alokacji, szybsze, mniej czytelne. Wspomnieć, nie implementować.
+
+## 9. Symulacja po macierzy: cztery granice (LeetCode 54, Spiral Matrix)
+
+> Rozwiązane 19–21.09.2026. Trzy wersje: własna z `visited` → własna z `currentLap` → kanoniczna z czterema granicami.
+
+**Kiedy się pojawia:** LC 54, 59 (Spiral Matrix II), 885, 2326, 48 (Rotate Image, te same granice warstw). Każde zadanie typu „przejdź macierz warstwami lub bokami".
+
+### 9.1 Rozwiązanie kanoniczne
+
+```js
+const spiralOrder = (matrix) => {
+  const result = [];
+  let top = 0,
+    bottom = matrix.length - 1;
+  let left = 0,
+    right = matrix[0].length - 1;
+
+  while (top <= bottom && left <= right) {
+    for (let c = left; c <= right; c++) result.push(matrix[top][c]);
+    top++;
+    for (let r = top; r <= bottom; r++) result.push(matrix[r][right]);
+    right--;
+    if (top <= bottom) {
+      for (let c = right; c >= left; c--) result.push(matrix[bottom][c]);
+      bottom--;
+    }
+    if (left <= right) {
+      for (let r = bottom; r >= top; r--) result.push(matrix[r][left]);
+      left++;
+    }
+  }
+  return result;
+};
+```
+
+- Jeden obrót `while` to jedno okrążenie, jeden `for` to jeden bok.
+- **Granica przesuwa się w chwili zużycia swojej linii**, nie po całym okrążeniu.
+- Złożoność: `O(m·n)` czasu, `O(1)` pamięci dodatkowej.
+
+### 9.2 Dwa `if`-y — jedyny nieoczywisty element
+
+**Reguła:** pętla boku sama się zatrzyma tylko wtedy, gdy wyczerpana oś jest jej **własną osią iteracji**.
+
+| Bok   | Iteruje po | Co mogło się wyczerpać             | Chroni go                                 |
+| ----- | ---------- | ---------------------------------- | ----------------------------------------- |
+| górny | kolumnach  | cokolwiek z poprzedniego okrążenia | warunek `while`                           |
+| prawy | wierszach  | wiersze (`top++`)                  | własny zakres `top..bottom` (pusta pętla) |
+| dolny | kolumnach  | **wiersze**                        | `if (top <= bottom)`                      |
+| lewy  | wierszach  | **kolumny**                        | `if (left <= right)`                      |
+
+Demaskatory: `[[1,2,3]]` (bez `if`-ów daje `[1,2,3,2,1]`, bo `top` i `bottom` wskazywały ten sam wiersz, a pętla dolnego boku o wierszach nic nie wie) oraz `[[1],[2],[3]]` (to samo dla kolumn).
+
+### 9.3 Wariant symulacyjny (wektory kierunku)
+
+```js
+const DIRS = [
+  [0, 1],
+  [1, 0],
+  [0, -1],
+  [-1, 0],
+];
+const spiralOrder = (matrix) => {
+  const total = matrix.length * matrix[0].length;
+  const result = [];
+  const steps = [matrix[0].length, matrix.length - 1]; // [poziomo, pionowo]
+  let r = 0,
+    c = -1,
+    d = 0;
+  while (result.length < total) {
+    for (let i = 0; i < steps[d % 2]; i++) {
+      r += DIRS[d][0];
+      c += DIRS[d][1];
+      result.push(matrix[r][c]);
+    }
+    steps[d % 2]--;
+    d = (d + 1) % 4;
+  }
+  return result;
+};
+```
+
+Długości boków maleją na przemian: `n, m-1, n-1, m-2, …`. Cztery gałęzie `if` sprowadzają się do pary liczb w `DIRS` i cyklu `(d + 1) % 4`. Warto go znać jako odpowiedź na pytanie „a da się bez czterech pętli?". Przydaje się też w LC 59.
+
+### 9.4 Anty-wzorce, w które wpadłem
+
+- **`visited` jako `Set` stringów `"r,c"`**: `O(m·n)` pamięci, alokacja i hashowanie na każdą komórkę. Granica drugiego okrążenia to liczba, nie zbiór odwiedzonych.
+- **`matrix[r]?.[c] !== undefined` jako test granicy**: test wartości, nie struktury. Skłamie przy macierzy zawierającej `undefined`. Test indeksu (`c < cols`) nie kłamie nigdy.
+- **Cztery gałęzie różniące się wyłącznie danymi** (kierunek ruchu + krok po skręcie). Wiedza „po right idzie down" była zakodowana w dwóch miejscach naraz. Patrz §3: gdy różnice między gałęziami są danymi, wyciągnij je do tablicy.
+- **Jeden licznik `currentLap` rosnący po pełnym okrążeniu** → w gałęzi `up` potrzebny był ukryty `+1` (`>` zamiast `>=`). Górny wiersz był już zużyty, a licznik jeszcze o tym nie wiedział. Poprawne, ale nie do obrony bez namysłu. Cztery granice przesuwane w chwili zużycia usuwają asymetrię u źródła.
+- **`push` przed walidacją pozycji**: w 1×3 `currentRow` wychodził poza macierz, a ratował mnie tylko warunek stopu w zewnętrznej pętli. Niezmiennik rozciągnięty na dwie pętle i `break`. W wersji kanonicznej każdy `push` jest legalny z konstrukcji `for`.
+- **Jednostka pracy = krok** („czy mogę dalej?" przy każdej komórce) zamiast **boku** („jak długi jest ten bok?"). Mniej decyzji to mniej miejsc na off-by-one.
+
+### 9.5 Zdanie na rozmowę
+
+> „Trzymam cztery granice i przesuwam każdą w chwili, gdy zużyję jej wiersz albo kolumnę. Dwa `if`-y chronią przed podwójnym przejściem, gdy zostaje pojedynczy wiersz lub pojedyncza kolumna, bo pętle dolnego i lewego boku iterują po osi prostopadłej do tej, która mogła się wyczerpać."
