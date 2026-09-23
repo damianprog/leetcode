@@ -16,7 +16,7 @@ var canJump = function (nums) {
   //   return lastZeroIndex === null;
   // =================================================================================
   // Kanoniczna alternatywa
-
+  //
   let maxReach = 0;
   for (let i = 0; i < nums.length; i++) {
     if (i > maxReach) return false; // nie da się tu dojść
