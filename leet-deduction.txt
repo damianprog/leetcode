@@ -5971,7 +5971,7 @@ i wskazuje na index elementu w pierwszym rzędzie od którego chcemy zacząć ka
 
 wiemy że kaskada przeniesień to zawsze 4 
 
-
+placeholdery będą zawsze w górnym rzędzie danego okrążenia
 
 
 
