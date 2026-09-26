@@ -5973,15 +5973,20 @@ wiemy że kaskada przeniesień to zawsze 4
 
 placeholdery będą zawsze w górnym rzędzie danego okrążenia
 
+górny rząd danego okrążenia to laps
 
+[ 	[ 7, 2, 1 ], 
+	[ 4, 5, 6 ], 
+	[ 9, 8, 3 ] 
+]
 
+dla 2 elementow i powinno sie wykonac 1 raz
+dla 3 elementow i powinno sie wykonac 2 razy
+dla 4 elementow i powinno sie wykonac 3 razy
 
+na 1 okrążenie odpadają 2 elementy
 
-
-
-
-
-
+jeśli działa jedno okrążenie to w takim razie zrobić to samo ale dla wewnętrznych okrążeń
 
 
 
