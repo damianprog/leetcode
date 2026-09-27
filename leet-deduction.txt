@@ -6006,6 +6006,37 @@ skonczone na Rotate Image solution review
 
 
 
+Set Matrix Zeroes
+
+jeżeli dany element to 0 
+to zamienić wszystkie elementy w jego row i column na 0
+
+ale co jeśli będziemy mieć 2 zera w roznych miejscach w matrix
+i zamiana wywołana przez pierwsze 0 wywoła utracenie informacji o położeniu tego drugiego zera
+
+najpierw wyszukać wszystkie zera a dopiero potem transformować 
+
+może dwa sety, jeden rowsToTransform i drugi colsToTransform
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
