@@ -1855,3 +1855,58 @@ Długości boków maleją na przemian: `n, m-1, n-1, m-2, …`. Cztery gałęzie
 ### 9.5 Zdanie na rozmowę
 
 > „Trzymam cztery granice i przesuwam każdą w chwili, gdy zużyję jej wiersz albo kolumnę. Dwa `if`-y chronią przed podwójnym przejściem, gdy zostaje pojedynczy wiersz lub pojedyncza kolumna, bo pętle dolnego i lewego boku iterują po osi prostopadłej do tej, która mogła się wyczerpać."
+
+## 9. Obrót macierzy in-place (LeetCode 48 — Rotate Image)
+
+> Rozwiązane 26.09.2026 wersją pierścieniową, potem przepisane i porównane z transpozycją + reverse.
+
+**Kiedy się pojawia:** LeetCode 48, 54 (Spiral Matrix), 59, 73, 1886; każde zadanie „przekształć macierz bez dodatkowej pamięci".
+
+### 9.1 Dwie drogi
+
+|                          | pierścienie     | transpozycja + reverse               |
+| ------------------------ | --------------- | ------------------------------------ |
+| czas / pamięć            | O(n²) / O(1)    | O(n²) / O(1)                         |
+| ruchy na element         | 1               | 2                                    |
+| ryzyko błędu w indeksach | wysokie         | niskie                               |
+| dowód poprawności        | śledzenie cyklu | dwie operacje o oczywistej semantyce |
+
+Na rozmowie: **transpozycja + reverse**. Pierścienie jako odpowiedź na „czy da się mniej ruchów" — różnica stała, asymptotycznie to samo, a niżej niż O(n²) się nie zejdzie, bo każdy element musi się ruszyć.
+
+### 9.2 Transpozycja + reverse
+
+```js
+for (let row = 0; row < size; row++)
+  for (let col = row + 1; col < size; col++)
+    [m[row][col], m[col][row]] = [m[col][row], m[row][col]];
+for (const row of m) row.reverse();
+```
+
+**Dowód** (`last = size - 1`): obrót w prawo to `new[r][c] = old[last - c][r]`. Transpozycja daje `old[c][r]`, odwrócenie wiersza podmienia `c → last - c` → `old[last - c][r]` ✓. Geometrycznie: dwa odbicia względem osi pod kątem 45° = obrót o 90°.
+
+**Pułapka:** `col = row + 1`, nie `col = 0`. Przejście całej macierzy zamienia każdą parę dwa razy — druga zamiana cofa pierwszą, wynik to identyczność.
+
+**`reverse()` mutuje** — spełnia in-place. `toReversed()` (ES2023) zwraca kopię i by nie spełniło.
+
+**Warianty:**
+
+- obrót w lewo → najpierw `reverse()` wierszy, potem transpozycja (kolejność ma znaczenie)
+- obrót o 180° → odwrócić kolejność wierszy i każdy wiersz z osobna
+
+### 9.3 Pierścienie — jak zapisać czytelnie
+
+Granice pierścienia `first = layer`, `last = size - 1 - layer`, offset `i < last - first`. Cztery komórki cyklu:
+
+top [first][first + i]
+right [first + i][last]
+bottom [last][last - i]
+left [last - i][first]
+
+Cykl 4 elementów obraca się jednym przypisaniem (4 zapisy) albo przez `temp`; trzy zamiany przez górną komórkę to 6 zapisów.
+
+### 9.4 Anty-wzorce, w które wpadłem
+
+- **For-switch:** pętla `j < 3` z `if (j === 0) … if (j === 1) …`. Pętla, której każdy obrót robi inną, znaną z góry rzecz, to trzy instrukcje po kolei w przebraniu.
+- **`n` jako ostatni indeks, nie rozmiar.** Każde `n - i - laps` trzeba było rozszyfrowywać. Nazwy `size` / `last` rozdzielają te pojęcia.
+- **Brak nazwanych granic.** Te same wyrażenia na indeksach powtórzone kilkanaście razy zamiast `first` / `last` raz na pierścień.
+- **Mieszanie `matrix.length` i `matrix[0].length`** przy macierzy z definicji kwadratowej — sugeruje czytelnikowi, że mogą się różnić.
