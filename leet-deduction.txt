@@ -6018,31 +6018,57 @@ najpierw wyszukać wszystkie zera a dopiero potem transformować
 
 może dwa sety, jeden rowsToTransform i drugi colsToTransform
 
+obecna wersja jest space O(n + m)
+
+pytanie jak stworzyć wersje ze stałym space?
 
 
+jeżeli iterując sie po wszystkich elementach w matrix
+napotkamy zero, wiemy że ta column i row mają być zerami
+
+może jakoś kaskadowo to zrobić?
+Rekurencyjnie?
+że lecimy po wszystkich elementach i kiedy napotykamy 0
+to uruchamiamy funkcje ktora będzie zamieniać elementy row / column na zera?
+
+taka funkcja by działała rekurencyjnie że jeśli podczas zamiany znalazła by zero
+to wywoływana by była ponownie dla danej row / col
+
+tylko że co jeśli taka funkcja napotkała by zero ale takie które zostało wstawione przez funkcje która zamieniała row / col na zera?
+
+może się przeiterować po wszystkich elementach i jeśli trafimy na zero
+to w pierwszej cell tego row i col stawiamy "."
+
+kropka by oznaczała że rząd i kolumna w której ona się znajduje
+musi być zamieniony na zera
+
+więc zero teraz nie jest wyznacznikiem zamiany danego row / col na zera
+więc nie będzie problemu typu że znajdujemy zero ale nie wiedząc że jest to zero wstawione przez zerowanie row / col, zerujemy niepotrzebnie row / col w ktorym ono się znajduje
+
+czyli w pierwszym przebiegu pooznaczać row i col za pomocą "."
+
+a w drugim przebiegu robić już zamienianie
+
+w drugim przebiegu nie trzeba iterowac sie po wszystkich elementach
+wystarczy tylko po pierwszych elementach rows / cols
+
+matrix[row] = new Array(matrix[row].length).fill(0);
+
+ale to było by tworzenie nowej struktury o długości zależnej od wejscia
+
+[ [ '.', 1, 2, '.' ], 
+  [ 3, 4, 5, 2 ], 
+  [ 1, 3, 1, 5 ] ]
 
 
+problem teraz polega na tym że zerami nadpisujemy kropki
 
+najpierw nie zamieniać kropek na zera
 
+i jeszcze jedna iteracja ktora zamieni kropki na zera?
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+a nie da sie zrobic o jedną iteracje mniej?
+i wstawiac zera tam gdzie kropki tzn. bez dwoch osobnych pętli na row i col
 
 
 
