@@ -27,21 +27,8 @@ const setZeroes = function (matrix) {
   // O(1) space
 
   for (let row = 0; row < matrix.length; row++) {
-    for (let col = 0; col < matrix[0].length; col++) {
-      if (matrix[row][col] === 0) {
-        matrix[row][0] = ".";
-        matrix[0][col] = ".";
-      }
-    }
+    for (let col = 0; col < matrix[0].length; col++) {}
   }
-
-  // for (let row = 0; row < matrix.length; row++) {
-  //   if (matrix[row][0] === ".") {
-  //     for (let col = 0; col < matrix[row].length; col++) {
-  //       matrix[row][col] = 0;
-  //     }
-  //   }
-  // }
 
   // for (let col = 0; col < matrix[0].length; col++) {
   //   if (matrix[0][col] === ".") {

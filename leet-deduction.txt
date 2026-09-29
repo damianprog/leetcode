@@ -6070,6 +6070,82 @@ i jeszcze jedna iteracja ktora zamieni kropki na zera?
 a nie da sie zrobic o jedną iteracje mniej?
 i wstawiac zera tam gdzie kropki tzn. bez dwoch osobnych pętli na row i col
 
+najpierw napiszmy działającą O(1) space wersje a potem refaktorujmy
+
+może dla rozróżnienia czy chodzi danej kropce o row czy col,
+zamiast kropek wstawiać "r","c"
+
+kropki nigdy nie były by wstawiane poza pierwszym rzędem i pierwszą kolumną
+
+może wstawiać kropki ale rozpatrzeć przypadek row = 0 i col = 0
+
+w poszukiwaniu liter nie musimy iterować się przez cały matrix
+wystarczy po pierwszym row i pierwszej col
+
+a co by było gdyby wstawić kropki
+wyzerować oznaczone rzędy
+
+następnie wstawić kropki 
+i wyzerowac oznaczone kolumny?
+
+wtedy byśmy wiedzieli że kropka oznacza rząd albo kolumne
+
+ale skąd byśmy wiedzieli po takim zerowaniu rzędów że dane zero nie jest efektem zerowania tylko było tam od początku?
+
+
+a może jeśli przy zerowaniu napotkamy 0 to zamienić to zero na kropke?
+kropka zawsze by oznaczała zerowanie rzędu i kolumny w których się znajduje
+
+także zerujemy rząd i kolumne kiedy napotkamy 0 lub "."
+
+ale skąd będziemy wiedzieli że nie napotkaliśmy zera które jest efektem zerowania?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
