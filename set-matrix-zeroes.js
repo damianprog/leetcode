@@ -27,16 +27,31 @@ const setZeroes = function (matrix) {
   // O(1) space
 
   for (let row = 0; row < matrix.length; row++) {
-    for (let col = 0; col < matrix[0].length; col++) {}
+    for (let col = 0; col < matrix[0].length; col++) {
+      if (matrix[row][col] === 0) {
+        matrix[row][col] = ".";
+        for (let currentCol = 0; currentCol < matrix[0].length; currentCol++) {
+          if (matrix[row][currentCol] !== 0) {
+            matrix[row][currentCol] = ".";
+          }
+        }
+
+        for (let currentRow = 0; currentRow < matrix.length; currentRow++) {
+          if (matrix[currentRow][col] !== 0) {
+            matrix[currentRow][col] = ".";
+          }
+        }
+      }
+    }
   }
 
-  // for (let col = 0; col < matrix[0].length; col++) {
-  //   if (matrix[0][col] === ".") {
-  //     for (let row = 0; row < matrix.length; row++) {
-  //       matrix[row][col] = 0;
-  //     }
-  //   }
-  // }
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[0].length; col++) {
+      if (matrix[row][col] === ".") {
+        matrix[row][col] = 0;
+      }
+    }
+  }
 };
 
 // const matrix = [

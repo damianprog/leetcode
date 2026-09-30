@@ -6101,13 +6101,16 @@ także zerujemy rząd i kolumne kiedy napotkamy 0 lub "."
 ale skąd będziemy wiedzieli że nie napotkaliśmy zera które jest efektem zerowania?
 
 
+to może zerowanie rzędu i kolumny ale tylko kiedy napotkamy kropke
+
+najpierw zamienić te natywne zera na kropki
 
 
+ewentualnie na odwrót czyli najpierw zamiast zerowania to wstawianie kropek
+a na końcu zamiana wszystkich kropek na 0
+a jeśli podczas kropkowania napotkamy 0 to nie zamieniamy tego 0 na kropke bo usunęlibyśmy wtedy natywne zero 
 
-
-
-
-
+czyli jeśli napotkamy zero to zmianiamy rząd i kolumne na zera włącznie z tym natywnym zerem ale tylko tym pierwszym current zerem
 
 
 
