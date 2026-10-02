@@ -6110,24 +6110,56 @@ ewentualnie na odwrót czyli najpierw zamiast zerowania to wstawianie kropek
 a na końcu zamiana wszystkich kropek na 0
 a jeśli podczas kropkowania napotkamy 0 to nie zamieniamy tego 0 na kropke bo usunęlibyśmy wtedy natywne zero 
 
-czyli jeśli napotkamy zero to zmianiamy rząd i kolumne na zera włącznie z tym natywnym zerem ale tylko tym pierwszym current zerem
+czyli jeśli napotkamy zero to zmianiamy rząd i kolumne na kropki włącznie z tym natywnym zerem ale tylko tym pierwszym current zerem
+
+skonczone na: można pozadawac questions takie jak dlaczego zerowanie wnetrza od col = 1, row = 1 itd.
 
 
 
 
 
+Game of life
+
+wszystko zależy od sąsiadów, czyli dla każdej komórki sprawdzać jej sąsiadów 
+ale jeśli mowa jest o in-place to modyfikacja komórki zaburzy początkowy stan
+bo wszystkie reguły mają zostać zastosowane jednocześnie
+
+najpierw skupić się na rozwiązaniu, potem na follow-upach
+
+stworzymy kopie tablicy w której będziemy umieszczać zmiany wywnioskowane na podstawie oryginalnej, nieruszonej tablicy
+
+1 która ma mniej niż dwóch sąsiadów jednek, zamienia się na 0
+
+1 która ma dwóch lub trzech sąsiadów jedynek zostaje nieruszona
+
+1 która ma więcej niż trzech sąsiadów jedynek zamienia się na 0
+
+0 z dokładnie trzema sąsiadami jedynkami zamienia się na 1
 
 
+żeby wiedzieć co trzeba zrobić z daną komórką trzeba najpierw sprawdzić jej wszystkich sąsiadów
 
+w zasadzie zawsze dla każdej komórki interesuje nas ilość jedynek z którymi sąsiaduje
 
+for 3 razy
+	for 3 razy
+	
+bo komórka może mieć maksymalnie 8 sąsiadów 
+więc trzeba będzie zrobić skip obecnie iterowanej komórki
 
+czyli zacząć iteracje od rzędu wyżej obecnej komórki
 
+ale tego wyższego rzędu może nie być oraz dla komórek w ostatnim rzędzie nie będzie dolnego rzędu
 
+w zasadzie to dla pierwszego rzędu nie ma wyższego rzędu
 
+oraz dla ostatniego rzędu nie ma dolnego rzędu
 
+dla pierwszej kolumny nie ma kolumny na lewo
 
-
-
+oraz dla ostatniej kolumny nie ma kolumny na prawo
+	
+	
 
 
 

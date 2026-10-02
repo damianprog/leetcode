@@ -1910,3 +1910,95 @@ Cykl 4 elementów obraca się jednym przypisaniem (4 zapisy) albo przez `temp`; 
 - **`n` jako ostatni indeks, nie rozmiar.** Każde `n - i - laps` trzeba było rozszyfrowywać. Nazwy `size` / `last` rozdzielają te pojęcia.
 - **Brak nazwanych granic.** Te same wyrażenia na indeksach powtórzone kilkanaście razy zamiast `first` / `last` raz na pierścień.
 - **Mieszanie `matrix.length` i `matrix[0].length`** przy macierzy z definicji kwadratowej — sugeruje czytelnikowi, że mogą się różnić.
+
+## 9. Macierz jako własna pamięć pomocnicza (LeetCode 73 — Set Matrix Zeroes)
+
+> Rozwiązane 30.09–01.10.2026. Najpierw O(m+n) na Setach, potem własna wersja „O(1)” z sentinelem, na końcu właściwe O(1) z markerami w pierwszym wierszu i kolumnie.
+
+**Kiedy się pojawia:** LeetCode 73, 41 (First Missing Positive), 442/448 (duplikaty / brakujące liczby przez znak w tablicy), 289 (Game of Life — dwa bity stanu w jednej komórce). Rodzina „O(1) extra space przez upchnięcie metadanych w samym wejściu”.
+
+### 9.1 Rozpoznanie wzorca
+
+Sygnał: masz działające rozwiązanie z pomocniczą strukturą rozmiaru X, a zadanie żąda O(1). Pytanie otwierające:
+
+> **Czy w samym wejściu jest X komórek, które mogę poświęcić albo które i tak nadpiszę?**
+
+Tu: wersja O(m+n) trzyma m+n flag. Pierwszy wiersz i pierwsza kolumna to dokładnie m+n komórek, a w razie potrzeby i tak zostaną wyzerowane.
+
+### 9.2 Trzy wersje
+
+| wersja                       | czas             | pamięć | uwagi                                                           |
+| ---------------------------- | ---------------- | ------ | --------------------------------------------------------------- |
+| Sety wierszy i kolumn        | O(m·n)           | O(m+n) | poprawna; tablice booleanów prostsze niż Sety, bo indeksy gęste |
+| sentinel `"."`               | **O(m·n·(m+n))** | O(1)   | pamięć zaoszczędzona kosztem czasu; wartość spoza dziedziny     |
+| markery w wierszu/kolumnie 0 | O(m·n)           | O(1)   | właściwe rozwiązanie                                            |
+
+### 9.3 Właściwe O(1) — cztery kroki
+
+```javascript
+const setZeroes = function (matrix) {
+  const m = matrix.length;
+  const n = matrix[0].length;
+  let firstColHasZero = false;
+
+  // 1. Oznaczanie
+  for (let row = 0; row < m; row++) {
+    if (matrix[row][0] === 0) firstColHasZero = true;
+    for (let col = 1; col < n; col++) {
+      if (matrix[row][col] === 0) {
+        matrix[row][0] = 0;
+        matrix[0][col] = 0;
+      }
+    }
+  }
+
+  // 2. Wnętrze na podstawie markerów
+  for (let row = 1; row < m; row++)
+    for (let col = 1; col < n; col++)
+      if (matrix[row][0] === 0 || matrix[0][col] === 0) matrix[row][col] = 0;
+
+  // 3. Wiersz 0 — sterowany przez matrix[0][0]
+  if (matrix[0][0] === 0) for (let col = 0; col < n; col++) matrix[0][col] = 0;
+
+  // 4. Kolumna 0 — sterowana przez flagę
+  if (firstColHasZero) for (let row = 0; row < m; row++) matrix[row][0] = 0;
+};
+```
+
+### 9.4 Kolizja w rogu — sedno zadania
+
+`matrix[0][0]` jest jednocześnie markerem wiersza 0 i markerem kolumny 0. Jedna komórka nie przechowa odpowiedzi na dwa różne pytania:
+
+| pytanie                         | gdzie zapisana odpowiedź |
+| ------------------------------- | ------------------------ |
+| czy w **wierszu 0** jest zero?  | `matrix[0][0]`           |
+| czy w **kolumnie 0** jest zero? | `firstColHasZero`        |
+
+Stąd pętla wewnętrzna w kroku 1 od `col = 1` — zero w kolumnie 0 ustawia tylko flagę, nie dotyka rogu. Przypisanie ról jest arbitralne (można odwrotnie z `firstRowHasZero`), ważne tylko, żeby dwie flagi nie dzieliły jednej komórki.
+
+**Dwa demaskatory** (lustrzane — każdy łamie inną połowę wspólnego markera):
+
+```
+zero w kolumnie 0, nie w wierszu 0     zero w wierszu 0, nie w kolumnie 0
+1 1 1      oczekiwane  0 1 1           1 0 1      oczekiwane  0 0 0
+0 1 1                  0 0 0           1 1 1                  1 0 1
+1 1 1                  0 1 1
+bez flagi: cały wiersz 0 wyzerowany    bez flagi: cała kolumna 0 wyzerowana
+```
+
+### 9.5 Kolejność zerowania jest wymuszona
+
+- **wnętrze przed brzegami** — wnętrze czyta markery z brzegów; zerowanie brzegów wcześniej niszczy informację,
+- **wiersz 0 przed kolumną 0** — krok 4 może wpisać 0 do `matrix[0][0]`, a krok 3 odczytałby to jako „wiersz 0 do wyzerowania”.
+
+Reguła ogólna dla tej rodziny: **gdy markery siedzą w danych, najpierw konsumujesz markery, dopiero potem je nadpisujesz.**
+
+### 9.6 Anty-wzorce, w które wpadłem
+
+- **Sentinel spoza dziedziny (`"."` w `number[][]`).** Działa w JS, nie skompiluje się w TS/Javie, i opiera się na założeniu o wejściu, którego zadanie nie daje. Na pytanie „a gdyby macierz była typowana?” nie ma dobrej odpowiedzi.
+- **O(1) pamięci kupione czasem.** Dla każdego zera osobny przebieg po wierszu i kolumnie → przy macierzy samych zer O(m·n·(m+n)). Przy optymalizacji pamięci zawsze przelicz też czas — rekruter zapyta.
+- **`matrix[0].length` w warunku każdej pętli.** Wyciągnąć `m`, `n` na górę.
+
+### 9.7 Zdanie na rozmowę
+
+> „Wersja O(m+n) trzyma m+n flag. Pierwszy wiersz i pierwsza kolumna to dokładnie m+n komórek, więc markery mogę trzymać w samej macierzy. Jedyny koszt to kolizja w rogu, którą rozwiązuje jedna zmienna, i ścisła kolejność zerowania: najpierw wnętrze, potem wiersz 0, na końcu kolumna 0.”
