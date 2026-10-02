@@ -6159,9 +6159,11 @@ dla pierwszej kolumny nie ma kolumny na lewo
 
 oraz dla ostatniej kolumny nie ma kolumny na prawo
 	
-	
+teraz pora na kminienie in-place
 
+może w komórkach zapisywać ilość sąsiadów ale wtedy starcimy informacje co było w tej komórce
 
+to może zapisywać w komórce ilość sąsiadów obok oryginalnej wartości
 
 
 
