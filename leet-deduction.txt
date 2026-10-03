@@ -6165,16 +6165,21 @@ może w komórkach zapisywać ilość sąsiadów ale wtedy starcimy informacje c
 
 to może zapisywać w komórce ilość sąsiadów obok oryginalnej wartości
 
+może nową wartość obok oryginalnej
 
+potrzebujemy oryginału żeby wiedzieć co znajdowało się w tablicy natywnie
 
+no to może nowa wartość, stara wartość i tyle
 
+potem w kolejnym runie wywalić stare wartości
 
+liczyć livingNeighbors na podstawie natywnych oraz starych wartości (czyli tez natywnych wartości)
 
+czyli albo to co jest albo to co jest po przecinku
 
+może lepiej stara wartość, nowa wartość
 
-
-
-
+bo split[0] nawet jeśli jest tylko natywna wartość 
 
 
 
