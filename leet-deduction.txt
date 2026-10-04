@@ -6179,11 +6179,13 @@ czyli albo to co jest albo to co jest po przecinku
 
 może lepiej stara wartość, nowa wartość
 
-bo split[0] nawet jeśli jest tylko natywna wartość 
+bo split[0] nawet jeśli jest tylko natywna wartość weźmie prawidlową wartość
 
+a czy livingNeighbors nie jest naruszeniem zasady O(1) space?
+bo tworzymy tyle razy livingNeighbors ile jest komórek
+ale przecież moze byc jedna i modyfikowana i zerowana
 
-
-
+skonczone na Game of Life optimization
 
 
 
