@@ -73,28 +73,73 @@ const gameOfLife = function (board) {
   // }
   // ==================================================================
 
-  const rows = board.length;
-  const cols = board[0].length;
+  // const rows = board.length;
+  // const cols = board[0].length;
 
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      let live = 0;
+  // for (let r = 0; r < rows; r++) {
+  //   for (let c = 0; c < cols; c++) {
+  //     let live = 0;
 
-      for (let i = Math.max(0, r - 1); i <= Math.min(rows - 1, r + 1); i++) {
-        for (let j = Math.max(0, c - 1); j <= Math.min(cols - 1, c + 1); j++) {
-          if (i === r && j === c) continue;
-          if (Math.abs(board[i][j]) === 1) live++;
+  //     for (let i = Math.max(0, r - 1); i <= Math.min(rows - 1, r + 1); i++) {
+  //       for (let j = Math.max(0, c - 1); j <= Math.min(cols - 1, c + 1); j++) {
+  //         if (i === r && j === c) continue;
+  //         if (Math.abs(board[i][j]) === 1) live++;
+  //       }
+  //     }
+
+  //     if (board[r][c] === 1 && (live < 2 || live > 3)) board[r][c] = -1;
+  //     if (board[r][c] === 0 && live === 3) board[r][c] = 2;
+  //   }
+  // }
+
+  // for (let r = 0; r < rows; r++) {
+  //   for (let c = 0; c < cols; c++) {
+  //     board[r][c] = board[r][c] > 0 ? 1 : 0;
+  //   }
+  // }
+
+  // ==================================================================
+
+  function gameOfLife(board) {
+    const rows = board.length;
+    const cols = board[0].length;
+
+    // przesunięcia [wiersz, kolumna] do 8 sąsiadów, bez [0, 0]
+    const directions = [
+      [-1, -1],
+      [-1, 0],
+      [-1, 1],
+      [0, -1],
+      [0, 1],
+      [1, -1],
+      [1, 0],
+      [1, 1],
+    ];
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        let live = 0;
+
+        for (const [dr, dc] of directions) {
+          const nr = r + dr; // wiersz sąsiada
+          const nc = c + dc; // kolumna sąsiada
+
+          // sąsiad może wypaść poza planszę na krawędzi
+          if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) continue;
+
+          // 1 i -1 były żywe w bieżącej generacji
+          if (Math.abs(board[nr][nc]) === 1) live++;
         }
+
+        if (board[r][c] === 1 && (live < 2 || live > 3)) board[r][c] = -1;
+        if (board[r][c] === 0 && live === 3) board[r][c] = 2;
       }
-
-      if (board[r][c] === 1 && (live < 2 || live > 3)) board[r][c] = -1;
-      if (board[r][c] === 0 && live === 3) board[r][c] = 2;
     }
-  }
 
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      board[r][c] = board[r][c] > 0 ? 1 : 0;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        board[r][c] = board[r][c] > 0 ? 1 : 0;
+      }
     }
   }
 
