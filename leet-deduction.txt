@@ -6190,6 +6190,75 @@ skonczone na Game of Life optimization
 
 
 
+Word Pattern
+
+mając string pattern oraz string s, trzeba ustalić czy s jest zgodne z patternem
+
+
+każda litera zawsze oznacza to samo słowo
+
+czyli sprawdzić czy i na co mapuje litera
+jeżeli nie mapowala na nic to teraz będzie mapować na dany word z s
+a jeżeli mapowała na dany word a teraz miała by mapować na inny
+możemy zwrócić false
+
+pattern char mappings
+
+Wrong Answer
+34 / 44 testcases passed
+
+
+Input
+pattern =
+"abba"
+s =
+"dog dog dog dog"
+
+Use Testcase
+Output
+true
+Expected
+false
+
+chodzi o to że każda litera odpowiada zawsze temu samemu słowu
+ale to samo słowo odpowiada różnym literom
+
+słowo dog należy do a
+ale teraz 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
