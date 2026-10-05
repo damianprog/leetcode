@@ -6224,20 +6224,22 @@ chodzi o to że każda litera odpowiada zawsze temu samemu słowu
 ale to samo słowo odpowiada różnym literom
 
 słowo dog należy do a
-ale teraz 
+ale teraz dla kolejnej litery czyli b miało by należeć slowo dog
+
+czyli naruszenie zasady że dwie różne litery nie mogą oznaczać tego smego słowa
+
+czym jest bijekcja?
+
+mapping powinien nastąpić kiedy litera nie jest na nic zmapowana
+oraz słowo do którego miała by być zmapowana nie jest na nic zmapowane
 
 
+pattern = "aaa"
+s = "aa aa aa aa"
 
+powinien byc false bo mamy 3 litery "a" oraz 4 słowa "aa"
 
-
-
-
-
-
-
-
-
-
+czyli jedno słowo nie ma być z kim zmapowane
 
 
 
