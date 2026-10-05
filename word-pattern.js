@@ -14,7 +14,7 @@ const wordPattern = function (pattern, s) {
   for (let i = 0; i < pattern.length; i++) {
     const currentCharWord = charWords.get(pattern[i]);
     const currentWordChar = wordChars.get(words[i]);
-    if (!currentCharWord && !currentWordChar) {
+    if (!charWords.has(pattern[i]) && !wordChars.has(words[i])) {
       charWords.set(pattern[i], words[i]);
       wordChars.set(words[i], pattern[i]);
     } else if (

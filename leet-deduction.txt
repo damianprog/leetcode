@@ -6242,12 +6242,18 @@ powinien byc false bo mamy 3 litery "a" oraz 4 słowa "aa"
 czyli jedno słowo nie ma być z kim zmapowane
 
 
+czy może zajść stan w którym dana litera jest zmapowana na dane słowo
+ale dane słowo nie jest zmapowane do żadnej litery
+
+to jest niemożliwe bo mapujemy od razu litere ze słowem i słowo z literą
 
 
+jeśli obecna litera jest zmapowana na obecne słowo
+to co wiemy o mapingu obecnego słowa?
 
+że jest zmapowane na obecną literę
 
-
-
+Skończone na Word pattern solution review
 
 
 
