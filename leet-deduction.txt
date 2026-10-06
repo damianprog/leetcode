@@ -6260,9 +6260,31 @@ pattern = "ab"
 s = "dog dog"
 
 przy "b" nie wchodimy do pierwszego warunku ponieważ słowo jest zmapowane 
-i ten warunek nie zostaje spełniony !wordChars.has(words[i])
 dog => a
-natomiast wchodzimy do drugiego warunku ponieważ 
+i ten warunek nie zostaje spełniony !wordChars.has(words[i])
+
+natomiast wchodzimy do drugiego warunku ponieważ
+obecna litera nie jest na nic zmapowana 
+czyli na pewno nie jest zmapowana na obecne słowo
+
+więc słowo jest zmapowane na jakąś literę ale nie na tą obecną literę 
+więc zwracamy false
+
+
+
+
+Valid anagram
+
+sprawdzić czy wszystkie litery z s znajdują się w t
+
+czy jeśli słowo będzie miało taką samą długość i wszystkie litery z s będą w nim wykorzystane to czy mamy gwarancje że to słowo to anagram?
+
+
+
+
+
+
+
 
 
 
