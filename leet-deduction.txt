@@ -6253,11 +6253,16 @@ to co wiemy o mapingu obecnego słowa?
 
 że jest zmapowane na obecną literę
 
-Skończone na Word pattern solution review
+więc wystarczy sprawdzić czy obecna litera jest zmapowana na dane słowo?
+jeśli nie jest to zwrocic false?
 
+pattern = "ab" 
+s = "dog dog"
 
-
-
+przy "b" nie wchodimy do pierwszego warunku ponieważ słowo jest zmapowane 
+i ten warunek nie zostaje spełniony !wordChars.has(words[i])
+dog => a
+natomiast wchodzimy do drugiego warunku ponieważ 
 
 
 

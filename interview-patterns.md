@@ -2002,3 +2002,18 @@ Reguła ogólna dla tej rodziny: **gdy markery siedzą w danych, najpierw konsum
 ### 9.7 Zdanie na rozmowę
 
 > „Wersja O(m+n) trzyma m+n flag. Pierwszy wiersz i pierwsza kolumna to dokładnie m+n komórek, więc markery mogę trzymać w samej macierzy. Jedyny koszt to kolizja w rogu, którą rozwiązuje jedna zmienna, i ścisła kolejność zerowania: najpierw wnętrze, potem wiersz 0, na końcu kolumna 0.”
+
+## 9. Bijekcja na dwóch mapach (Word Pattern i pokrewne: Isomorphic Strings)
+
+**Sedno:** jedna mapa sprawdza tylko funkcję (każda litera → jedno słowo). Bijekcja wymaga też kierunku odwrotnego.
+Kontrprzykład na jedną mapę: `pattern = "ab"`, `s = "dog dog"`.
+
+**Niezmiennik:** obie mapy wypełniane zawsze razem, w jednym kroku → `charToWord.get(c) === w` ⇔ `wordToChar.get(w) === c`.
+Wniosek: przy niezgodności wystarcza **jedno** porównanie:
+
+- c zmapowane na inne słowo → `get(c) !== w`
+- c nowe, ale w zajęte → `get(c)` to `undefined`, więc `!== w`
+
+**Pułapka:** sprawdzanie obecności przez truthiness (`!map.get(k)`) zamiast `map.has(k)`. Psuje się, gdy wartością jest `""`, `0` albo indeks.
+
+**Uproszczenie wyprowadzaj z niezmiennika, nie z testów.** Zapytaj: „jakie stany są w ogóle osiągalne?". Gałęzie dla stanów nieosiągalnych to szum.
