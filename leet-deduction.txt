@@ -6288,10 +6288,11 @@ t = "bba"
 wystarczy posortować i porownac ale najpierw rozwiazmy to z Map
 
 
+s = "aacc"
 
+t = "ccac"
 
-
-
+czy jeśli chcemy posortować string to musimy go zamienić na array?
 
 
 
