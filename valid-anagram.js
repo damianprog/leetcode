@@ -13,6 +13,13 @@ const isAnagram = function (s, t) {
   }
 
   for (const char of t) {
-    if (!sCharQty.has(char) || sCharQty.get(char)) return false;
+    const tCharQtyInS = sCharQty.get(char);
+    if (!sCharQty.has(char) || tCharQtyInS === 0) {
+      return false;
+    } else {
+      sCharQty.set(char, tCharQtyInS - 1);
+    }
   }
+
+  return true;
 };

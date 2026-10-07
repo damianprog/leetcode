@@ -6279,12 +6279,13 @@ sprawdzić czy wszystkie litery z s znajdują się w t
 
 czy jeśli słowo będzie miało taką samą długość i wszystkie litery z s będą w nim wykorzystane to czy mamy gwarancje że to słowo to anagram?
 
+s = "aab"
 
+ale to wszystkie litery z s nie są wykorzystane
 
+t = "bba"
 
-
-
-
+wystarczy posortować i porownac ale najpierw rozwiazmy to z Map
 
 
 
