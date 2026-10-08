@@ -4,26 +4,26 @@
  * @return {boolean}
  */
 const isAnagram = function (s, t) {
-  // if (s.length !== t.length) return false;
+  if (s.length !== t.length) return false;
 
-  // const sCharQty = new Map();
+  const counts = new Map();
 
-  // for (const char of s) {
-  //   sCharQty.set(char, (sCharQty.get(char) ?? 0) + 1);
-  // }
+  for (const char of s) {
+    counts.set(char, (counts.get(char) ?? 0) + 1);
+  }
 
-  // for (const char of t) {
-  //   const tCharQtyInS = sCharQty.get(char);
-  //   if (!sCharQty.has(char) || tCharQtyInS === 0) {
-  //     return false;
-  //   } else {
-  //     sCharQty.set(char, tCharQtyInS - 1);
-  //   }
-  // }
+  for (const char of t) {
+    const count = counts.get(char);
+    // explicitly showing two conditions instead of one "is falsy" condition
+    if (count === undefined || count === 0) {
+      return false;
+    }
+    counts.set(char, count - 1);
+  }
 
-  // return true;
+  return true;
 
-  return s.split("").sort().join("") === t.split("").sort().join("");
+  // return s.split("").sort().join("") === t.split("").sort().join("");
 };
 
 const s = "anagram";

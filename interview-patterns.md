@@ -2017,3 +2017,79 @@ Wniosek: przy niezgodności wystarcza **jedno** porównanie:
 **Pułapka:** sprawdzanie obecności przez truthiness (`!map.get(k)`) zamiast `map.has(k)`. Psuje się, gdy wartością jest `""`, `0` albo indeks.
 
 **Uproszczenie wyprowadzaj z niezmiennika, nie z testów.** Zapytaj: „jakie stany są w ogóle osiągalne?". Gałęzie dla stanów nieosiągalnych to szum.
+
+## 9. Zliczanie na multizbiorze (LeetCode 242 — Valid Anagram)
+
+> Rozwiązane 07.10.2026, dwie wersje: Map i sortowanie. Omówione bez trybu zagadki.
+
+**Kiedy się pojawia:** LeetCode 242, 383 (Ransom Note), 49 (Group Anagrams), 438 / 567 (anagram w oknie — patrz §7). Wszędzie, gdzie pytanie brzmi „czy dwa zbiory elementów są równe, bez względu na kolejność".
+
+### 9.1 Wzorzec: inkrementuj z jednej strony, dekrementuj z drugiej
+
+```js
+const isAnagram = (s, t) => {
+  if (s.length !== t.length) return false;
+
+  const counts = new Map();
+  for (const char of s) counts.set(char, (counts.get(char) ?? 0) + 1);
+
+  for (const char of t) {
+    const count = counts.get(char);
+    if (count === undefined || count === 0) return false;
+    counts.set(char, count - 1);
+  }
+  return true;
+};
+```
+
+Warunek odrzucenia: `undefined` (znaku nie było w `s`) i `0` (limit wyczerpany). Krótsza forma `!count` łapie oba przypadki naraz, bo obie wartości są falsy. Jawna forma jest równie dobra, ważne, żeby opierała się na **jednej** wartości z `get`, a nie na dodatkowym `has`. Na rozmowie powiedz, że znasz skrót i świadomie go nie użyłeś.
+
+### 9.2 Dlaczego na końcu nie trzeba skanować mapy
+
+To jest pytanie kontrolne, które warto umieć obronić:
+
+1. Po pierwszej pętli suma liczników = `n`.
+2. Długości są równe, więc druga pętla robi dokładnie `n` dekrementów. Jeśli doszła do końca, każdy odjął 1 od dodatniego licznika → suma spadła do `0`.
+3. Żaden licznik nie jest ujemny, bo warunek odrzucenia pilnuje zera.
+
+Suma liczb nieujemnych równa 0 → wszystkie są zerami → `return true` jest poprawne bez skanu.
+
+**Sprawdzenie długości jest nośne, nie tylko optymalizacyjne.** Bez niego `s = "aab"`, `t = "ab"` daje `true`: pętla kończy się, bo `t` był za krótki, żeby zużyć wszystko, a w mapie zostaje `a: 1`.
+
+_„Długości są równe, więc druga pętla robi tyle dekrementów, ile pierwsza inkrementów. Żaden licznik nie zszedł poniżej zera, a suma spadła do zera, więc wszystkie są zerami."_
+
+### 9.3 Wariant pod stały alfabet
+
+Constraint „tylko a–z" → tablica 26 liczników zamiast `Map`. Ta sama złożoność, mniejsza stała (zero hashowania), jedna pętla:
+
+```js
+const counts = new Array(26).fill(0);
+for (let i = 0; i < s.length; i++) {
+  counts[s.charCodeAt(i) - 97]++;
+  counts[t.charCodeAt(i) - 97]--;
+}
+return counts.every((c) => c === 0);
+```
+
+Tu skan na końcu **jest** potrzebny, bo nic nie pilnuje zera w trakcie pętli.
+
+_„Tablica, bo alfabet jest mały i stały; Map, gdy wejściem jest dowolny Unicode."_
+
+### 9.4 Wersja z sortowaniem i pułapka Unicode
+
+```js
+return [...s].sort().join("") === [...t].sort().join("");
+```
+
+- **Dodaj early exit na długość** — bez niego sortujesz nawet wtedy, gdy odpowiedź jest oczywista.
+- **`split("")` zamiast `[...s]` to bug na Unicode.** `split("")` tnie na jednostki UTF-16, czyli rozcina emoji na dwie połówki (surogaty). Sortowanie miesza połówki różnych emoji, więc dwa stringi o różnych znakach mogą mieć ten sam multizbiór połówek → fałszywe `true`. Spread i `for...of` iterują po code pointach, więc tego problemu nie mają.
+
+### 9.5 Złożoność
+
+| wersja     | czas       | pamięć                          |
+| ---------- | ---------- | ------------------------------- |
+| Map        | O(n)       | O(k), k = liczba różnych znaków |
+| tablica 26 | O(n)       | O(1)                            |
+| sort       | O(n log n) | O(n) — kopie jako tablice       |
+
+_„Sort jako pierwsza wersja w minutę, bo trudno w nim o błąd. Potem zliczanie dla O(n)."_

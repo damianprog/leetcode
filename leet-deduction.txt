@@ -6294,9 +6294,12 @@ t = "ccac"
 
 czy jeśli chcemy posortować string to musimy go zamienić na array?
 
+skonczone na chat valid anagram optimization
 
-
-
+mamy liczniki łącznie n dla wszystkich znaków z s
+i za każdym obrotem drugiej pętli, dekrementujemy
+natomiast jeśli dla jakiejś litery z t miało by nie dojść do dekrementacji
+to zwracamy false
 
 
 
