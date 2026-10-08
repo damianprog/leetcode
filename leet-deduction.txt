@@ -6304,6 +6304,63 @@ to zwracamy false
 
 
 
+Group Anagrams 
+
+te same litery w tej samej kolejności
+
+Może mielibyśmy cały alfabet i dla każdego słowa
+
+Może posortować każde ze słów 
+
+więc pomyślmy w jaki sposob zgrupować ze sobą te same słowa
+
+["dog", "cat", "dog", "cat", "cow"]
+
+najpierw stworzyć grupy indeksów a nastepnie te indeksy zamienić na oryginalne odpowiadające im słowa
+
+tworzymy pierwszą grupę
+
+szukamy "dog"
+
+[0,2]
+
+tylko że będzie trzeba pamiętać te słowa które już szukaliśmy
+do tego może posłużyć set, żeby przeiterować się tylko po unikalnych słowach
+
+szukamy "cat"
+
+[1,3]
+
+szukamy "cow"
+
+[4]
+
+czyli mamy 
+
+[[0,2], [1,3], [4]]
+
+teraz sie przeiterować po wszystkich arrays i zamienić indeksy na odpowiadające im słowa z oryginalnego array
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
