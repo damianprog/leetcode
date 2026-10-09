@@ -6341,16 +6341,34 @@ czyli mamy
 
 teraz sie przeiterować po wszystkich arrays i zamienić indeksy na odpowiadające im słowa z oryginalnego array
 
+obecnie problem jest na etapie konstruowaniu grup indeksów
 
 
+a może posortować litery w słowach a następnie posortować słowa względem siebie?
+
+wtedy iterujemy sie po tych wszystkich słowach
+i jeśli dane słowo różni się od poprzedniego to tworzymy nowy array
+a jesli slowo jest takie samo jak poprzednie to dorzucamy je do obecnego array
+
+ale wtedy będziemy miec grupy w ktorych słowa mają posortowane litery a chodzi nam o grupowanie oryginalnych słów
+
+może zrobić mape żeby zmapować oryginalne słowa na odpowiadające im indeksy
+
+tablica slow w ktorych są posortowane litery zachowuje informacje o oryginalnych indeksach tak długo jak nie posortujemy tej tablicy
 
 
+to może zrobić mape żeby zmapować nie oryginalne słowa ale słowa z posortowanymi literami na odpowiadające im indeksy w oryginalnym array
+
+wtedy będzie można taką mape posortować po kluczach 
+
+i zrobić pętle ktora przeiteruje sie po tych wszystkich posortowanych kluczowo key value pairs i jesli klucz w danym rekordzie jest taki sam jak w poprzednim to dodajemy do currentArray a jesli jest inne to tworzymy nowy currentArray i wrzucamy do niego obecne słowo
+
+ale nie moze byc dwóch takich samych kluczy
+
+to moze niech kluczami będą indeksy a wartosciami słowa bo wartosci w przeciwienstwie do kluczy mogą sie powtarzac
 
 
-
-
-
-
+teraz nalezy posortowac te mape po wartosciach
 
 
 
