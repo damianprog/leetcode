@@ -15,9 +15,9 @@ const groupAnagrams = function (strs) {
     if (!searchedWords.has(wordsWithSortedChars[i])) {
       const currentWordsGrouped = [];
 
-      for (const word of wordsWithSortedChars) {
-        if (wordsWithSortedChars[i] === word) {
-          currentWordsGrouped.push(i);
+      for (let j = 0; j < wordsWithSortedChars.length; j++) {
+        if (wordsWithSortedChars[i] === wordsWithSortedChars[j]) {
+          currentWordsGrouped.push(j);
         }
       }
 
@@ -26,9 +26,6 @@ const groupAnagrams = function (strs) {
       searchedWords.add(wordsWithSortedChars[i]);
     }
   }
-
-  // console.log("strs: ", strs);
-  console.log("sortedWordsGroups: ", sortedWordsGroups);
 
   const result = [];
 
