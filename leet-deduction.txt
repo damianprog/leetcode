@@ -6371,6 +6371,36 @@ to moze niech kluczami będą indeksy a wartosciami słowa bo wartosci w przeciw
 teraz nalezy posortowac te mape po wartosciach
 
 
+dwa najwieksze usprawnienia dla obecnego kodu widzę w sprawdzaniu if (wordsGrouped.length > 0) które ma sens w zasadzie tylko dla pierwszego elementu
+bo tylko w przypadku pierwszego elementu może dojśc do sytuacji że do result byłby dodany pusty array
+
+drugą sprawą jest taki sam warunek czyli if (wordsGrouped.length > 0) {
+w którym dodajemy do result wordsGrouped array jeśli jakiś został po głównej pętli
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

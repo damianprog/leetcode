@@ -56,7 +56,7 @@ const groupAnagrams = function (strs) {
 
   let wordsGrouped = [];
   let result = [];
-  let prevWord = null;
+  let prevWord = wordsToIndexesSorted.values().next().value;
 
   for (const [key, value] of wordsToIndexesSorted) {
     if (value === prevWord) {
