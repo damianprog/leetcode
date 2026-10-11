@@ -44,33 +44,18 @@ const groupAnagrams = function (strs) {
     str.split("").toSorted().join(""),
   );
 
-  const wordsToIndexes = new Map();
+  const wordToIndexes = new Map();
 
   for (let i = 0; i < wordsWithSortedChars.length; i++) {
-    wordsToIndexes.set(i, wordsWithSortedChars[i]);
+    const currentWordIndexes = wordToIndexes.get(wordsWithSortedChars[i]) ?? [];
+    currentWordIndexes.push(strs[i]);
+    wordToIndexes.set(wordsWithSortedChars[i], currentWordIndexes);
   }
 
-  const wordsToIndexesSorted = new Map(
-    [...wordsToIndexes].sort(([, a], [, b]) => a.localeCompare(b)),
-  );
+  const result = [];
 
-  let wordsGrouped = [];
-  let result = [];
-  let prevWord = wordsToIndexesSorted.values().next().value;
-
-  for (const [key, value] of wordsToIndexesSorted) {
-    if (value === prevWord) {
-      wordsGrouped.push(strs[key]);
-    } else {
-      result.push(wordsGrouped);
-      wordsGrouped = [strs[key]];
-    }
-
-    prevWord = value;
-  }
-
-  if (wordsGrouped.length > 0) {
-    result.push(wordsGrouped);
+  for (const [_, value] of wordToIndexes) {
+    result.push(value);
   }
 
   return result;

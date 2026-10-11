@@ -6378,11 +6378,75 @@ drugą sprawą jest taki sam warunek czyli if (wordsGrouped.length > 0) {
 w którym dodajemy do result wordsGrouped array jeśli jakiś został po głównej pętli
 
 
+n - liczba słów
+L - długość słowa
+
+pierwsze rozwiązanie
+
+główna pętla to jest O(n^2)
+
+w drugim rozwiązaniu 
+
+L log L
+
+mam go rozumieć jako: 
+L razy
+log L czyli do jakiej potęgi musze podnieść 10 aby otrzymać L
+
+podstawa w informatyce to 2 a nie 10
+
+więc L * do jakiej potęgi musze podnieść 2 aby otrzymać L
+
+Podstawa: w informatyce to 2, nie 10
+
+W analizie algorytmów log domyślnie oznacza log₂: do jakiej potęgi trzeba podnieść 2, żeby dostać L.
+
+Intuicja przydatniejsza od definicji: log₂ L to liczba dzieleń L na pół, zanim zostanie 1.
+
+100 → 50 → 25 → 12 → 6 → 3 → 1   ≈ 6–7 kroków   (log₂ 100 ≈ 6,6)
+
+Stąd logarytm w sortowaniu. Merge sort dzieli tablicę na pół, potem połówki na pół itd. Powstaje log L poziomów, a na każdym poziomie trzeba dotknąć wszystkich L elementów. Razem L · log L.
 
 
+gdyby z wersji drugiej zniknęło:
+sort całej kolekcji: n log n porównań × L na każde localeCompare
+
+to wersja druga miała by złożoność n * L * log L
+
+Następny krok
+
+Załóżmy, że wiersz 3 rzeczywiście znika. Sortowanie służyło Ci do tego, żeby takie same klucze trafiły obok siebie. Bez sortowania musisz jakoś inaczej zebrać słowa o tym samym kluczu. Jaka struktura pozwala odpowiedzieć na pytanie „do której grupy należy ten klucz?” w czasie stałym (pomijając koszt hashowania)?
+
+także w wersji 2 to jest najbardziej drogi obliczeniowo krok:
+const wordsToIndexesSorted = new Map(
+    [...wordsToIndexes].sort(([, a], [, b]) => a.localeCompare(b)),
+  );
+
+w wordsToIndexes oraz w wordsToIndexesSorted
+kluczem jest index a wartoscią jest słowo z posortowanymi literami
 
 
+wordsToIndexes:  Map(6) {
+  0 => 'aet',
+  1 => 'aet',
+  2 => 'ant',
+  3 => 'aet',
+  4 => 'ant',
+  5 => 'abt'
+}
+wordsToIndexesSorted:  Map(6) {
+  5 => 'abt',
+  0 => 'aet',
+  1 => 'aet',
+  3 => 'aet',
+  2 => 'ant',
+  4 => 'ant'
+}
 
+
+napisałeś "Załóżmy, że wiersz 3 rzeczywiście znika. Sortowanie służyło Ci do tego, żeby takie same klucze trafiły obok siebie." - Jak to klucze? przecież kluczami są indeksy, chyba mówisz o wartosciach?
+
+"aet" => [0,1,3]
 
 
 
