@@ -6479,6 +6479,88 @@ n * L log L
 
 skonczone na Group Anagrams complexity analysis
 
+Two Sum
+
+Znaleźć w arrayu dwie liczby które sumują się do target
+
+nums = [2,7,11,15]
+
+target = 9
+
+
+
+
+
+
+
+
+
+
+
+
+Happy Number
+
+trzeba będzie wykryć czy proces miałby się powtarzać w kółko w nieskonczonosc
+
+rozbić liczbe na jej digits da sie zrobic chyba za pomocą modulo
+
+2
+2 % 10 = 2
+
+19
+19 % 10 = 9
+
+19 - 9 = 10
+
+10 / 10 = 1
+
+123
+123 % 10 = 3
+
+123 - 3 = 120
+
+120 / 10 = 12
+
+12 % 10 = 2
+
+12 - 2 = 10
+
+10 / 10 = 1
+
+1 % 10 = 1
+
+
+33
+33 % 10 = 3
+
+33 - 3 = 30
+
+30 / 10 = 3
+
+3 % 10 = 3
+
+3 - 3 = 0 Więc przerwać odcinanie kiedy na tym etapie wyjdzie nam 0
+
+
+Przy każdym uzyskaniu cyfry należy podnieść ją do kwadratu i dodać do sumy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
