@@ -2093,3 +2093,57 @@ return [...s].sort().join("") === [...t].sort().join("");
 | sort       | O(n log n) | O(n) — kopie jako tablice       |
 
 _„Sort jako pierwsza wersja w minutę, bo trudno w nim o błąd. Potem zliczanie dla O(n)."_
+
+## 9. Grupowanie po kluczu kanonicznym (LeetCode 49 — Group Anagrams)
+
+> Rozwiązane 10–11.10.2026, tryb sokratejski. Trzy wersje: zagnieżdżone pętle → sort kolekcji → hashmapa.
+
+**Kiedy się pojawia:** LeetCode 49, 242 (Valid Anagram), 438, 249 (Group Shifted Strings), każde „pogrupuj elementy równoważne względem jakiejś relacji".
+
+### 9.1 Rozpoznanie wzorca
+
+Sygnał: elementy trzeba **podzielić na klasy równoważności**, a kolejność grup nie ma znaczenia.
+
+Przepis: znajdź funkcję, która każdemu elementowi przypisuje **klucz kanoniczny** — taki sam dla wszystkich elementów jednej klasy. Potem `Map<klucz, element[]>`.
+
+Dla anagramów kluczem jest słowo z posortowanymi literami: `"eat"`, `"tea"`, `"ate"` → `"aet"`.
+
+### 9.2 Trzy wersje i ich koszt
+
+| wersja | pomysł                                                     | złożoność                |
+| ------ | ---------------------------------------------------------- | ------------------------ |
+| 1      | dla każdego klucza skan całej listy w poszukiwaniu równych | `O(n²·L)`                |
+| 2      | posortuj pary (indeks, klucz) po kluczu, zbierz sąsiadów   | `O(n·L·(log n + log L))` |
+| 3      | `Map<klucz, słowa[]>`                                      | `O(n · L log L)`         |
+
+`n` = liczba słów, `L` = długość słowa.
+
+**Przełom między 2 a 3 to odwrócenie ról.** W wersji 2 klucz kanoniczny był _wartością_ w `Map` (`indeks → "aet"`), więc żeby zebrać równe, trzeba było sortować. Zrobiony _kluczem_ `Map` grupuje sam, bo klucze są unikalne. Sortowanie kolekcji służyło tylko temu, żeby równe trafiły obok siebie — potrzebna była informacja „te są równe", nie „ten jest przed tamtym". Hashmapa daje pierwszą bez kosztu drugiej.
+
+### 9.3 Analiza złożoności — co tu było do nauczenia
+
+- **Jedna litera na jedną wielkość.** „Iteruję po `n` słowach i sortuję każde" to `n · L log L`, nie `n · n`. Pętla wewnętrzna chodzi po literach, nie po słowach. `n²` wychodzi tylko wtedy, gdy obie pętle chodzą po tym samym zbiorze.
+- **Porównanie stringów kosztuje `O(L)`, nie `O(1)`.** Znak po znaku do pierwszej różnicy; worst case to słowa różniące się na ostatnim znaku albo identyczne. Stąd `L` doliczone do każdego `===` w wersji 1 i do każdego porównania w sorcie kolekcji w wersji 2.
+- **Ten sam sort, różny „element".**
+
+  | sortujesz        | porównań  | koszt porównania | razem         |
+  | ---------------- | --------- | ---------------- | ------------- |
+  | litery słowa     | `L log L` | `1`              | `L log L`     |
+  | słowa w kolekcji | `n log n` | `L`              | `n log n · L` |
+
+- **Który sort dominuje w wersji 2:** oba mają wspólne `n·L`, różnią się `log L` vs `log n`. Wygrywa większa zmienna. Przy `n = 10⁴`, `L = 100`: `log₂ n ≈ 13 > log₂ L ≈ 7` → dominuje sort kolekcji.
+- **`L log L` = `log L` poziomów × `L` pracy na poziom.** Merge sort dzieli na pół `log₂ L` razy, a na każdym poziomie scalania dotyka wszystkich `L` elementów. Dla `L = 8`: 3 poziomy × 8 = 24.
+- **Logarytm w informatyce to `log₂`** — „ile razy dzielę na pół, zanim zostanie 1". W `O()` podstawa i tak nie ma znaczenia: zmiana podstawy to stały mnożnik (`log₁₀ x = log₂ x / 3,32`).
+
+### 9.4 Gotchas z JS
+
+- **`localeCompare` to porównanie zgodne z regułami języka** (ICU: akcenty, wielkość liter, polskie „ą"). Duży stały koszt na porównanie. Do grupowania wystarcza dowolny spójny porządek — `a < b` jest wielokrotnie tańsze. `O()` tego nie pokazuje.
+- **`map.get(k) ?? []`** — idiom „weź albo utwórz" przy budowaniu multimapy.
+
+### 9.5 Otwarte (do domknięcia)
+
+- nazwy `wordToIndexes` / `currentWordIndexes` po zmianie zawartości tablic
+- czy `set` jest potrzebne w każdym obrocie pętli (przypisanie vs mutacja, §6.1)
+- ostatnia pętla po `[_, value]` — która metoda `Map` daje same wartości
+- `[...strs]` przed `map`
+- bonus: klucz anagramu bez sortowania liter, przy alfabecie `a–z` — jaka złożoność?

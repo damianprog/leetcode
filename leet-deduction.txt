@@ -6449,15 +6449,35 @@ napisałeś "Załóżmy, że wiersz 3 rzeczywiście znika. Sortowanie służyło
 "aet" => [0,1,3]
 
 
+wordToIndexes:  Map(3) { 'aet' => [ 0, 1, 3 ], 'ant' => [ 2, 4 ], 'abt' => [ 5 ] }
 
+teraz należy zebrać arraye oraz zamienić indeksy na odpowiadające im słowa z oryginalnego array
 
+const groupAnagrams = function (strs) {
+	const wordsWithSortedChars = [...strs].map((str) =>
+    str.split("").toSorted().join(""),
+  );
 
+  const wordToIndexes = new Map();
 
+  for (let i = 0; i < wordsWithSortedChars.length; i++) {
+    const currentWordIndexes = wordToIndexes.get(wordsWithSortedChars[i]) ?? [];
+    currentWordIndexes.push(strs[i]);
+    wordToIndexes.set(wordsWithSortedChars[i], currentWordIndexes);
+  }
 
+  const result = [];
 
+  for (const [_, value] of wordToIndexes) {
+    result.push(value);
+  }
 
+  return result;
+};
 
+n * L log L
 
+skonczone na Group Anagrams complexity analysis
 
 
 
