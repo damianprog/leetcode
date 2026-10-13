@@ -6544,22 +6544,30 @@ rozbić liczbe na jej digits da sie zrobic chyba za pomocą modulo
 
 Przy każdym uzyskaniu cyfry należy podnieść ją do kwadratu i dodać do sumy
 
+20 % 10 = 0
 
+20 - 0 = 20
 
+20 / 10 = 2
 
+2 % 10 = 2
 
+cyfre która nas interesuje otrzymujemy przy operacji modulo
 
+może przerwać pętle odcinającą kiedy wynik z modulo będzie równy X % 10 = X
 
+2 % 10 = 2
 
+gdzie wstawić return false?
 
+kiedy będziemy wiedzieć że to niemożliwe 
+aby currentSum był kiedykolwiek równy 1?
 
+czym jest currentSum = 1?
 
+jest to suma cyfr number podniesionych do kwadratu
 
-
-
-
-
-
+2 % 10 = 2
 
 
 
