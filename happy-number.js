@@ -3,11 +3,14 @@
  * @return {boolean}
  */
 const isHappy = function (n) {
+  const seen = new Set();
   let number = n;
   let currentSum = 0;
 
   while (true) {
     if (number === 1) return true;
+    if (seen.has(number)) return false;
+    seen.add(number);
     while (true) {
       const digit = number % 10;
 

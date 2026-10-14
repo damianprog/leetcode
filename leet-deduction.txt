@@ -6569,6 +6569,41 @@ jest to suma cyfr number podniesionych do kwadratu
 
 2 % 10 = 2
 
+2 - 2 = 0
+
+wykryć moment który będzie oznaczał że dalsze wyliczanie nigdy nie osiągnie warunku z return true
+
+czy zawsze zejdziemy do number jako jednocyfrowej liczby?
+
+18 % 10 = 8
+
+a może po prostu rejestrować to co widzieliśmy i jeśli sie powtorzy to false 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
