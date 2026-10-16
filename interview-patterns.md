@@ -2147,3 +2147,113 @@ Dla anagramów kluczem jest słowo z posortowanymi literami: `"eat"`, `"tea"`, `
 - ostatnia pętla po `[_, value]` — która metoda `Map` daje same wartości
 - `[...strs]` przed `map`
 - bonus: klucz anagramu bez sortowania liter, przy alfabecie `a–z` — jaka złożoność?
+
+## 9. Wykrywanie cyklu w ciągu deterministycznym (LeetCode 202 — Happy Number)
+
+> Rozwiązane 14.10.2026. Moja wersja z `Set` była poprawna. Poprawki dotyczyły czytelności, a follow-upy przerobione do zrozumienia.
+
+**Kiedy się pojawia:** LeetCode 202 (Happy Number), 141/142 (Linked List Cycle), 287 (Find the Duplicate Number). Ogólnie każdy ciąg postaci `x → f(x)`, w którym trzeba wykryć zapętlenie.
+
+### 9.1 Rozpoznanie
+
+Sygnał: **każdy stan ma dokładnie jeden następnik**, wyznaczony wyłącznie przez bieżący stan. To jest niejawna linked lista, w której `next` liczysz funkcją (`sumOfSquares(n)`) zamiast odczytywać z pola.
+
+### 9.2 Wersja kanoniczna (editorial, podejście 1)
+
+```js
+const sumOfSquares = (n) => {
+  let sum = 0;
+  while (n > 0) {
+    const digit = n % 10;
+    sum += digit * digit;
+    n = (n - digit) / 10; // albo Math.floor(n / 10)
+  }
+  return sum;
+};
+
+const isHappy = (n) => {
+  const seen = new Set();
+  while (n !== 1 && !seen.has(n)) {
+    seen.add(n);
+    n = sumOfSquares(n);
+  }
+  return n === 1;
+};
+```
+
+### 9.3 Co poprawiłem względem swojej wersji
+
+- **Ukryty warunek końca pętli.** `if (digit === number) break` działa, bo ostatnia cyfra równa się liczbie tylko dla liczby jednocyfrowej. Czytelnik musi to jednak rozszyfrować. `while (n > 0)` mówi wprost: „dopóki zostały cyfry”. Warunek końca powinien stać w nagłówku pętli, a nie w środku ciała za obliczeniami.
+- **Akumulator w złym zakresie.** `currentSum` zadeklarowane na zewnątrz wymagało ręcznego zerowania. To ręcznie pilnowany niezmiennik (patrz §3). Funkcja pomocnicza sprawia, że zmienna rodzi się na nowo przy każdym wywołaniu, więc resetu nie ma.
+- **`while (true)` + dwa `return`.** Oba wyjścia może przejąć warunek pętli, a po pętli wystarczy `return n === 1`.
+- **`let number = n`** było zbędne. Parametr jest prymitywem, więc jego nadpisanie nic nie zmienia na zewnątrz.
+- `0 / 10` to nie dzielenie przez zero, tylko zero w liczniku, więc wynik to `0` i pętla się kończy. Dla porządku: nawet prawdziwe `x / 0` w JS nie rzuca wyjątku (`Infinity`, `NaN`), co czyni takie błędy podstępnymi.
+
+### 9.4 Dlaczego tu wystarcza `visited`, a nie `path` (kontrast z §1)
+
+W Stringify `visited` dawał fałszywe cykle, bo graf miał rozgałęzienia: do węzła można było dojść dwiema drogami bez cyklu. Tu z każdego węzła wychodzi **dokładnie jedna** krawędź. Jedyny sposób, żeby wrócić do odwiedzonego węzła, to przejść przez cykl. **Out-degree = 1 ⇒ visited = path.**
+
+### 9.5 Follow-up 1: dlaczego ciąg nie rośnie w nieskończoność
+
+Wersja na rozmowę, jedno zdanie:
+
+> „Duże liczby po kroku maleją, bo suma kwadratów cyfr rośnie tylko liniowo z liczbą cyfr. Poniżej tysiąca stanów jest skończenie wiele, więc coś musi się powtórzyć.”
+
+Pełne rozumowanie w trzech krokach:
+
+1. **Zejście.** Liczba d-cyfrowa daje sumę co najwyżej `81·d`. Od 4 cyfr w górę to mniej niż najmniejsza liczba o tej długości (4 cyfry → maks. 324 < 1000), więc każdy krok zmniejsza liczbę.
+2. **Pułapka.** Poniżej 1000 maksimum daje 999 → 243. Ciąg zostaje więc na zawsze w przedziale 1–243, czyli w skończonym zbiorze stanów. Z zasady szufladkowej któraś wartość musi się powtórzyć.
+3. **Determinizm.** Następnik zależy tylko od bieżącej liczby, więc pierwsza powtórka oznacza, że cała sekwencja kręci się w kółko na zawsze.
+
+Wynik: każdy start kończy się w cyklu. Jest albo `1 → 1` (szczęśliwa), albo jedyny nieszczęśliwy cykl `4 → 16 → 37 → 58 → 89 → 145 → 42 → 20 → 4`.
+
+Złożoność: O(log n) kroków do zejścia poniżej 1000, potem stała liczba kroków.
+
+Realnie na rozmowie na mida JS formalny dowód raczej nie padnie. Może paść lżejsze pytanie „skąd wiesz, że ta pętla się skończy?”, i na nie wystarczy jedno zdanie z góry.
+
+### 9.6 Follow-up 2: O(1) pamięci, czyli Floyd (żółw i zając)
+
+```js
+const isHappy = (n) => {
+  let slow = n;
+  let fast = sumOfSquares(n);
+
+  while (fast !== 1 && slow !== fast) {
+    slow = sumOfSquares(slow); // 1 krok
+    fast = sumOfSquares(sumOfSquares(fast)); // 2 kroki
+  }
+
+  return fast === 1;
+};
+```
+
+**Intuicja:** dwóch biegaczy na trasie. Jeśli trasa ma pętlę, szybki zdubluje wolnego i się spotkają. Jeśli ma metę (tu: 1), szybki dobiegnie do niej pierwszy.
+
+**Dlaczego spotkanie jest gwarantowane:** gdy obaj są w cyklu, szybki zyskuje dokładnie 1 pozycję na turę. Odstęp maleje po jednym, więc nie da się go przeskoczyć i musi dojść do zera.
+
+Trace n = 2 (nieszczęśliwa):
+
+| tura  | slow | fast                     |
+| ----- | ---- | ------------------------ |
+| start | 2    | 4                        |
+| 1     | 4    | 37                       |
+| 2     | 16   | 89                       |
+| 3     | 37   | 42                       |
+| 4     | 58   | 4                        |
+| 5     | 89   | 37                       |
+| 6     | 145  | 89                       |
+| 7     | 42   | 42 → spotkanie → `false` |
+
+Trace n = 7 (szczęśliwa): `7/49 → 49/130 → 97/1`, więc szybki jest na mecie i wynik to `true`.
+
+To ta sama technika co w Linked List Cycle (`slow = slow.next`, `fast = fast.next.next`).
+
+### 9.7 Trade-off i trzy podejścia
+
+| podejście                    | pamięć | uwagi                                                                       |
+| ---------------------------- | ------ | --------------------------------------------------------------------------- |
+| `Set`                        | O(k)   | oczekiwana pierwsza odpowiedź; tu zbiór ma najwyżej ~243 elementy           |
+| Floyd                        | O(1)   | odpowiedź na „a bez dodatkowej pamięci?”; ~3× więcej wywołań `sumOfSquares` |
+| `while (n !== 1 && n !== 4)` | O(1)   | ciekawostka; wymaga znania faktu matematycznego, nie zaczynać od tego       |
+
+Zdanie na rozmowę: „Floyd zbija pamięć do stałej kosztem około trzykrotnie większej liczby obliczeń następnika. Tutaj zbiór i tak jest mały, więc `Set` jest w praktyce równie dobry.”

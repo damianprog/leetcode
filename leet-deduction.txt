@@ -6581,19 +6581,10 @@ a może po prostu rejestrować to co widzieliśmy i jeśli sie powtorzy to false
 
 czy powinienem robić let number = n, czy mogę pracować na n? od czego to zależy?
 
+question:
+dlaczego ciąg w Happy Number nie rosnie w nieskonczonosc
 
-
-
-
-
-
-
-
-
-
-
-
-
+skonczone na Happy Number solution review
 
 
 

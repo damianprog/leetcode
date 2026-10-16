@@ -36,14 +36,30 @@ const isHappy = function (n) {
   //   number = currentSum;
   // }
 
-  const seen = new Set();
+  // ==============================================================================
+  // Refactored
 
-  while (n !== 1 && !seen.has(n)) {
-    seen.add(n);
-    n = sumOfSquares(n);
+  // const seen = new Set();
+
+  // while (n !== 1 && !seen.has(n)) {
+  //   seen.add(n);
+  //   n = sumOfSquares(n);
+  // }
+
+  // return n === 1;
+
+  // ==============================================================================
+  // Linked List Floyd. O(1) Space
+
+  let slow = n;
+  let fast = sumOfSquares(n);
+
+  while (fast !== 1 && slow !== fast) {
+    slow = sumOfSquares(slow);
+    fast = sumOfSquares(sumOfSquares(fast));
   }
 
-  return n === 1;
+  return fast === 1;
 };
 
 console.log(isHappy(2));
