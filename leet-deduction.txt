@@ -6586,6 +6586,137 @@ dlaczego ciąg w Happy Number nie rosnie w nieskonczonosc
 
 skonczone na Happy Number solution review
 
+WAŻNE
+
+kiedy funkcje function a kiedy strzałkowe
+
+czy powinienem robić let number = n, czy mogę pracować na n? od czego to zależy?
+
+
+
+
+
+
+
+
+Contains Duplicate II
+
+mamy array integerów oraz integer k
+zwrócić true jeśli istnieją dwa indeksy i oraz j w arrayu takie że,
+nums[i] === nums[j] czyli obie liczby pod tymi indeksami są równe
+oraz wartość bezwzględna z różnicy i - j <= k
+
+
+const nums = [1,2,3,1]
+const k = 3
+
+True
+
+nums[0] === nums[3]
+
+oraz
+
+Math.abs(0 - 3) <= k
+
+z tą wartoscią bezwzględną raczej chodzi po prostu o to aby te nums które są równe były odpowiednio blisko siebie, aby odstęp pomiędzy nimi nie przekraczał k
+
+const nums = [1,2,3,1,2,3] 
+const k = 2
+
+False
+
+Bo nie ma dwóch takich nums które by były równe i za razem były wystarczająco blisko siebie
+
+w nums może być kilka nums równych 
+ale mogą być rozstawione zbyt daleko od siebie
+
+to może mapa z pozycjami gdzie kluczem będzie num a wartością będzie array indeksów pod których ten num sie znajduje
+
+const nums = [1,2,3,1]
+const k = 3
+
+Map(3) { 1 => [ 0, 3 ], 2 => [ 1 ], 3 => [ 2 ] }
+
+mamy gwarancje że arraye indeksów będą uporządkowane w kolejności rosnącej
+
+w zasadzie to interesują nas dwa najmniejsze indeksy pod którymi znajduje się dany num
+
+jeśli 1 by występowało w tym array jeszcze pod większymi indeksami od 3 
+to nas to nie interesuje
+
+a że lecimy po indeksach w kolejności rosnącej to jeśli jakis array ma już dwa indeksy to znaczy że dany num jest już spalony bo kolejne indeksy będą tylko większe
+
+czyli jeśli trafimy na array gdzie jest juz jeden element
+to należy porównać obecny indeks z tym co jest w tym array
+i jesli roznica tych indeksów nie przekracza k to zwracamy true
+a w przeciwnym razie dodajemy do tego array obecny indeks 
+i num traktujemy za zamknięty
+
+ale to po co nam w ogóle array?
+
+nie potrzebne jest jzywanie Math.abs bo zawsze będziemy odejmować mniejszy indeks od większego
+
+może numToLowestIndex i jeśli nie ma w mapie to znaczy 
+że jesteśmy na lowestIndex tego num
+
+czyli jesli nie ma w mapie to dodajemy
+a jesli jest to sprawdzamy roznice
+
+
+w map należy trzymać maksymalnie k elementów bo więcej nie ma sensu
+
+1,3
+const nums = [1, 2, 3, 1];
+const k = 2;
+
+wystarczy set zamiast mapy, set ma nie przekraczać długości k
+
+const numsWindow = [1, 2]
+
+jeżeli set ma już długość k to przed dodaniem nowego elementu należy usunąć pierwszy
+
+jaki to element chcemy usunąć? set.delete(nums[i - k])
+
+
+
+
+
+
+
+
+Longest Consecutive Sequence
+
+chodzi o to aby zwrocić ilość elementów które są o 1 większe od drugiego
+
+nums = [100,4,200,1,3,2]
+
+zwracamy 4 bo mamy elementy 1 następny o jeden większy element to 2, następny 3 a następny 4
+
+elementy te mogą być rozsiane po całym array
+
+iterujemy się po arrayu
+
+pierwszy element to 100 więc szukamy czy jest w arrayu element 101
+
+natomiast kolejnym elementem jest 4 więc szukamy czy jest w arrayu element 5
+
+i co by się stało gdyby kolejnym elementem po 4 było 101?
+
+nums = [100, 4, 101]
+
+jesli tak by wyglądał array nums to powinnismy zwrocic 2
+
+a nie można bylo by po prostu posortować?
+
+sort ma złożoność O(n log n) czyli nie możemy z niego skorzystać bo w poleceniu jest wyraznie powiedziane ze złożoność ma być O(n)
+
+a gdybysmy sledzili najmniejszy element jak dotychczas?
+
+100 jest najmniejszy
+4 jest najmniejszy 
+
+i co z tego?
+
 
 
 
