@@ -6710,23 +6710,128 @@ a nie można bylo by po prostu posortować?
 
 sort ma złożoność O(n log n) czyli nie możemy z niego skorzystać bo w poleceniu jest wyraznie powiedziane ze złożoność ma być O(n)
 
-a gdybysmy sledzili najmniejszy element jak dotychczas?
+iterowac sie po nums 
 
-100 jest najmniejszy
-4 jest najmniejszy 
+dodac 100 do mapy z value 1
 
-i co z tego?
+teraz bierzemy na tapet 4 i sprawdzamy czy w mapie jest o jeden mniejsza czyli 3
+
+nie ma wiec dodajemy do mapy 4 z value 1
+
+teraz 101 zatem sprawdzamy czy w mapie jest 100
+Jest także zwiększamy value pod 100 i samo 100 zamieniamy na 101
+
+na koniec zwrocic najwieksza value z mapy
+
+mozna tez ustawiac najwieksza dotychczasową value zeby potem nie musiec szukac jej w mapie
+
+numToSequenceLength
+
+
+for (const num of nums) {
+    const prevNumSequenceLength = numToSequenceLength.get(num - 1);
+    if (prevNumSequenceLength) {
+      numToSequenceLength.delete(num - 1);
+      
+    }
+  }
+
+czy po delete nadal bedzie value w prevNumSequenceLength?
+primitywy są kopiowane po value a nie po referencji
 
 
 
+a może sprawdzanie dla num czy jest o 1 większa i o 1 mniejsza
+
+moze jakos w stylu linked listy?
+
+1, 3, 2
+
+dla 1 czy jest 0 lub 2? nie ma póki co
+
+dla 3 czy jest 2 lub 4? nie ma poki co
+
+dla 2 czy jest 1 lub 3? są obydwa 
+czyli w 1 ustawiamy next na 2 
+w 2 ustawiamy prev na 1 a next na 3
+a w 3 ustawiamy prev na 2
+
+czy potrzebne jest ustawianie prev?
+
+2
+dla 2 ustawiamy next na 3
+dla 1 ustawiamy next na 2
+
+na koniec iteracja po key value pairs w mapie
+i liczymy długości łączności
+
+może mapa num do obiektu z {prev: X, next: X}
+
+wtedy przy 1 mamy next do 2
+z 2 mamy next do 3
+
+i zapisujemy najdluzszą łączność
+
+czyli jestesmy przy key 1 które ma value 2
+następnie sprawdzamy co jest pod key 2 i jest value 3
+nastepnie sprawdzamy co jest pod key 3 i jest null
+
+const nums = [100, 4, 200, 1, 3, 2];
+
+100
+
+sprawdzamy czy jest 99 Nie ma
+sprawdzamy czy jest 101 Nie ma
+
+zapisujemy key 100 value null
+
+4
+
+sprawdzamy czy jest 3 Nie ma
+sprawdzamy czy jest 5 Nie ma
+
+zapisujemy key 4 value null
+
+200
+
+-1 nie ma
++1 nie ma 
+
+zapisujemy key 200 value null
+
+1
+
+-1 nie ma
++1 nie ma 
+
+zapisujemy key 1 value null
+
+3
+
+-1 nie ma
++1 jest 
+
+zapisujemy key 3 value 4
+
+2
+
+-1 jest
+zapisujemy do key 1 value 2
++1 jest 
+
+zapisujemy key 2 value 3
+
+teraz poza tymi key value pairs ktore mają null w value, mamy:
+
+1: 2
+2: 3
+3: 4
+4: null
 
 
+ale czy to rozwiązanie będzie O(n)?
 
-
-
-
-
-
+może i będzie ale zależy to od implementacji
 
 
 
