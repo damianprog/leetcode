@@ -6799,6 +6799,9 @@ zapisujemy key 4 value null
 
 zapisujemy key 200 value null
 
+
+
+
 1
 
 -1 nie ma
@@ -6832,6 +6835,53 @@ teraz poza tymi key value pairs ktore mają null w value, mamy:
 ale czy to rozwiązanie będzie O(n)?
 
 może i będzie ale zależy to od implementacji
+
+
+a może z samych łączeń da sie jakoś zsumować longest sequence?
+
+
+Jakie wartości może zwrócić numToHigher.get(x)?
+
+może zwrócić albo x + 1 albo null
+
+
+może jakoś z set?
+
+1,3,2
+
+dla 1 zadajemy pytanie czy 2 istnieje?
+
+tak zatem count + 1
+
+dla 3 zadajemy pytanie czy 4 istnieje 
+
+nie
+
+dla 2 zadajemy pytanie czy 3 istnieje?
+
+tak zatem count + 1
+
+count = 2
+
+return count + 1?
+
+
+
+[1, 2, 3, 10, 11]
+
+w tym wejściu są dwa ciągi
+
+skonczone na chat Longest Consecutive Sequence
+
+
+
+
+
+
+
+
+
+
 
 
 
