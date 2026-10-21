@@ -6871,14 +6871,14 @@ return count + 1?
 
 w tym wejściu są dwa ciągi
 
-skonczone na chat Longest Consecutive Sequence
+startami ciągów są liczby x dla których nie ma w nums x - 1
 
 
+ile razy w całym przebiegu programu while może wejść na daną liczbę, na przykład na 3 w [1, 2, 3, 10, 11]?
 
+jeden raz bo iterujemy sie po unique nums
 
-
-
-
+for robi n obrotów. while w sumie, przez cały przebieg, robi co najwyżej n kroków, bo każda liczba jest odwiedzana tylko z początku swojego ciągu.
 
 
 

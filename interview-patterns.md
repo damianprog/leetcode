@@ -2257,3 +2257,28 @@ To ta sama technika co w Linked List Cycle (`slow = slow.next`, `fast = fast.nex
 | `while (n !== 1 && n !== 4)` | O(1)   | ciekawostka; wymaga znania faktu matematycznego, nie zaczynać od tego       |
 
 Zdanie na rozmowę: „Floyd zbija pamięć do stałej kosztem około trzykrotnie większej liczby obliczeń następnika. Tutaj zbiór i tak jest mały, więc `Set` jest w praktyce równie dobry.”
+
+## 9. Hash set + start sekwencji (LeetCode 128 — Longest Consecutive Sequence)
+
+> Rozwiązane 20–21.10.2026, tryb sokratejski.
+
+**Kiedy się pojawia:** szukanie ciągów/grup w nieposortowanych danych w `O(n)`, gdy sortowanie (`O(n log n)`) jest zakazane lub zbyt wolne.
+
+**Sedno:**
+
+1. `Set` zamiast `Map`. Jeśli wartość w mapie da się zawsze odtworzyć z klucza (tu: następnik to zawsze `x + 1`), mapa niczego nie wnosi.
+2. **Warunek startu:** `x` zaczyna ciąg ⇔ `!set.has(x - 1)`. Tylko od startów liczysz w górę `while (set.has(cur + 1))`.
+3. Jedna zmienna `max`. Długości poprzednich ciągów nie są potrzebne.
+
+**Złożoność `O(n)` mimo pętli w pętli (argument zamortyzowany):**
+każda liczba należy do dokładnie jednego ciągu i jest odwiedzana tylko z jego początku → łącznie `while` wykonuje ≤ `n` kroków. Za to odpowiadają DWIE rzeczy naraz:
+
+- warunek startu (bez niego jeden długi ciąg daje `O(n²)`),
+- iteracja po `Set`, nie po `nums` (bez niej duplikat startu powtarza cały ciąg → TLE).
+
+**Anty-wzorce, w które wpadłem:**
+
+- Jeden globalny `count` zliczający pary „ma następnika”. Sumuje długości wszystkich ciągów zamiast mierzyć każdy osobno. Demaskator: `[1,2,3,10,11]` → kod daje 4, poprawnie 3.
+- Uzasadnienie „`O(n)`, bo iteruję po unikalnych”. Unikalność to tylko połowa powodu; kluczowy jest warunek startu.
+
+**Detal:** `Math.max` po wyjściu z `while`, nie w każdym kroku. Najpierw zmierz ciąg, potem porównaj.
