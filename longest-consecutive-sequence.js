@@ -3,32 +3,24 @@
  * @return {number}
  */
 const longestConsecutive = function (nums) {
-  // const numToHigher = new Map();
-
-  // for (const num of nums) {
-  //   if (numToHigher.has(num - 1)) {
-  //     numToHigher.set(num - 1, num);
-  //   }
-
-  //   if (numToHigher.has(num + 1)) {
-  //     numToHigher.set(num, num + 1);
-  //   } else {
-  //     numToHigher.set(num, null);
-  //   }
-  // }
+  if (nums.length === 0) return 0;
 
   const uniqueNums = new Set(nums);
-  let count = 0;
+  let longestSequence = 1;
 
-  for (const num of nums) {
-    if (uniqueNums.has(num + 1)) {
-      count++;
+  for (const num of uniqueNums) {
+    if (!uniqueNums.has(num - 1)) {
+      let currentNum = num;
+      while (uniqueNums.has(currentNum + 1)) {
+        currentNum++;
+      }
+      longestSequence = Math.max(longestSequence, currentNum - num + 1);
     }
   }
 
-  return count + 1;
+  return longestSequence;
 };
 
 const nums = [100, 4, 200, 1, 3, 2];
 
-longestConsecutive(nums);
+console.log(longestConsecutive(nums));
