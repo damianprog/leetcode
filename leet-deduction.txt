@@ -6885,6 +6885,62 @@ for robi n obrotów. while w sumie, przez cały przebieg, robi co najwyżej n kr
 
 
 
+Merge intervals
+
+
+[1,7], [2,6]
+
+czy to merge'ujemy?
+
+myślę że tak i w takim przypadku dodajemy do wynikowego arraya krotke [1,7]
+
+
+
+jakie są wszystkie warunki / sytuacje oznaczające overlap
+
+
+[1,3],[2,6]
+
+
+tutaj druga liczba pierwszej krotki czyli 3 jest większa od pierwszej liczby drugiej krotki czyli 2
+
+a czy druga liczba pierwszej krotki mogła by być większa od obu liczb drugiej krotki?
+
+[1,8], [2,6]
+
+tu jest overlap bo 2 do 6 jest zawarte w 1 do 8
+
+ale 
+
+[7,8], [2,6]
+
+tutaj overlapu nie ma choć druga liczba pierwszej krotki też jest większa od obu liczb drugiej krotki
+
+
+jakie są różnice pomiędzy tymi dwiema krotkami
+
+[1,8], [2,6]
+
+druga liczba pierwszej krotki jest wieksza od obu liczb drugiej krotki 
+pierwsza liczba pierwszej krotki jest mniejsza od obu liczb drugiej krotki
+
+vs 
+
+[7,8], [2,6]
+
+druga liczba pierwszej krotki jest wieksza od obu liczb drugiej krotki 
+pierwsza liczba pierwszej krotki również jest większa od obu liczb drugiej krotki
+
+
+jeśli druga liczba pierwszej krotki jest większa od obu liczb drugiej krotki
+to żeby był overlap to pierwsza liczba pierwszej krotki musi być albo:
+- mniejsza od obu liczb drugiej krotki
+
+
+
+
+
+
 
 
 
