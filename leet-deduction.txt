@@ -6934,7 +6934,31 @@ pierwsza liczba pierwszej krotki również jest większa od obu liczb drugiej kr
 
 jeśli druga liczba pierwszej krotki jest większa od obu liczb drugiej krotki
 to żeby był overlap to pierwsza liczba pierwszej krotki musi być albo:
+
+- mniejsza tylko od drugiej liczby drugiej krotki
+
+[4,8], [2,6] = [2,8]
+
 - mniejsza od obu liczb drugiej krotki
+
+czyli wystarczy żeby w takim przypadku pierwsza liczba pierwszej krotki była mniejsza niż druga liczba drugiej krotki
+
+[1,8], [2,6] = [1,8]
+
+w obu przypadkach wybraliśmy kolejno najmniejszą i największą z 4 liczb
+
+hipoteza:
+po pierwsze wykryć overlap a następnie wziąć liczby najmniejszą i największą z 4 liczb
+
+a jak wykryć overlap?
+
+Jeśli druga liczba pierwszej krotki jest większa od obu liczb drugiej krotki to pierwsza liczba pierwszej krotki musi być mniejsza od drugiej liczby drugiej krotki
+
+[4,8], [3,6] jeśli wykryjemy overlap to zawsze wybieramy najmniejszą i największa z 4 liczb = [3,8]
+
+Jeśli druga liczba pierwszej krotki jest większa tylko od pierwszej liczby drugiej krotki
+
+[,8], [7,20]
 
 
 
