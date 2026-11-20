@@ -6952,13 +6952,49 @@ po pierwsze wykryć overlap a następnie wziąć liczby najmniejszą i najwięks
 
 a jak wykryć overlap?
 
-Jeśli druga liczba pierwszej krotki jest większa od obu liczb drugiej krotki to pierwsza liczba pierwszej krotki musi być mniejsza od drugiej liczby drugiej krotki
+Jeśli druga liczba pierwszej krotki jest większa od obu liczb drugiej krotki to pierwsza liczba pierwszej krotki musi być mniejsza bądź równa drugiej liczby drugiej krotki
 
 [4,8], [3,6] jeśli wykryjemy overlap to zawsze wybieramy najmniejszą i największa z 4 liczb = [3,8]
 
-Jeśli druga liczba pierwszej krotki jest większa tylko od pierwszej liczby drugiej krotki
+Jeśli druga liczba pierwszej krotki jest większa bądź równa tylko pierwszej liczby drugiej krotki to znaczy to że musi być mniejsza od drugiej liczby drugiej krotki
 
-[,8], [7,20]
+[8,8], [7,20]
+
+
+a co jeśli by brać liczby najmniejszą i największą z obu krotek i jakoś sprawdzić ciągłość?
+
+[1,3],[2,6]
+
+najmnijesza: 1
+największa: 6
+
+może odliczać od 1 do 6 i jeśli liczba jest w secie danych czterech liczb to usuwać ją z tego setu i jeśli na koniec odliczania set będzie pusty to mamy overlap 
+
+
+a może rozpłaszczyć wszystkie liczby ze wszystkich krotek
+wybrać z nich najmniejszą i największą 
+zrobić odliczanie od najmniejszej do największej
+
+[1,3],[2,6],[8,10]
+
+wynik powinien być:
+[[1,6],[8,10],[15,18]]
+
+[1,3,2,6,8,10]
+
+najmniejsza: 1
+największa: 10
+
+a co jesli byśmy to posortowali?
+
+[1,2,3,6,8,10]
+
+sortowanie gubi nam informacje
+
+a może po prostu porównywanie każdej krotki z każdą? i wkykrywać overlap na podstawie wniosków wyżej?
+
+
+
 
 
 
