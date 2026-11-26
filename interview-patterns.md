@@ -2282,3 +2282,24 @@ każda liczba należy do dokładnie jednego ciągu i jest odwiedzana tylko z jeg
 - Uzasadnienie „`O(n)`, bo iteruję po unikalnych”. Unikalność to tylko połowa powodu; kluczowy jest warunek startu.
 
 **Detal:** `Math.max` po wyjściu z `while`, nie w każdym kroku. Najpierw zmierz ciąg, potem porównaj.
+
+## Merge Intervals — sort + sweep
+
+**Sygnał:** przedziały / zakresy / „nachodzące się” → najpierw sortuj po początku.
+
+**Klocki:**
+
+1. `intervals.sort((a, b) => a[0] - b[0])`
+2. Porównuj tylko z ostatnim scalonym (`last`), nie każdy z każdym.
+   Po sortowaniu `last[0] <= cur[0]` zawsze → wystarczy `last[1] >= cur[0]`.
+3. Nowy koniec: `Math.max(last[1], cur[1])` (przypadek zawierania: `[1,10],[2,3]`).
+
+**Pułapki:**
+
+- Porównania parami (O(n²)) nie łapią łańcuchów: `[1,3],[2,5],[4,8]` → `[1,8]`.
+- Puste wejście → `last` undefined.
+- `sort` mutuje wejście → `[...arr].sort()` / `toSorted()`.
+
+**Złożoność:** O(n log n) czas, O(n) pamięć na wynik.
+
+**Luka w tej sesji:** brak narzędzia (sort jako przygotowanie danych), potem detal (`max` przy końcu).
