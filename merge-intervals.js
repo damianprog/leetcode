@@ -5,37 +5,23 @@
 const merge = function (intervals) {
   const result = [];
 
-  const overlappedIntervalsIndexes = new Set();
+  intervals.sort((a, b) => a[0] - b[0]);
 
-  for (let i = 0; i < intervals.length - 1; i++) {
-    for (let j = i + 1; j < intervals.length; j++) {
-      if (
-        intervals[i][1] >= intervals[j][0] &&
-        intervals[i][1] >= intervals[j][1]
-      ) {
-        if (intervals[i][0] <= intervals[j][1]) {
-          const currentMin = Math.min(intervals[i][0], intervals[j][0]);
-          const currentMax = intervals[i][1];
+  let last = intervals[0];
 
-          result.push([currentMin, currentMax]);
-          overlappedIntervalsIndexes.add(i);
-          overlappedIntervalsIndexes.add(j);
-        }
-      } else if (intervals[i][1] >= intervals[j][0]) {
-        const currentMin = Math.min(intervals[i][0], intervals[j][0]);
-        const currentMax = intervals[j][1];
-        result.push([currentMin, currentMax]);
-        overlappedIntervalsIndexes.add(i);
-        overlappedIntervalsIndexes.add(j);
-      }
+  for (let i = 1; i < intervals.length; i++) {
+    if (last[1] >= intervals[i][0]) {
+      const merged = [last[0], Math.max(last[1], intervals[i][1])];
+
+      last = merged;
+    } else {
+      result.push(last);
+
+      last = intervals[i];
     }
   }
 
-  for (let i = 0; i < intervals.length; i++) {
-    if (!overlappedIntervalsIndexes.has(i)) {
-      result.push(intervals[i]);
-    }
-  }
+  result.push(last);
 
   return result;
 };
@@ -52,9 +38,15 @@ const merge = function (intervals) {
 //   [4, 5],
 // ];
 
+// const intervals = [
+//   [4, 7],
+//   [1, 4],
+// ];
+
 const intervals = [
-  [4, 7],
-  [1, 4],
+  [2, 5],
+  [1, 1],
+  [4, 8],
 ];
 
 console.log(merge(intervals));

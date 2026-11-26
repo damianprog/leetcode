@@ -7013,6 +7013,69 @@ Expected
 jeśli dojdzie do przeplotu dwóch krotek to w dalszym porównywaniu z tych osobnych dwóch krotek nie korzystamy tylko korzystamy z zmerge'owanej krotki
 
 
+[[1,3], [2,5], [4,8]]
+
+mój kod da:
+[[1,5], [2,8]]
+
+a powinno być:
+[[1,8]]
+
+
+1. Ile przedziałów może rafić do jednej scalonej grupy?
+Wszystkie
+
+2. Nie bardzo rozumiem
+
+
+1. Posortować krotki po pierwszych liczbach w krotkach?
+
+skonczone na Merge Intervals JavaScript
+
+
+
+[[1,3], [2,5], [4,8]]
+
+
+nie porównywać każdego z każdym tylko ostatni z następnym
+
+
+mamy pewność że pierwsza liczba pierwszej krotki jest mniejsza bądź równa pierwszej liczbie dugiej krotki
+
+
+[[1,1], [2,5], [4,8]]
+
+
+trzeba sprawdzić tylko czy last[1] >= current[0]
+
+
+jeśli nachodzą nowym końcem last będzie w zależności który jest większy albo last[1] albo current[1]
+
+
+[[1,10], [2,3]]
+
+
+[[1,4],[0,2],[3,5]]
+
+
+[[0,2],[1,4],[3,5]]
+
+
+[[0,4]]
+
+
+jeśli dochodzi do merge'u to nie znaczy że zawsze jest pora na pushnięcie
+
+
+a pushowanie zawsze wtedy kiedy dochodzi do merge'u?
+
+
+
+
+
+
+
+
 
 
 
