@@ -7067,7 +7067,64 @@ jeśli nachodzą nowym końcem last będzie w zależności który jest większy 
 jeśli dochodzi do merge'u to nie znaczy że zawsze jest pora na pushnięcie
 
 
-a pushowanie zawsze wtedy kiedy dochodzi do merge'u?
+a pushowanie tylko i zawsze wtedy kiedy nie dochodzi do merge'u?
+
+
+[[1,3],[2,6],[8,10],[15,18]]
+
+last = [1,6]
+
+[[1,6]]
+
+
+last = [8,10]
+
+[[1,6],[8,10]]
+
+
+
+[[0,2],[1,4],[3,5]]
+
+last = [0,4]
+
+[]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Insert Interval
+
+chodzi o to że mamy array krotkek intervals [start,end] posortowane po start w kolejności rosnącej
+oraz mamy newInterval = [start,end] i należy wsadzić ten interval w odpowiednie miejsce w intervals tak aby zachować kolejność rosnącą 
+
+początkowo w intervals przed wsadzenem newInterval na pewno nie ma żadnych overlapów
+
+overlapy w intervals może powodować wsadzenie newInterval do intervals
+
+należy zmerge'ować wszystkie krotki które na siebie nachodzą
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
