@@ -7132,6 +7132,33 @@ należy zmerge'ować wszystkie krotki które na siebie nachodzą
 
 
 
+Minimum Number of Arrows to Burst Balloons
+
+jesli mamy 3 przedziały i te przedziały mają conajmniej 1 wspólny punkt to powiedzmy że kasujemy te 3 przedziały i mamy na liczniku 1
+
+[[1,6],[6,7].[4,8],[16,18]]
+
+przedziały 0,1,2 mają conajmniej 1 wspólny punkt zatem jedna strzała 
+a ostatni przedział nie ma punktów wspólnych z żadnym innym przedziałem więc kolejna strzała
+
+[[10,16],[2,8],[1,6],[7,12]]
+
+a co jeśli posortujemy?
+
+[[1,6],[2,8],[7,12],[10,16]]
+
+
+
+[[1,6],[6,7].[4,8],[16,18]]
+
+posortowane:
+[[1,6],[4,8],[6,7],[16,18]]
+
+
+a co gdyby poosortować nie po pierwszej liczbie krotki tylko po drugiej?
+
+
+[[1,6],[6,7],[4,8],[16,18]]
 
 
 
